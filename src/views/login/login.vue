@@ -33,8 +33,7 @@ export default {
       let data = {"username": this.userName, "password": this.userPassword};
       let judge = await login(data);
       console.log(judge);
-      console.log(judge.result);
-      console.log(judge.token);
+      console.log((judge.token))
 
       if (judge.result === "yes") {
         window.sessionStorage.setItem("token", judge.token);
