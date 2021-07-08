@@ -6,7 +6,7 @@
       <input  v-model="userPassword" placeholder="密码">
 <!--      <input type="submit" class="btn" value=" 登  录 " @click="getMsg">-->
 <!--      <input type="submit" class="btn" value=" 注  册 " @click="getMsg2">-->
-      <a-button  @click="getMsg" class="btn">登 陆</a-button>
+      <a-button  @click="toLogin" class="btn">登 陆</a-button>
 
       <a-button  @click="getMsg" class="btn">注 册</a-button>
     </form>
@@ -16,6 +16,7 @@
 <script>
 // import {requestPost, requestGet} from "@/api/api";
 import axios from "axios";
+import {login} from "@/api/api";
 
 export default {
   name: "login",
@@ -28,6 +29,20 @@ export default {
   },
 
   methods: {
+    async toLogin() {
+      let data = {"username": this.userName, "password": this.userPassword};
+      let judge = await login(data);
+      console.log(judge);
+      console.log(judge.result);
+      console.log(judge.token);
+
+      if (judge.result === "yes") {
+        window.sessionStorage.setItem("token", judge.token);
+        console.log("success!");
+      } else {
+        console.log("failed");
+      }
+    },
     getMsg() {
       axios.get('http://127.0.0.1:8000/api/')
           .then((response) => {

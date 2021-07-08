@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function request(config) {
     const instance = axios.create({
-        baseURL: 'http://127.0.0.1:8000/api/',
+        baseURL: 'http://127.0.0.1:8000/api',
         timeout: 5000
     })
 
@@ -23,18 +23,11 @@ export function request(config) {
     return instance(config);
 }
 
-export function requestPost (userInfo) {
-    return request({
-        method: 'post',
-        url:    'currentprice.json',
-        data:   userInfo
-    });
-}
-
-export function requestGet (userInfo) {
+export function login (userInfo) {
     return request({
         method: 'get',
-        url:    'currentprice.json',
-        data:   userInfo
-    });
+        url:    '/login',
+        data:   userInfo,
+        params: {username: userInfo.username, password: userInfo.password}
+    })
 }
