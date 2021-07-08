@@ -2,37 +2,43 @@
   <div>
     <form action="" class="login">
       <p>Login</p>
-      <input type="text" placeholder="用户名">
-      <input type="password" placeholder="密码">
+      <input  v-model="userName" placeholder="用户名">
+      <input  v-model="userPassword" placeholder="密码">
+<!--      <input type="submit" class="btn" value=" 登  录 " @click="getMsg">-->
+<!--      <input type="submit" class="btn" value=" 注  册 " @click="getMsg2">-->
+      <a-button  @click="getMsg" class="btn">登 陆</a-button>
 
-      <input type="submit" class="btn" value=" 登  录 " @click="getMsg">
-      <input type="submit" class="btn" value=" 注  册 " @click="func2">
+      <a-button  @click="getMsg" class="btn">注 册</a-button>
     </form>
   </div>
 </template>
 
 <script>
-import {request} from "@/api/api";
+// import {requestPost, requestGet} from "@/api/api";
+import axios from "axios";
 
 export default {
   name: "login",
+  data() {
+    return {
+      msg: 'null',
+      userName: '',
+      userPassword: ''
+    }
+  },
 
   methods: {
     getMsg() {
-      request({
-        method: 'post',
-        url:  ''
-      })
+      axios.get('http://127.0.0.1:8000/api/')
+          .then((response) => {
+            console.log(response.data);
+            console.log(this.userName);
+            console.log(this.userPassword)
+          })
+          .catch((error) => {
+            console.log('出错了！', error);
+          })
     },
-
-    func1() {
-      alert("登陆失败");
-    },
-
-    func2() {
-      alert("注册失败")
-    },
-
   }
 }
 </script>
@@ -82,17 +88,20 @@ input{
   font-size: 22px;
 }
 
-.btn{
+  .btn{
   background-color: #59c2c5;
-  width: 38%;
+  width: 48%;
   height: 48px;
-  border-radius: 8px;
+  border-radius: 4px;
   margin-top: 40px;
-  font-size: 28px;
+  margin-right: 20px;
+  margin-left: 20px;
+  font-size: 50px;
   font-weight: 600;
   color: white;
 }
 .btn:hover{
   background-color: #59c2a0;
+  width: auto;
 }
 </style>

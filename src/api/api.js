@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function request(config) {
     const instance = axios.create({
-        baseURL: 'https://api.coindesk.com/v1/bpi/currentprice.json',
+        baseURL: 'http://127.0.0.1:8000/api/',
         timeout: 5000
     })
 
@@ -23,9 +23,18 @@ export function request(config) {
     return instance(config);
 }
 
-// export function login (useInfo) {
-//     return request({
-//         method: 'post',
-//
-//     })
-// }
+export function requestPost (userInfo) {
+    return request({
+        method: 'post',
+        url:    'currentprice.json',
+        data:   userInfo
+    });
+}
+
+export function requestGet (userInfo) {
+    return request({
+        method: 'get',
+        url:    'currentprice.json',
+        data:   userInfo
+    });
+}
