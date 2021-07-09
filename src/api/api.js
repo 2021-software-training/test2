@@ -46,3 +46,20 @@ export function register (userInfo) {
         }
     })
 }
+
+
+/*
+* 请求拦截器
+* 用于在每次请求之前在then或者catch之前拦截并进行处理
+* 这里用于每次请求头中增加一个Authorization属性，属性值为Token，用于Token验证
+* 官方文档：https://www.axios-http.cn/docs/interceptors
+* */
+axios.interceptors.request.use(config =>{
+    console.log(config)
+    // 为请求头对象添加Token验证的Authorization对象，就不用每次都在要传送的字段上加token了
+    config.headers.Authorization = window.sessionStorage.getItem('token')
+    return config
+}, function (error) {
+    console.log("拦截器错误");
+    return Promise.reject(error);
+})
