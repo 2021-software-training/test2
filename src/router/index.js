@@ -6,6 +6,8 @@ import VueRouter from "vue-router";
 const Home = () => import('../views/home/home');
 const Test = () => import('../views/testVue/testVue');
 const Login = () => import('../views/login/login');
+const Register = () => import('../views/register/register');
+const Menu = () => import('../views/menu/menu');
 
 Vue.use(VueRouter);
 
@@ -28,7 +30,18 @@ const routes = [
     {
         path: '/login',
         component: Login
-    }
+    },
+
+    {
+        path: '/menu',
+        component: Menu
+    },
+
+    {
+        path: '/register',
+        component: Register
+    },
+
 ];
 
 const router = new VueRouter({

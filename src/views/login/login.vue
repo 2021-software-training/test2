@@ -1,21 +1,18 @@
 <template>
-  <div>
+  <div >
     <form action="" class="login">
-      <p>Login</p>
-      <input  v-model="userName" placeholder="用户名">
-      <input  v-model="userPassword" placeholder="密码">
-<!--      <input type="submit" class="btn" value=" 登  录 " @click="getMsg">-->
-<!--      <input type="submit" class="btn" value=" 注  册 " @click="getMsg2">-->
-      <a-button  @click="toLogin" class="btn">登 陆</a-button>
-
-      <a-button  @click="getMsg" class="btn">注 册</a-button>
+      <p>CSI语音技术吧</p>
+      <input type="text" v-model="userName" placeholder="用户名">
+      <input type="password" v-model="userPassword" placeholder="密码">
+      <label><input type="checkbox" name="ten" id="yu">记住密码</label>
+      <el-button type="submit" class="btn" @click="toLogin"> 登  录 </el-button>
+      <el-button type="submit" class="btn btn1" @click="toRegister"> 注  册 </el-button>
     </form>
   </div>
 </template>
 
 <script>
 // import {requestPost, requestGet} from "@/api/api";
-import axios from "axios";
 import {login} from "@/api/api";
 
 export default {
@@ -27,32 +24,24 @@ export default {
       userPassword: ''
     }
   },
-
   methods: {
     async toLogin() {
-      let data = {"username": this.userName, "password": this.userPassword};
-      let judge = await login(data);
+      let userInfo = {"username": this.userName, "password": this.userPassword};
+      let judge = await login(userInfo);
       console.log(judge);
       console.log((judge.token))
-
       if (judge.result === "yes") {
         window.sessionStorage.setItem("token", judge.token);
         console.log("success!");
+        await this.$router.push('/menu');
       } else {
         console.log("failed");
       }
     },
-    getMsg() {
-      axios.get('http://127.0.0.1:8000/api/')
-          .then((response) => {
-            console.log(response.data);
-            console.log(this.userName);
-            console.log(this.userPassword)
-          })
-          .catch((error) => {
-            console.log('出错了！', error);
-          })
-    },
+
+    toRegister() {
+      this.$router.push('/register');
+    }
   }
 }
 </script>
@@ -64,10 +53,13 @@ export default {
 }
 
 body{
-  background-size: cover;
-  background: url(wallpaper.jpg) no-repeat fixed;
+  background: url("./wallpaper.jpg") no-repeat fixed;
 }
-
+#yu{
+  margin-left: -544px;
+  width: min-content;
+  height: min-content;
+}
 .login{
   position: absolute;
   top: 50%;
@@ -84,7 +76,6 @@ body{
   box-sizing: border-box;
   /* 这样padding就不会影响大小 */
 }
-
 p{
   font-size: 42px;
   font-weight: 600;
@@ -93,7 +84,7 @@ p{
 input{
   background-color: whitesmoke;
   width: 100%;
-  height: 48px;
+  height: 40px;
   margin-bottom: 10px;
   border: none;
   border-bottom: 2px solid silver;
@@ -102,20 +93,23 @@ input{
   font-size: 22px;
 }
 
-  .btn{
-  background-color: #59c2c5;
-  width: 48%;
-  height: 48px;
-  border-radius: 4px;
+.btn{
+  display: block;
+  background-color:#3399CC ;
+  width: 42%;
+  height: 52px;
+  border-radius: 23px;
   margin-top: 40px;
-  margin-right: 20px;
-  margin-left: 20px;
-  font-size: 50px;
+  font-size: 31px;
   font-weight: 600;
   color: white;
+  float:left;
+}
+.btn1
+{
+  margin-left: 40px;
 }
 .btn:hover{
-  background-color: #59c2a0;
-  width: auto;
+  background-color:#17D3AD
 }
 </style>

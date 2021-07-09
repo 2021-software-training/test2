@@ -31,3 +31,18 @@ export function login (userInfo) {
         params: {username: userInfo.username, password: userInfo.password}
     })
 }
+
+export function register (userInfo) {
+    return request({
+        method: 'get',
+        url:    '/register',
+        data:   userInfo,
+        params: {
+            username: userInfo.username,
+            password: userInfo.password,
+            email   : userInfo.email,
+            age     : userInfo.age,
+            sex     : userInfo.sex
+        }
+    })
+}
