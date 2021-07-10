@@ -8,6 +8,7 @@ const Test = () => import('../views/testVue/testVue');
 const Login = () => import('../views/login/login');
 const Register = () => import('../views/register/register');
 const Menu = () => import('../views/menu/menu');
+const Edit = () => import('../views/edit/edit')
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [
     {
         path: '/register',
         component: Register
+    },
+
+    {
+        path: '/edit',
+        component: Edit
     },
 
 ];

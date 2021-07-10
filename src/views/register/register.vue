@@ -5,8 +5,8 @@
       <input type="text" id="username" placeholder="用户名">
       <input type="email" id="email" placeholder="邮箱">
       <input type="text" id="age"  placeholder="年龄">
-      <label><input type="radio" name="sex" class="ti" >女</label>
-      <label><input type="radio" name="sex" class="ti" checked>男</label>
+      <label><input type="radio" name="gender" class="ti" >女</label>
+      <label><input type="radio" name="gender" class="ti" checked>男</label>
       <br>
       <input type="password" id="password1" placeholder="密码">
       <input type="password" id="password2" placeholder="确认密码">
