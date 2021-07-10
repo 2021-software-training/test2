@@ -25,7 +25,7 @@
           </li>
         </ul>
       </li>
-      <li><a href="/">用户管理</a></li>
+      <li><a href="/edit">新的文章</a></li>
     </ul>
     <br>
   </div>

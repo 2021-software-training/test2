@@ -41,8 +41,7 @@ export function register (userInfo) {
             username: userInfo.username,
             password: userInfo.password,
             email   : userInfo.email,
-            age     : userInfo.age,
-            sex     : userInfo.sex
+            age     : userInfo.age
         }
     })
 }
