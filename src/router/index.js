@@ -9,6 +9,13 @@ const Login = () => import('../views/login/login');
 const Register = () => import('../views/register/register');
 const Menu = () => import('../views/menu/menu');
 const Edit = () => import('../views/edit/edit')
+const AllArticle = () => import('../views/allArticle/allArticle')
+const History = () =>import('../views/history/history');
+const Science = () =>import('../views/science/science');
+const Life = () =>import('../views/life/life');
+const Personal = () =>import('../views/personal/personal');
+const Content = () =>import('../views/content/content')
+
 
 Vue.use(VueRouter);
 
@@ -47,6 +54,26 @@ const routes = [
         path: '/edit',
         component: Edit
     },
+
+    {
+        path: '/allArticle',
+        component: AllArticle
+    }, {
+        path: '/history',
+        component: History
+    }, {
+        path: '/science',
+        component: Science
+    }, {
+        path: '/life',
+        component: Life
+    }, {
+        path: '/personal',
+        component: Personal
+    }, {
+        path: '/content',
+        component: Content
+    }
 
 ];
 

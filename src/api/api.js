@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function request(config) {
     const instance = axios.create({
-        baseURL: 'http://127.0.0.1:8000/api',
+        baseURL: 'http://127.0.0.1:8000',
         timeout: 5000
     })
 
@@ -26,7 +26,7 @@ export function request(config) {
 export function login (userInfo) {
     return request({
         method: 'get',
-        url:    '/login',
+        url:    '/api/login',
         data:   userInfo,
         params: {username: userInfo.username, password: userInfo.password}
     })
@@ -35,7 +35,7 @@ export function login (userInfo) {
 export function register (userInfo) {
     return request({
         method: 'get',
-        url:    '/register',
+        url:    '/api/register',
         data:   userInfo,
         params: {
             username: userInfo.username,
@@ -46,6 +46,13 @@ export function register (userInfo) {
     })
 }
 
+export function showAllArticle(articleInfo) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/showAllArticle',
+        data:   articleInfo,
+    })
+}
 
 /*
 * 请求拦截器
