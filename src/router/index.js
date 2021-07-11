@@ -2,20 +2,29 @@
 import Vue from 'vue'
 // import Axios from 'axios'
 import VueRouter from "vue-router";
-
 const Home = () => import('../views/home/home');
 const Test = () => import('../views/testVue/testVue');
 const Login = () => import('../views/login/login');
 const Register = () => import('../views/register/register');
 const Menu = () => import('../views/menu/menu');
-const Edit = () => import('../views/edit/edit')
+const WriteArticle = () => import('../views/writeArticle/writeArticle')
 const AllArticle = () => import('../views/allArticle/allArticle')
 const History = () =>import('../views/history/history');
 const Science = () =>import('../views/science/science');
-const Life = () =>import('../views/life/life');
-const Personal = () =>import('../views/personal/personal');
-const Content = () =>import('../views/content/content')
-
+const Life = () => import('../views/life/life');
+const Content = () => import('../views/content/content')
+const PersonalKeep = () => import('../views/personalKeep/personalKeep');
+const PersonalNotKeep = () => import('../views/personalNotKeep/personalNotKeep');
+const PersonalPage = () => import('../views/personalPage/personalPage');
+const ChangePassword = () => import('../views/changePassword/changePassword');
+const ChangeHead = () => import('../views/changeHead/changeHead');
+const MyArticle = () => import('../views/myArticle/myArticle');
+const MyComment = () => import('../views/myComment/myComment');
+const Voice = () => import('../views/voice/voice');
+const EditUserInfo = () => import('../views/editUserInfo/editUserInfo');
+const EditComment = () => import('../views/editComment/editComment');
+const EmailCheck = () =>import('../views/emailCheck/emailCheck');
+// const Detailarticle = () =>import('../views/detailarticle/detailarticle');
 
 Vue.use(VueRouter);
 
@@ -23,39 +32,25 @@ const routes = [
     {
         path: '',
         redirect: '/home'       // 重定向到 /home
-    },
-
-    {
+    },{
         path: '/home',
         component: Home
-    },
-
-    {
+    }, {
         path: '/test',
         component: Test
-    },
-
-    {
+    },{
         path: '/login',
         component: Login
-    },
-
-    {
+    },{
         path: '/menu',
         component: Menu
-    },
-
-    {
+    },{
         path: '/register',
         component: Register
-    },
-
-    {
-        path: '/edit',
-        component: Edit
-    },
-
-    {
+    },{
+        path: '/writeArticle',
+        component: WriteArticle
+    },{
         path: '/allArticle',
         component: AllArticle
     }, {
@@ -68,11 +63,45 @@ const routes = [
         path: '/life',
         component: Life
     }, {
-        path: '/personal',
-        component: Personal
+        path: '/personalNotKeep',
+        component: PersonalNotKeep
     }, {
         path: '/content',
         component: Content
+    },
+    {
+        path: '/personalKeep',
+        component: PersonalKeep
+    }, {
+        path: '/personalNotKeep',
+        component: PersonalNotKeep
+    }, {
+        path: '/personalPage',
+        component: PersonalPage
+    }, {
+        path: '/changePassword',
+        component: ChangePassword
+    }, {
+        path: '/changeHead',
+        component: ChangeHead
+    }, {
+        path: '/myArticle',
+        component: MyArticle
+    }, {
+        path: '/myComment',
+        component: MyComment
+    }, {
+        path: '/voice',
+        component: Voice
+    }, {
+        path: '/editUserInfo',
+        component: EditUserInfo
+    }, {
+        path: '/editComment',
+        component: EditComment
+    }, {
+        path: '/emailCheck',
+        component: EmailCheck
     }
 
 ];

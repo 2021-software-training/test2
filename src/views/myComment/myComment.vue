@@ -1,15 +1,14 @@
 <template>
   <body>
   <div class="logo">
-    <h1>分类</h1>
+    <h1>评论</h1>
     <h2>E</h2>
   </div>
   <nav id="sort">
     <ul>
-      <li><a href="/alla"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></a></li>
-      <li><a href="/history"><img src="assets/images/icon-2.png" alt=""> <em>历史</em></a></li>
-      <li><a href="/science"><img src="assets/images/icon-3.png" alt=""> <em>科技</em></a></li>
-      <li><a href="/life"><img src="assets/images/icon-4.png" alt=""> <em>生活</em></a></li>
+      <li><a href="/editcomment"><img src="assets/images/icon-1.png" alt=""> <em>编辑</em></a></li>
+      <li><a href="/history"><img src="assets/images/icon-2.png" alt=""> <em>按时间</em></a></li>
+      <li><a href="/science"><img src="assets/images/icon-3.png" alt=""> <em>按点赞数</em></a></li>
     </ul>
   </nav>
 
@@ -42,7 +41,7 @@
 
   <div class="row separator">
     <section class="span4 articles-list">
-      <h3>科技类</h3>
+      <h3>我的评论</h3>
       <ul class="articles">
         <li class="article-entry standard">
           <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
@@ -118,7 +117,7 @@
 
 <script>
 export default {
-  name: "science"
+  name: "myComment"
 }
 </script>
 

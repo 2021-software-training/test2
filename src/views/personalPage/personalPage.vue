@@ -1,18 +1,5 @@
 <template>
   <body>
-  <div class="logo">
-    <h1>分类</h1>
-    <h2>E</h2>
-  </div>
-  <nav id="sort">
-    <ul>
-      <li><a href="/alla"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></a></li>
-      <li><a href="/history"><img src="assets/images/icon-2.png" alt=""> <em>历史</em></a></li>
-      <li><a href="/science"><img src="assets/images/icon-3.png" alt=""> <em>科技</em></a></li>
-      <li><a href="/life"><img src="assets/images/icon-4.png" alt=""> <em>生活</em></a></li>
-    </ul>
-  </nav>
-
   <div class="header-wrapper">
     <header>
       <div class="container">
@@ -39,190 +26,261 @@
       </div>
     </header>
   </div>
-
-  <div class="row separator">
-    <section class="span4 articles-list">
-      <h3>科技类</h3>
-      <ul class="articles">
-        <li class="article-entry standard">
-          <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-          <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-          <span class="like-count">66</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-          <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">15</span>
-        </li>
-        <li class="article-entry video">
-          <h4><a href="single.html">Meta Tags in WordPress</a></h4>
-          <span class="article-meta">23 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">8</span>
-        </li>
-        <li class="article-entry image">
-          <h4><a href="single.html">WordPress in Your Language</a></h4>
-          <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-          <span class="like-count">6</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">Know Your Sources</a></h4>
-          <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">2</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">Validating a Website</a></h4>
-          <span class="article-meta">21 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">3</span>
-        </li>
-      </ul>
-    </section>
-
-
-    <section class="span4 articles-list">
-      <ul class="articles">
-        <li class="article-entry standard">
-          <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-          <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-          <span class="like-count">66</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">Using Javascript</a></h4>
-          <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-          <span class="like-count">18</span>
-        </li>
-        <li class="article-entry image">
-          <h4><a href="single.html">Using Images</a></h4>
-          <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
-          <span class="like-count">7</span>
-        </li>
-        <li class="article-entry video">
-          <h4><a href="single.html">Using Video</a></h4>
-          <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
-          <span class="like-count">7</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-          <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">15</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">WordPress CSS Information and Techniques</a></h4>
-          <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Theme Development">Theme Development</a></span>
-          <span class="like-count">1</span>
-        </li>
-      </ul>
-    </section>
+  <!-- End of Header -->
+  <div id="page-wraper">
+    <!-- Sidebar Menu -->
+    <div class="responsive-nav">
+      <i class="fa fa-bars" id="menu-toggle"></i>
+      <div id="menu" class="menu">
+        <i class="fa fa-times" id="menu-close"></i>
+        <div class="container">
+          <div class="image">
+            <a href="#"><img src="../../assets/wallpaper.jpg" alt="" /></a>
+          </div>
+          <div class="author-content">
+            <h4>Name</h4>
+            <span>个性签名</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <!-- Start of Search Wrapper -->
+  <div class="search-area-wrapper">
+    <div class="search-area container">
+      <h3 class="search-header">XXXX的主页</h3>
+      <p class="search-tag-line">说给来者的话</p>
+
+      <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+        <input class="search-term required" type="text" id="s" name="s" placeholder="留言" title="* Please enter a search term!" />
+        <input class="search-btn" type="submit" value="留言" />
+        <div id="search-error-container"></div>
+      </form>
+    </div>
+  </div>
+  <div class="page-container">
+    <div class="container">
+      <div class="row">
+
+        <!-- start of page content -->
+        <div class="span8 page-content">
+
+          <!-- Basic Home Page Template -->
+          <div class="row separator">
+            <section class="span4 articles-list">
+              <h3>XXXX的文章</h3>
+              <ul class="articles">
+                <li class="article-entry standard">
+                  <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
+                  <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
+                  <span class="like-count">66</span>
+                </li>
+                <li class="article-entry standard">
+                  <h4><a href="single.html">WordPress Site Maintenance</a></h4>
+                  <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                  <span class="like-count">15</span>
+                </li>
+                <li class="article-entry video">
+                  <h4><a href="single.html">Meta Tags in WordPress</a></h4>
+                  <span class="article-meta">23 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                  <span class="like-count">8</span>
+                </li>
+                <li class="article-entry image">
+                  <h4><a href="single.html">WordPress in Your Language</a></h4>
+                  <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
+                  <span class="like-count">6</span>
+                </li>
+                <li class="article-entry standard">
+                  <h4><a href="single.html">Know Your Sources</a></h4>
+                  <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                  <span class="like-count">2</span>
+                </li>
+                <li class="article-entry standard">
+                  <h4><a href="single.html">Validating a Website</a></h4>
+                  <span class="article-meta">21 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                  <span class="like-count">3</span>
+                </li>
+              </ul>
+            </section>
+
+
+            <section class="span4 articles-list">
+              <ul class="articles">
+                <li class="article-entry standard">
+                  <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
+                  <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
+                  <span class="like-count">66</span>
+                </li>
+                <li class="article-entry standard">
+                  <h4><a href="single.html">Using Javascript</a></h4>
+                  <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
+                  <span class="like-count">18</span>
+                </li>
+                <li class="article-entry image">
+                  <h4><a href="single.html">Using Images</a></h4>
+                  <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
+                  <span class="like-count">7</span>
+                </li>
+                <li class="article-entry video">
+                  <h4><a href="single.html">Using Video</a></h4>
+                  <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
+                  <span class="like-count">7</span>
+                </li>
+                <li class="article-entry standard">
+                  <h4><a href="single.html">WordPress Site Maintenance</a></h4>
+                  <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                  <span class="like-count">15</span>
+                </li>
+                <li class="article-entry standard">
+                  <h4><a href="single.html">WordPress CSS Information and Techniques</a></h4>
+                  <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Theme Development">Theme Development</a></span>
+                  <span class="like-count">1</span>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>xxx的信息</h3>
+  <form action="#" class="information">
+    <p>
+      <label>性别</label>
+      <select class="form-select" aria-label="Default select example" disabled>
+        <option selected>男</option>
+        <option value="女">女</option>
+      </select>
+      <label>生日</label>
+      <input name="dname" value="Your Birthday 无" type="text" size="30" disabled />
+      <label>邮箱</label>
+      <input name="demail" value="Your Email 无" type="text" size="30" disabled />
+      <label>地址</label>
+      <input name="demail" value="Your Address 无" type="text" size="30" disabled />
+      <label>喜好</label>
+      <input  class="text" value="无" disabled>
+      <label>个性签名</label>
+      <input  class="text" value="无" disabled>
+    </p>
+  </form>
+
   </body>
 </template>
 
 <script>
 export default {
-  name: "science"
+  name: "personalPage"
 }
 </script>
 
 <style scoped>
-#sort {
-  top: 15%;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.75);
-  position: fixed;
-  z-index: 100;
-  height: 90%;
-  left: 0;
-  width: 15%;
-  font-weight: 300;
-  font-size: 1rem;
-}
-#sort em {
-  font-style: normal;
-  font-size: 13px;
-  text-transform: uppercase;
-  display: block;
-  margin-top: 15px;
-  color: #fff;
-}
-
-#sort ul li a {
-  text-align: center;
-}
-
-#sort ul {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: left;
-  list-style-type: none;
-  height: 70%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-}
-#sort ul li {
-  text-align: center;
-  margin: 5px 0px;
-}
-#sort a, #sort a:visited, #sort a:active {
-  color: #fff;
-}
-#sort a {
-  text-decoration: none!important;
-  display: inline-block;
-  width: 140px;
-  padding: 15px 0px;
-  position: relative;
-  z-index: 0;
-  transition: all .5s;
-}
-#sort a.active {
-  background-color: rgba(0,0,0,0.8);
-}
-#sort a::before {
-  content: "";
-  position: absolute;
-  height: 0%;
-  width: 0%;
-  bottom: 0;
-  left: 0;
-  opacity: 1;
-  z-index: -1;
-}
-.logo {
-  margin-top: 0px;
-  top: 0;
-  left: 0;
-  z-index: 999999;
-  position: fixed;
-  display: inline-block;
-  text-align: center;
-  background-color: #faf5b2;
-  height: 15%;
-  width: 15%;
-}
-.logo h1 {
-  font-size: 24px;
-  text-transform: uppercase;
-  font-weight: 900;
-  color: #111;
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
-}
-.logo h2 {
-  display: none;
-}
+/* General ------------------------------------------------------------------------------------------------------------*/
 body {
   background-color: #fff;
 }
+
+.menu .image {
+  margin-top: 18px;
+}
+
+.menu .image img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.menu .author-content {
+  margin: 40px 0px 60px 0px;
+}
+
+.menu .author-content h4 {
+  margin-bottom: 0px;
+}
+
+.menu .author-content span {
+  font-size: 13px;
+  font-style: italic;
+  color: black;
+}
+
+.menu {
+  margin-top: 60px;
+}
+
+.menu  {
+  position: relative;
+  margin-top: 60px;
+}
+.menu:before,
+.menu:after {
+  content: "";
+  display: table;
+}
+
+.menu:after {
+  clear: both;
+}
+
+.menu a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.menu {
+  text-align: center;
+}
+.menu {
+  left: 1%;
+  -webkit-transition: -webkit-transform 233ms cubic-bezier(0, 0, 0.21, 1);
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  height: 54vh;
+  max-height: 100vh !important;
+  max-width: 80vw !important;
+  min-width: 45px !important;
+  outline: none;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 0;
+  position: fixed !important;
+  top: -70px;
+  width: 27%;
+  will-change: transform;
+  z-index: 9999 !important;
+
+}
+
+.information {
+  margin:10px; padding: 0;
+  border: 1px solid #f2f2f2;
+  background-color: #FAFAFA;
+}
+label {
+  display:block;
+  font-weight:bold;
+  margin:5px 0;
+  color:black;
+}
+input,.form-select {
+  padding: 2px;
+  border:1px solid #eee;
+  font: normal 1em Verdana, sans-serif;
+  color:#777;
+}
+.text {
+  width:190px;
+  padding:100px;
+  margin-left:auto;
+  margin-right: auto;
+  font: normal 1em Verdana, sans-serif;
+  border:1px solid #eee;
+  height:20px;
+  display:block;
+  color:black;
+}
+
 .article-entry .like-count[data-v-a70e9a84] {
   position: absolute;
   bottom: 0px;
@@ -232,7 +290,7 @@ body {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("#") no-repeat 6px 8px;
+  background: url("/liked.png") no-repeat 6px 8px;
 }
 .header-wrapper {
   background-color: #3b4348;

@@ -1,15 +1,14 @@
 <template>
   <body>
   <div class="logo">
-    <h1>分类</h1>
+    <h1>文章</h1>
     <h2>E</h2>
   </div>
   <nav id="sort">
     <ul>
-      <li><a href="/alla"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></a></li>
-      <li><a href="/history"><img src="assets/images/icon-2.png" alt=""> <em>历史</em></a></li>
-      <li><a href="/science"><img src="assets/images/icon-3.png" alt=""> <em>科技</em></a></li>
-      <li><a href="/life"><img src="assets/images/icon-4.png" alt=""> <em>生活</em></a></li>
+      <li><a href="/edit"><img src="assets/images/icon-1.png" alt=""> <em>编辑</em></a></li>
+      <li><a href="/history"><img src="assets/images/icon-2.png" alt=""> <em>按时间</em></a></li>
+      <li><a href="/science"><img src="assets/images/icon-3.png" alt=""> <em>按点赞数</em></a></li>
     </ul>
   </nav>
 
@@ -42,37 +41,62 @@
 
   <div class="row separator">
     <section class="span4 articles-list">
-      <h3>科技类</h3>
+      <h3>编辑我的文章</h3>
+      <button @click="hold">保存</button>
       <ul class="articles">
         <li class="article-entry standard">
           <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
           <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
           <span class="like-count">66</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">WordPress Site Maintenance</a></h4>
           <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">15</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry video">
           <h4><a href="single.html">Meta Tags in WordPress</a></h4>
           <span class="article-meta">23 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">8</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry image">
           <h4><a href="single.html">WordPress in Your Language</a></h4>
           <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
           <span class="like-count">6</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">Know Your Sources</a></h4>
           <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">2</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">Validating a Website</a></h4>
           <span class="article-meta">21 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">3</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
       </ul>
     </section>
@@ -84,31 +108,55 @@
           <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
           <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
           <span class="like-count">66</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">Using Javascript</a></h4>
           <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
           <span class="like-count">18</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry image">
           <h4><a href="single.html">Using Images</a></h4>
           <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
           <span class="like-count">7</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry video">
           <h4><a href="single.html">Using Video</a></h4>
           <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
           <span class="like-count">7</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">WordPress Site Maintenance</a></h4>
           <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">15</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">WordPress CSS Information and Techniques</a></h4>
           <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Theme Development">Theme Development</a></span>
           <span class="like-count">1</span>
+          <button>编辑</button>
+          <button>删除</button>
+          <button>公开</button>
+          <button>私人</button>
         </li>
       </ul>
     </section>
@@ -118,7 +166,12 @@
 
 <script>
 export default {
-  name: "science"
+  name: "changeUserInfo",
+  methods:{
+    hold(){
+      this.$router.push('myArticle');
+    }
+  }
 }
 </script>
 

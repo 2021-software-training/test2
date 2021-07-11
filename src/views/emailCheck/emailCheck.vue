@@ -1,46 +1,25 @@
 <template>
+
   <div >
     <form action="" class="login">
-      <p>CSI语音技术吧</p>
-      <input type="text" v-model="userName" placeholder="用户名">
-      <input type="password" v-model="userPassword" placeholder="密码">
-      <label><input type="checkbox" name="ten" id="yu">记住密码</label>
-      <el-button type="submit" class="btn" @click="toLogin"> 登  录 </el-button>
-      <el-button type="submit" class="btn btn1" @click="toRegister"> 注  册 </el-button>
+      <p>邮箱验证</p >
+      <input type="text" placeholder="邮箱验证码">
+
+
+      <el-button type="submit" class="btn" @click="func1"> 验证 </el-button>
+
     </form>
   </div>
 </template>
 
 <script>
-// import {requestPost, requestGet} from "@/api/api";
-import {login} from "@/api/api";
+//import {request} from "@/api/api";
 
 export default {
-  name: "login",
-  data() {
-    return {
-      msg: 'null',
-      userName: '',
-      userPassword: ''
-    }
-  },
+  name: "emailCheck",
   methods: {
-    async toLogin() {
-      let userInfo = {"username": this.userName, "password": this.userPassword};
-      let judge = await login(userInfo);
-      console.log(judge);
-      console.log((judge.token))
-      if (judge.result === "yes") {
-        window.sessionStorage.setItem("token", judge.token);
-        console.log("success!");
-        await this.$router.push('/menu');
-      } else {
-        console.log("failed");
-      }
-    },
-
-    toRegister() {
-      this.$router.push('/register');
+    func1() {
+      alert("check")
     }
   }
 }
@@ -52,9 +31,6 @@ export default {
   /* 无法选中，整体感更强 */
 }
 
-body{
-  background: url("./../../assets/wallpaper.jpg") no-repeat fixed;
-}
 #yu{
   margin-left: -544px;
   width: min-content;
@@ -100,6 +76,7 @@ input{
   height: 52px;
   border-radius: 23px;
   margin-top: 40px;
+  margin-left: 88px;
   font-size: 31px;
   font-weight: 600;
   color: white;
@@ -112,4 +89,6 @@ input{
 .btn:hover{
   background-color:#17D3AD
 }
+
+
 </style>

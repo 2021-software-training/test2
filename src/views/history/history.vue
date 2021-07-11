@@ -1,15 +1,14 @@
 <template>
   <body>
   <div class="logo">
-    <h1>分类</h1>
+    <h1>评论</h1>
     <h2>E</h2>
   </div>
   <nav id="sort">
     <ul>
-      <li><a href="/alla"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></a></li>
-      <li><a href="/history"><img src="assets/images/icon-2.png" alt=""> <em>历史</em></a></li>
-      <li><a href="/science"><img src="assets/images/icon-3.png" alt=""> <em>科技</em></a></li>
-      <li><a href="/life"><img src="assets/images/icon-4.png" alt=""> <em>生活</em></a></li>
+      <li><a href="/editcomment"><img src="assets/images/icon-1.png" alt=""> <em>编辑</em></a></li>
+      <li><a href="/history"><img src="assets/images/icon-2.png" alt=""> <em>按时间</em></a></li>
+      <li><a href="/science"><img src="assets/images/icon-3.png" alt=""> <em>按点赞数</em></a></li>
     </ul>
   </nav>
 
@@ -28,25 +27,9 @@
             <ul id="menu-top-menu" class="clearfix">
               <li class="current-menu-item"><a href="/menu">主页</a></li>
               <li><a href="/alla">所有文章</a></li>
-              <li><a href="home-categories-articles.html">Home 3</a></li>
-              <li><a href="articles-list.html">Articles List</a></li>
-              <li><a href="/personal">个人中心</a></li>
-              <li><a href="#">Skins</a>
-                <ul class="sub-menu">
-                  <li><a href="blue-skin.html">Blue Skin</a></li>
-                  <li><a href="green-skin.html">Green Skin</a></li>
-                  <li><a href="red-skin.html">Red Skin</a></li>
-                  <li><a href="index-2.html">Default Skin</a></li>
-                </ul>
-              </li>
-              <li><a href="#">More</a>
-                <ul class="sub-menu">
-                  <li><a href="full-width.html">Full Width</a></li>
-                  <li><a href="elements.html">Elements</a></li>
-                  <li><a href="page.html">Sample Page</a></li>
-                </ul>
-              </li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="/myarticle">我的文章</a></li>
+              <li><a href="/mycomment">我的评论</a></li>
+              <li><a href="/personalkeep">个人中心</a></li>
             </ul>
           </div>
         </nav>
@@ -58,37 +41,44 @@
 
   <div class="row separator">
     <section class="span4 articles-list">
-      <h3>历史类</h3>
+      <h3>我的评论</h3>
+      <button @click="hold">保存</button>
       <ul class="articles">
         <li class="article-entry standard">
           <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
           <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
           <span class="like-count">66</span>
+          <button>删除</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">WordPress Site Maintenance</a></h4>
           <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">15</span>
+          <button>删除</button>
         </li>
         <li class="article-entry video">
           <h4><a href="single.html">Meta Tags in WordPress</a></h4>
           <span class="article-meta">23 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">8</span>
+          <button>删除</button>
         </li>
         <li class="article-entry image">
           <h4><a href="single.html">WordPress in Your Language</a></h4>
           <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
           <span class="like-count">6</span>
+          <button>删除</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">Know Your Sources</a></h4>
           <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">2</span>
+          <button>删除</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">Validating a Website</a></h4>
           <span class="article-meta">21 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">3</span>
+          <button>删除</button>
         </li>
       </ul>
     </section>
@@ -100,31 +90,37 @@
           <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
           <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
           <span class="like-count">66</span>
+          <button>删除</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">Using Javascript</a></h4>
           <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
           <span class="like-count">18</span>
+          <button>删除</button>
         </li>
         <li class="article-entry image">
           <h4><a href="single.html">Using Images</a></h4>
           <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
           <span class="like-count">7</span>
+          <button>删除</button>
         </li>
         <li class="article-entry video">
           <h4><a href="single.html">Using Video</a></h4>
           <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
           <span class="like-count">7</span>
+          <button>删除</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">WordPress Site Maintenance</a></h4>
           <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
           <span class="like-count">15</span>
+          <button>删除</button>
         </li>
         <li class="article-entry standard">
           <h4><a href="single.html">WordPress CSS Information and Techniques</a></h4>
           <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Theme Development">Theme Development</a></span>
           <span class="like-count">1</span>
+          <button>删除</button>
         </li>
       </ul>
     </section>
@@ -134,7 +130,12 @@
 
 <script>
 export default {
-  name: "menu"
+  name: "history",
+  methods:{
+    hold(){
+      this.$router.push('myComment');
+    }
+  }
 }
 </script>
 
@@ -346,7 +347,7 @@ span.tag-line {
 
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
-  background: #353b65 url("wallpaper.jpg") center top no-repeat;
+  background: #353b65 url("../../assets/wallpaper.jpg") center top no-repeat;
   background-size: 100%;
   min-height: 279px;
   height: auto !important;
@@ -396,7 +397,7 @@ form.search-form input.search-term {
   margin-bottom: 0;
 }
 form.search-form input.search-term.loading {
-  background-image: url("wallpaper.jpg");
+  background-image: url("../../assets/wallpaper.jpg");
   background-repeat: no-repeat;
   background-position: 98% 50%;
 }
@@ -487,19 +488,19 @@ ul.articles .article-entry {
   position: relative;
   border-bottom: 1px solid #f2f2f2;
   padding: 0 0 0 24px;
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles .article-entry.standard {
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles .article-entry.video {
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles .article-entry.image {
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles .article-entry {
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #f2f2f2;
@@ -529,10 +530,10 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("liked.png") no-repeat 6px 8px;
+  background: url("/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
-  background: url("wallpaper.jpg") no-repeat 6px -22px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
   color: #395996;
 }
 

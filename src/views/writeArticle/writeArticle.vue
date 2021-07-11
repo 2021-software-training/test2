@@ -27,7 +27,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "edit",
+  name: "writeArticle",
   data() {
     return {
       model: {
@@ -47,7 +47,6 @@ export default {
             if(res.data.Code === 200) {
               this.$message.success('发布成功');
             }
-
             else {
               console.log()
             }

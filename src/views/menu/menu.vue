@@ -14,13 +14,10 @@
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
               <li class="current-menu-item"><a href="/menu">主页</a></li>
-              <li><a href="/allArticle">所有文章</a></li>
-              <li><a href="home-categories-articles.html">Home 3</a></li>
-              <li><a href="articles-list.html">Articl</a></li>
-              <li><a href="/personal">个人中心</a></li>
-              <li><a href="#">Skins</a></li>
-              <li><a href="#">More</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="/alla">所有文章</a></li>
+              <li><a href="/myarticle">我的文章</a></li>
+              <li><a href="/mycomment">我的评论</a></li>
+              <li><a href="/personalkeep">个人中心</a></li>
             </ul>
           </div>
         </nav>
@@ -57,7 +54,7 @@
               <h3>Featured Articles</h3>
               <ul class="articles">
                 <li class="article-entry standard">
-                  <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
+                  <h4><a href="/detailarticle">Integrating WordPress with Your Website</a></h4>
                   <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
                   <span class="like-count">66</span>
                 </li>
@@ -163,7 +160,6 @@ body {
 .header-wrapper .container {
   position: relative;
   min-height: 60px;
-  height: auto !important;
   height: 60px;
 }
 #bigname{
@@ -251,7 +247,7 @@ span.tag-line {
 
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
-  background: #353b65 url("wallpaper.jpg") center top no-repeat;
+  background: #353b65 url("../../assets/wallpaper.jpg") center top no-repeat;
   background-size: 100%;
   min-height: 279px;
   height: auto !important;
@@ -301,7 +297,7 @@ form.search-form input.search-term {
   margin-bottom: 0;
 }
 form.search-form input.search-term.loading {
-  background-image: url("wallpaper.jpg");
+  background-image: url("../../assets/wallpaper.jpg");
   background-repeat: no-repeat;
   background-position: 98% 50%;
 }
@@ -392,19 +388,19 @@ ul.articles .article-entry {
   position: relative;
   border-bottom: 1px solid #f2f2f2;
   padding: 0 0 0 24px;
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles .article-entry.standard {
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles .article-entry.video {
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles .article-entry.image {
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles .article-entry {
-  background: url("wallpaper.jpg") no-repeat 0 3px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
 }
 ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #f2f2f2;
@@ -434,10 +430,10 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("liked.png") no-repeat 6px 8px;
+  background: url("/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
-  background: url("wallpaper.jpg") no-repeat 6px -22px;
+  background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
   color: #395996;
 }
 
@@ -476,6 +472,7 @@ ul.articles li.article-entry:last-child {
   .search-area-wrapper {
     background-size: auto;
     min-height: 240px;
+    height: auto !important;
     height: 240px;
   }
 
