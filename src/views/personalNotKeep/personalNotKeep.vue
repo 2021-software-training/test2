@@ -15,7 +15,7 @@
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
               <li class="current-menu-item"><a href="/menu">主页</a></li>
-              <li><a href="/alla">所有文章</a></li>
+              <li><a href="/allArticle">所有文章</a></li>
               <li><a href="/myarticle">我的文章</a></li>
               <li><a href="/mycomment">我的评论</a></li>
               <li><a href="/personalkeep">个人中心</a></li>
@@ -62,7 +62,7 @@
     <p>
       <label>性别</label>
       <select class="form-select" aria-label="Default select example">
-        <option selected>男</option>
+        <option selected value="男">男</option>
         <option value="女">女</option>
       </select>
       <label>生日</label>

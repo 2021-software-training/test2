@@ -26,7 +26,7 @@
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
               <li class="current-menu-item"><a href="/menu">主页</a></li>
-              <li><a href="/alla">所有文章</a></li>
+              <li><a href="/allArticle">所有文章</a></li>
               <li><a href="/myarticle">我的文章</a></li>
               <li><a href="/mycomment">我的评论</a></li>
               <li><a href="/personalkeep">个人中心</a></li>
