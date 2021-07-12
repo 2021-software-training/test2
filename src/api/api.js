@@ -69,7 +69,7 @@ export function addArticle(articleInfo) {
 export function editArticle(articleInfo) {
     return request({
         method: 'get',
-        url:    '/mainPage/addArticle',
+        url:    '/mainPage/editArticle',
         params: {
             articleID:  articleInfo.articleID
         }
@@ -79,17 +79,27 @@ export function editArticle(articleInfo) {
 export function showPageAllArticle(articleType) {
     return request({
         method: 'get',
-        url:    '/mainPage/showAllArticle',
+        url:    '/mainPage/showPageAllArticles',
         params: {
             type: articleType
         }
     })
 }
 
-export function showUserArticle() {
+export function showUserAllArticle() {
     return request({
         method: 'get',
-        url:    '/mainPage/showUserArticle',
+        url:    '/mainPage/showUserAllArticles',
+    })
+}
+
+export function showAnArticle(articleInfo) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/showAnArticle',
+        params: {
+            articleID: articleInfo.articleID
+        }
     })
 }
 
