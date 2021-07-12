@@ -28,7 +28,7 @@
             <ul id="menu-top-menu" class="clearfix">
               <li class="current-menu-item"><a href="/menu">主页</a></li>
               <li><a href="/allArticle">所有文章</a></li>
-              <li><a href="/myarTicle">我的文章</a></li>
+              <li><a href="/myArticle">我的文章</a></li>
               <li><a href="/myComment">我的评论</a></li>
               <li><a href="/personalKeep">个人中心</a></li>
             </ul>
