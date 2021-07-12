@@ -50,6 +50,30 @@ export function register (userInfo) {
     })
 }
 
+export function addArticle(articleInfo) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/addArticle',
+        params: {
+            title:  articleInfo.title,
+            articleText:  articleInfo.articleText,
+            articleType1: articleInfo.articleType1,
+            articleType2: articleInfo.articleType1,
+            articleType3: articleInfo.articleType1
+        }
+    })
+}
+
+export function editArticle(articleInfo) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/addArticle',
+        params: {
+            articleID:  articleInfo.articleID
+        }
+    })
+}
+
 export function showAllArticle(articleType) {
     return request({
         method: 'get',
@@ -64,6 +88,13 @@ export function showUserArticle() {
     return request({
         method: 'get',
         url:    '/mainPage/showUserArticle',
+    })
+}
+
+export function showAllComment() {
+    return request({
+        method: 'get',
+        url:    '/mainPage/showAllComment',
     })
 }
 
@@ -89,20 +120,28 @@ export function editUserInfo(userInfo) {
     })
 }
 
-export function addLike(articleAndUserInfo) {
-    articleAndUserInfo.articleID = undefined;
+export function addLikeArticle(articleAndUserInfo) {
     return request({
         method: 'get',
-        url:    '/mainPage/addLike',
+        url:    '/mainPage/addLikeArticle',
         data:   articleAndUserInfo,
         params: {
-            article:    articleAndUserInfo.articleID,
+            articleID:    articleAndUserInfo.articleID,
             username:   articleAndUserInfo.username
         }
     })
 }
 
-
+export function addLikeComment(commentAndUserInfo) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/addLikeComment',
+        params: {
+            commentID:    commentAndUserInfo.commentID,
+            username:   commentAndUserInfo.username
+        }
+    })
+}
 
 
 
