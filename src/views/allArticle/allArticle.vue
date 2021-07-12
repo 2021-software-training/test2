@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import {showAllArticle} from "@/api/api";
+import {showPageAllArticle} from "@/api/api";
 
 export default {
   name: "allArticle",
@@ -71,7 +71,7 @@ export default {
     }
   },
   created() {
-     showAllArticle("all").then((myData) => {
+    showPageAllArticle("all").then((myData) => {
       console.log(myData);
       if (myData.result === 0) {
         this.$router.push('/login');

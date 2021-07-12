@@ -50,6 +50,8 @@ export function register (userInfo) {
     })
 }
 
+
+
 export function addArticle(articleInfo) {
     return request({
         method: 'get',
@@ -74,7 +76,7 @@ export function editArticle(articleInfo) {
     })
 }
 
-export function showAllArticle(articleType) {
+export function showPageAllArticle(articleType) {
     return request({
         method: 'get',
         url:    '/mainPage/showAllArticle',
@@ -91,12 +93,37 @@ export function showUserArticle() {
     })
 }
 
+
+export function addComment(articleAndCommentInfo) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/addComment',
+        params: {
+            articleID:  articleAndCommentInfo.articleID,
+            commentText: articleAndCommentInfo.commentText
+        }
+    })
+}
+
+export function editComment(commentInfo) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/editComment',
+        params: {
+            commentID:  commentInfo.commentID,
+            commentText: commentInfo.commentText
+        }
+    })
+}
+
 export function showAllComment() {
     return request({
         method: 'get',
         url:    '/mainPage/showAllComment',
     })
 }
+
+
 
 export function getUserInfo() {
     return request({
@@ -119,6 +146,8 @@ export function editUserInfo(userInfo) {
         }
     })
 }
+
+
 
 export function addLikeArticle(articleAndUserInfo) {
     return request({
