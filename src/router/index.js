@@ -23,8 +23,10 @@ const MyComment = () => import('../views/myComment/myComment');
 const Voice = () => import('../views/voice/voice');
 const EditUserInfo = () => import('../views/editUserInfo/editUserInfo');
 const EditComment = () => import('../views/editComment/editComment');
-const EmailCheck = () =>import('../views/emailCheck/emailCheck');
+const EmailCheck = () => import('../views/emailCheck/emailCheck');
 // const Detailarticle = () =>import('../views/detailarticle/detailarticle');
+
+const GitTest = () => import('../views/testVue/gittest');
 
 Vue.use(VueRouter);
 
@@ -102,6 +104,9 @@ const routes = [
     }, {
         path: '/emailCheck',
         component: EmailCheck
+    }, {
+        path: '/gitTest',
+        component: GitTest
     }
 
 ];

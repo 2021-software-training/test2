@@ -46,10 +46,13 @@ export function register (userInfo) {
     })
 }
 
-export function showAllArticle() {
+export function showAllArticle(articleType) {
     return request({
         method: 'get',
-        url:    '/mainPage/showAllArticle'
+        url:    '/mainPage/showAllArticle',
+        params: {
+            type: articleType
+        }
     })
 }
 
