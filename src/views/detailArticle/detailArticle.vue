@@ -1,17 +1,54 @@
 <template>
   <body>
+
+    <nav id="sort">
+      <el-space direction="vertical">
+        <el-card class="box-card" style="width: 250px">
+          <template #header>
+            <div class="card-header">
+              <br><el-avatar shape="square" :size="100">user</el-avatar><br><br>
+              <span>Author Name</span>
+<!--              <el-button class="button" type="text">Operation button</el-button>-->
+            </div>
+          </template>
+            <span class="article-title">
+              我的文章<br><br>
+            </span>
+          <el-divider></el-divider>
+
+          <el-button type="primary" icon="el-icon-caret-top" size="mini" circle></el-button>
+          <el-button type="primary" icon="el-icon-chat-line-round" size="mini" circle></el-button>
+          <el-button type="primary" icon="el-icon-paperclip" size="mini" circle></el-button>
+
+          <el-divider></el-divider>
+          <div v-for="o in 2" :key="o" class="text item">
+            <el-tag size="10">标签一</el-tag>
+          </div>
+
+        </el-card>
+      </el-space>
+    </nav>
+
+
   <div class="header-wrapper">
+    <div class="user-avatar">
+      <el-avatar id="image1" shape="square"> user </el-avatar>
+    </div>
+
     <header>
       <div class="container">
         <div class="logo-container">
           <!-- Website Logo -->
           <p id="bigname"><strong>Knowledge Base Theme</strong></p>
-          <span class="tag-line">Premium WordPress Theme</span>
         </div>
 
         <!-- Start of Main Navigation -->
         <nav class="main-nav">
           <div class="menu-top-menu-container">
+            <div class="search">
+              <input class="search-term" type="text"  placeholder="search" />
+              <input class="search-btn" type="submit" value="search" />
+            </div>
             <ul id="menu-top-menu" class="clearfix">
               <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
               <li><el-link href="/allArticle">所有文章</el-link></li>
@@ -26,170 +63,214 @@
       </div>
     </header>
   </div>
-  <!-- End of Header -->
 
-  <!-- Start of Search Wrapper -->
-  <div class="search-area-wrapper">
-    <div class="search-area container">
-      <h3 class="search-header">Have el-link Question?</h3>
-      <p class="search-tag-line">If you have any question you can ask below or enter what you are looking for!</p>
-
-      <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
-        <input class="search-term required" type="text" id="s" name="s" placeholder="Type your search terms here" title="* Please enter el-link search term!" />
-        <input class="search-btn" type="submit" value="Search" />
-        <div id="search-error-container"></div>
-      </form>
+  <div class="row separator">
+    <!--    <h3>我的搜索</h3>-->
+    <div class="main-title">
+      这里是文章的标题
     </div>
-  </div>
-  <div class="page-container">
-    <div class="container">
-      <div class="row">
-
-        <!-- start of page content -->
-        <div class="span8 page-content">
-
-          <!-- Basic Home Page Template -->
-          <div class="row separator">
-            <section class="span4 articles-list" v-for="article in articlesData" v-bind:key="article.title">
-              <ul id="array-render">
-                <li>
-                  {{article.title}}
-                </li>
-              </ul>
-            </section>
-          </div>
-        </div>
-      </div>
+    <el-divider></el-divider>
+    <div class="article">
+      <p>计算机科学（英语：computer science，有时缩写为CS）是系统性研究信息与计算的理论基础以及它们在计算机系统中如何实现与
+        应用的实用技术的学科。
+        [7] [8]它通常被形容为对那些创造、描述以及转换信息的算法处理的系统研究。计算机科学包含很多分支领域；
+        有些强调特定结果的计算，比如计算机图形学；而有些是探讨计算问题的性质，比如计算复杂性理论；
+        还有一些领域专注于怎样实现计算，比如编程语言理论是研究描述计算的方法，而程序设计是应用特定的编程语言解决特定的计算问题，
+        人机交互则是专注于怎样使计算机和计算变得有用、好用，以及随时随地为人所用。</p>
     </div>
+
   </div>
+
   </body>
 </template>
 
 <script>
+import {showPageAllArticle} from "@/api/api";
+import {addLikeArticle} from "@/api/api";
 
 export default {
-  name: "menu",
-
+  name: "allArticle",
   data() {
     return {
-      articlesData: {}
+      articlesData: [{
+        articleID:    '',
+        articleType1: '',
+        articleType2: '',
+        articleType3: '',
+        title:        '',
+        time:         '',
+        articleText:  '',
+        commentsNum:  '',
+        likesNum:     ''
+      }],
+      radio1: 'all',
+    }
+  },
+  created() {
+    showPageAllArticle("all").then((myData) => {
+      console.log(myData);
+      if (myData.result === 0) {
+        this.$router.push('/login');
+        alert("请先登陆")
+      }
+      this.articlesData = myData
+    });
+    console.log(this.articlesData);
+  },
+
+  methods: {
+    sendLike() {
+      addLikeArticle()
     }
   }
 }
 </script>
 
 <style scoped>
-/* General ------------------------------------------------------------------------------------------------------------*/
-body {
-  background-color: #fff;
+
+
+.search{
+
 }
-#image1{
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  float:left;
-  margin-left:40px;
-  margin-top:15px !important;
+.article{
+  text-align:justify;
+  height:300px;
+  margin-right:50px;
 }
-.menu .image {
-  margin-top: 18px;
+
+.card-header {
+  font-size:18px;
+  font-family: "Microsoft YaHei", Arial,sans-serif;
+  font-weight: bold;
 }
-.menu .image img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
+
+.main-title {
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.main-content {
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size: 14px;
+}
+
+.article-icon {
+  float: right;
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  color: #3A5F7B;
+}
+
+.user-avatar {
+  float: right;
+  margin-top: 30px;
+  margin-right: 10px;
+}
+
+/*#image1{*/
+/*  border-radius: 50%;*/
+/*  float:left;*/
+/*  margin-left:40px;*/
+/*  margin-top:15px !important;*/
+/*}*/
+#sort {
+  top: 175px;
   text-align: center;
-}
-.menu .author-content {
-  margin: 40px 0px 60px 0px;
-}
-.menu .author-content h4 {
-  margin-bottom: 0px;
-}
-.menu .author-content span {
-  font-size: 13px;
-  font-style: italic;
-  color: black;
-}
-.menu {
-  margin-top: 60px;
-}
-.menu  {
-  position: relative;
-  margin-top: 60px;
-}
-.menu:before,
-.menu:after {
-  content: "";
-  display: table;
-}
-.menu:after {
-  clear: both;
-}
-.menu el-link {
-  text-decoration: none;
-  color: inherit;
-}
-.menu {
-  text-align: center;
-}
-.menu {
-  left: 1%;
-  -webkit-transition: -webkit-transform 233ms cubic-bezier(0, 0, 0.21, 1);
-  -webkit-overflow-scrolling: touch;
-  box-sizing: border-box;
-  height: 54vh;
-  max-height: 100vh !important;
-  max-width: 80vw !important;
-  min-width: 45px !important;
-  outline: none;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  padding: 0;
-  position: fixed !important;
-  top: -70px;
-  width: 27%;
-  will-change: transform;
-  z-index: 9999 !important;
-}
-.information {
-  margin:10px; padding: 0;
-  border: 1px solid #f2f2f2;
-  background-color: #FAFAFA;
-}
-label {
-  display:block;
-  font-weight:bold;
-  margin:5px 0;
-  color:black;
-}
-input,.form-select {
-  padding: 2px;
-  border:1px solid #eee;
-  font: normal 1em Verdana, sans-serif;
-  color:#777;
-}
-.text {
-  width:190px;
-  padding:100px;
-  margin-left:auto;
-  margin-right: auto;
-  font: normal 1em Verdana, sans-serif;
-  border:1px solid #eee;
-  height:20px;
-  display:block;
-  color:black;
-}
-.article-entry .like-count[data-v-a70e9a84] {
+  background: #F2F6FC;
   position: absolute;
-  bottom: 0px;
-  right: 0px;
-  line-height: 18px;
-  font-weight: 600;
-  padding: 3px 5px 3px 20px;
-  border: 1px solid #f2f2f2;
-  border-bottom: none;
-  background: url("../../assets/liked.png") no-repeat 6px 8px;
+  z-index: 100;
+  height: 90%;
+  left: 16px;
+  width: 275px;
+
+}
+#sort em {
+  font-style: normal;
+  font-size: 13px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 15px;
+  color: #fff;
+}
+
+#sort ul li a {
+  text-align: center;
+}
+
+#sort ul {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  list-style-type: none;
+  height: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+#sort ul li {
+  text-align: center;
+  margin: 5px 0px;
+}
+#sort a, #sort a:visited, #sort a:active {
+  color: #fff;
+}
+#sort a {
+  text-decoration: none!important;
+  display: inline-block;
+  width: 140px;
+  padding: 15px 0px;
+  position: relative;
+  z-index: 0;
+  transition: all .5s;
+}
+#sort a.active {
+  background-color: rgba(0,0,0,0.8);
+}
+#sort a::before {
+  content: "";
+  position: absolute;
+  height: 0%;
+  width: 0%;
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  z-index: -1;
+}
+.logo {
+  margin-top: 150px;
+  top: -1px;
+  left: 16px;
+  z-index: 999999;
+  position: fixed;
+  display: inline-block;
+  text-align: center;
+  background-color: black;
+  height: 15%;
+  width: 15%;
+}
+.logo h1 {
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #3b4348;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.logo h2 {
+  display: none;
+}
+body {
+  background-color: #EBEEF5;
 }
 .article-entry .like-count[data-v-a70e9a84] {
   position: absolute;
@@ -203,7 +284,7 @@ input,.form-select {
   background: url("#") no-repeat 6px 8px;
 }
 .header-wrapper {
-  background-color: #3b4348;
+  background-color: #3A5F7B;
   width: 100%;
   height: auto;
   margin-top:-61px;
@@ -212,27 +293,30 @@ input,.form-select {
   position: relative;
   min-height: 60px;
   height: auto !important;
+  height: 150px !important;
   top:5px;
 }
 #bigname{
   color:white;
-  font-size:xx-large;
-  margin-left: -500px !important;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC",serif;
+  font-size: 45px;
+  margin-left: -800px;
+  margin-top: 35px;
+  margin-bottom: -100px;
 }
 .logo-container {
   padding: 19px 0;
+
 }
 .logo-container img {
   margin-right: 10px;
 }
-.logo-container {
-  width: 450px;
-}
+
 span.tag-line {
   color: #818a90;
   font-size: 12px;
   position: relative;
-  top: 2px;
+  padding-top: 2px !important;
   left:-520px;
 }
 .main-nav {
@@ -249,23 +333,23 @@ span.tag-line {
   position: relative;
   float: left;
   list-style: none;
-  padding: 16px 14px 18px;
+  padding: 45px 14px 18px;
 }
-.main-nav div > ul > li el-link {
+.main-nav div > ul > li a {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   color: #c1cad1;
 }
-.main-nav div > ul > li el-link:hover {
+.main-nav div > ul > li a:hover {
   color: #fff;
 }
-.main-nav div > ul > li:hover > el-link {
+.main-nav div > ul > li:hover > a {
   color: #fff;
 }
 .main-nav div > ul > li:last-child {
   padding-right: 0;
 }
-.main-nav div > ul li.current-menu-item el-link {
+.main-nav div > ul li.current-menu-item a {
   color: #fff;
 }
 .main-nav .sub-menu {
@@ -286,7 +370,7 @@ span.tag-line {
 .main-nav .sub-menu li:hover {
   background-color: #292e32;
 }
-.main-nav .sub-menu li:hover > el-link {
+.main-nav .sub-menu li:hover > a {
   color: #fff;
 }
 .main-nav .sub-menu .sub-menu {
@@ -297,19 +381,19 @@ span.tag-line {
 .main-nav .responsive-nav {
   display: none;
 }
+
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
-  background: #353b65 url("../../assets/flower.png") center top no-repeat;
+  background: #353b65 url("../../assets/wallpaper.jpg") center top no-repeat;
   background-size: 100%;
   min-height: 279px;
   height: auto !important;
   height: 279px;
 }
 .search-area-wrapper .search-area {
-  margin-top: -20px;
   padding: 50px 0;
-  height:450px;
 }
+
 h3.search-header {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -317,6 +401,7 @@ h3.search-header {
   color: #fff;
   text-align: center;
 }
+
 p.search-tag-line {
   font-family: "Droid Serif", serif;
   font-style: italic;
@@ -325,6 +410,7 @@ p.search-tag-line {
   color: #fff;
   text-align: center;
 }
+
 form.search-form {
   margin: 40px 0 0;
   text-align: center;
@@ -363,15 +449,18 @@ form.search-form input.search-btn {
 form.search-form input.search-btn:hover {
   background-color: #4b5760;
 }
+
 #search-error-container label {
   color: #fff;
   padding: 5px;
   font-size: 14px;
 }
+
 .lt-ie8 form.search-form input.search-btn {
   padding-top: 12px;
   padding-bottom: 13px;
 }
+
 /* Page - Container --------------------------------------------------------------------------------------------------*/
 .page-container {
   width: 100%;
@@ -380,13 +469,18 @@ form.search-form input.search-btn:hover {
   padding: 40px 35px;
   background-color: #fff;
 }
-.pages-nav el-link {
+
+
+.pages-nav a {
   margin-right: 10px;
 }
+
+
 div {
   display: block;
   margin: 5px auto 20px auto;
 }
+
 li.comment > article {
   background: #fff;
   float: left;
@@ -400,6 +494,7 @@ li.comment > article {
 .page-content {
   margin-bottom: 20px;
 }
+
 .row.separator {
   margin-bottom: 10px;
 }
@@ -415,12 +510,13 @@ li.comment > article {
   color: #6f7579;
   font-size: 16px;
 }
-.articles-list > h3 el-link {
+.articles-list > h3 a {
   color: #3b4348;
 }
-.articles-list > h3 el-link:hover {
+.articles-list > h3 a:hover {
   color: #395996;
 }
+
 ul.articles {
   list-style: none;
   margin: 0;
@@ -446,15 +542,16 @@ ul.articles .article-entry {
 ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #f2f2f2;
 }
+
 .article-entry > h4 {
   font-size: 13px;
   margin-bottom: 5px;
   font-weight: 600;
 }
-.article-entry > h4 el-link {
+.article-entry > h4 a {
   color: #3b4348;
 }
-.article-entry > h4 el-link:hover {
+.article-entry > h4 a:hover {
   color: #395996;
 }
 .article-entry .article-meta {
@@ -476,6 +573,7 @@ ul.articles li.article-entry:last-child {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
   color: #395996;
 }
+
 #footer .article-entry .like-count {
   border-color: #535b61;
 }
@@ -485,6 +583,7 @@ ul.articles li.article-entry:last-child {
 #footer ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #535b61;
 }
+
 .main-listing article {
   margin-bottom: 0;
 }
@@ -496,6 +595,7 @@ ul.articles li.article-entry:last-child {
   .main-nav > div {
     display: none;
   }
+
   .main-nav {
     display: block;
     width: 85%;
@@ -504,6 +604,7 @@ ul.articles li.article-entry:last-child {
     border-radius: 0;
     border: none;
   }
+
   /* Search Area */
   .search-area-wrapper {
     background-size: auto;
@@ -511,21 +612,26 @@ ul.articles li.article-entry:last-child {
     height: auto !important;
     height: 240px;
   }
+
   .search-area-wrapper .search-area {
     padding: 20px 0;
   }
+
   .search-area-wrapper h3.search-header {
     font-size: 30px;
     padding: 0 15px;
   }
+
   .search-area-wrapper p.search-tag-line {
     padding: 0 15px;
     font-size: 14px;
     line-height: 22px;
   }
+
   .search-area-wrapper form.search-form input.search-term {
     width: 60%;
   }
+
   @media (max-width: 480px) {
     /* Search Area */
     .search-area-wrapper form.search-form input.search-term {
@@ -533,10 +639,12 @@ ul.articles li.article-entry:last-child {
       display: block;
       margin: 0 auto 10px;
     }
+
     .search-area-wrapper form.search-form input.search-btn {
       display: block;
       margin: 0 auto;
     }
+
     ul.articles .article-entry {
       padding-bottom: 20px;
     }

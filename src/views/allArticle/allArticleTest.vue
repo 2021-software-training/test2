@@ -1,195 +1,212 @@
 <template>
-  <body>
-  <div class="header-wrapper">
-    <header>
-      <div class="container">
-        <div class="logo-container">
-          <!-- Website Logo -->
-          <p id="bigname"><strong>Knowledge Base Theme</strong></p>
-          <span class="tag-line">Premium WordPress Theme</span>
+  <div class="common-layout">
+
+    <el-container>
+      <el-header>
+        <div>
+          <el-avatar id="image1"> user </el-avatar>
         </div>
 
-        <!-- Start of Main Navigation -->
-        <nav class="main-nav">
-          <div class="menu-top-menu-container">
-            <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
-              <li><el-link href="/allArticle">所有文章</el-link></li>
-              <li><el-link href="/myArticle">我的文章</el-link></li>
-              <li><el-link href="/myComment">我的评论</el-link></li>
-              <li><el-link href="/personalKeep">个人中心</el-link></li>
-            </ul>
+
+        <div class="container">
+          <div class="logo-container">
+            <!-- Website Logo -->
+            <p id="bigname"><strong>Knowledge Base Theme</strong></p>
+            <span class="tag-line">Premium WordPress Theme</span>
           </div>
-        </nav>
-        <!-- End of Main Navigation -->
 
-      </div>
-    </header>
-  </div>
-  <!-- End of Header -->
+          <!-- Start of Main Navigation -->
+          <nav class="main-nav">
+            <div class="menu-top-menu-container">
+              <div class="search">
+                <input class="search-term" type="text"  placeholder="search" />
+                <input class="search-btn" type="submit" value="search" />
+              </div>
+              <ul id="menu-top-menu" class="clearfix">
+                <li><el-link href="/menu">主页</el-link></li>
+                <li><el-link href="/allArticle">所有文章</el-link></li>
+                <li><el-link href="/myArticle">我的文章</el-link></li>
+                <li><el-link href="/myComment">我的评论</el-link></li>
+                <li><el-link href="/personalKeep">个人中心</el-link></li>
+              </ul>
+            </div>
+          </nav>
+          <!-- End of Main Navigation -->
 
-  <!-- Start of Search Wrapper -->
-  <div class="search-area-wrapper">
-    <div class="search-area container">
-      <h3 class="search-header">Have el-link Question?</h3>
-      <p class="search-tag-line">If you have any question you can ask below or enter what you are looking for!</p>
+        </div>
+      </el-header>
 
-      <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
-        <input class="search-term required" type="text" id="s" name="s" placeholder="Type your search terms here" title="* Please enter el-link search term!" />
-        <input class="search-btn" type="submit" value="Search" />
-        <div id="search-error-container"></div>
-      </form>
-    </div>
-  </div>
-  <div class="page-container">
-    <div class="container">
-      <div class="row">
+      <el-container>
+        <el-aside width="200px">
 
-        <!-- start of page content -->
-        <div class="span8 page-content">
+          <nav id="sort">
+            <ul>
+              <li><el-link href="/allArtcle"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></el-link></li>
+              <li><el-link href="/history"><img src="assets/images/icon-2.png" alt=""> <em>历史</em></el-link></li>
+              <li><el-link href="/science"><img src="assets/images/icon-3.png" alt=""> <em>科技</em></el-link></li>
+              <li><el-link href="/life"><img src="assets/images/icon-4.png" alt=""> <em>生活</em></el-link></li>
+            </ul>
+          </nav>
 
-          <!-- Basic Home Page Template -->
+        </el-aside>
+
+        <el-main>
           <div class="row separator">
-            <section class="span4 articles-list" v-for="article in articlesData" v-bind:key="article.title">
-              <ul id="array-render">
+            <h3>我的搜索</h3>
+            <section class="span4 articles-list">
+              <ul id="array-render" class="articles" v-for="article in articlesData" v-bind:key="article.title">
                 <li>
-                  {{article.title}}
+                  {{article.title}} <br>
+                  {{article.time}}
                 </li>
               </ul>
             </section>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </body>
-</template>
+        </el-main>
+      </el-container>
 
+    </el-container>
+  </div>
+</template>
 <script>
+import {showPageAllArticle} from "@/api/api";
 
 export default {
-  name: "menu",
-
+  name: "allArticle",
   data() {
     return {
-      articlesData: {}
+      articlesData: [{
+        articleType1: '',
+        articleType2: '',
+        articleType3: '',
+        title:        '',
+        time:         ''
+      }],
     }
+  },
+  created() {
+    showPageAllArticle("all").then((myData) => {
+      console.log(myData);
+      if (myData.result === 0) {
+        this.$router.push('/login');
+        alert("请先登陆")
+      }
+      this.articlesData = myData
+    });
+    console.log(this.articlesData);
   }
 }
 </script>
 
+
 <style scoped>
-/* General ------------------------------------------------------------------------------------------------------------*/
-body {
-  background-color: #fff;
+.search{
+
 }
 #image1{
-  width: 100px;
-  height: 100px;
   border-radius: 50%;
   float:left;
   margin-left:40px;
   margin-top:15px !important;
 }
-.menu .image {
-  margin-top: 18px;
-}
-.menu .image img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
+#sort {
+  top: 147px;
   text-align: center;
-}
-.menu .author-content {
-  margin: 40px 0px 60px 0px;
-}
-.menu .author-content h4 {
-  margin-bottom: 0px;
-}
-.menu .author-content span {
-  font-size: 13px;
-  font-style: italic;
-  color: black;
-}
-.menu {
-  margin-top: 60px;
-}
-.menu  {
-  position: relative;
-  margin-top: 60px;
-}
-.menu:before,
-.menu:after {
-  content: "";
-  display: table;
-}
-.menu:after {
-  clear: both;
-}
-.menu el-link {
-  text-decoration: none;
-  color: inherit;
-}
-.menu {
-  text-align: center;
-}
-.menu {
-  left: 1%;
-  -webkit-transition: -webkit-transform 233ms cubic-bezier(0, 0, 0.21, 1);
-  -webkit-overflow-scrolling: touch;
-  box-sizing: border-box;
-  height: 54vh;
-  max-height: 100vh !important;
-  max-width: 80vw !important;
-  min-width: 45px !important;
-  outline: none;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  padding: 0;
-  position: fixed !important;
-  top: -70px;
-  width: 27%;
-  will-change: transform;
-  z-index: 9999 !important;
-}
-.information {
-  margin:10px; padding: 0;
-  border: 1px solid #f2f2f2;
-  background-color: #FAFAFA;
-}
-label {
-  display:block;
-  font-weight:bold;
-  margin:5px 0;
-  color:black;
-}
-input,.form-select {
-  padding: 2px;
-  border:1px solid #eee;
-  font: normal 1em Verdana, sans-serif;
-  color:#777;
-}
-.text {
-  width:190px;
-  padding:100px;
-  margin-left:auto;
-  margin-right: auto;
-  font: normal 1em Verdana, sans-serif;
-  border:1px solid #eee;
-  height:20px;
-  display:block;
-  color:black;
-}
-.article-entry .like-count[data-v-a70e9a84] {
+  background: #3b4348;
   position: absolute;
-  bottom: 0px;
-  right: 0px;
-  line-height: 18px;
-  font-weight: 600;
-  padding: 3px 5px 3px 20px;
-  border: 1px solid #f2f2f2;
-  border-bottom: none;
-  background: url("../../assets/liked.png") no-repeat 6px 8px;
+  z-index: 100;
+  height: 90%;
+  left: 16px;
+  width: 150px;
+
+}
+#sort em {
+  font-style: normal;
+  font-size: 13px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 15px;
+  color: #fff;
+}
+
+#sort ul li a {
+  text-align: center;
+}
+
+#sort ul {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  list-style-type: none;
+  height: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+#sort ul li {
+  text-align: center;
+  margin: 5px 0px;
+}
+#sort a, #sort a:visited, #sort a:active {
+  color: #fff;
+}
+#sort a {
+  text-decoration: none!important;
+  display: inline-block;
+  width: 140px;
+  padding: 15px 0px;
+  position: relative;
+  z-index: 0;
+  transition: all .5s;
+}
+#sort a.active {
+  background-color: rgba(0,0,0,0.8);
+}
+#sort a::before {
+  content: "";
+  position: absolute;
+  height: 0%;
+  width: 0%;
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  z-index: -1;
+}
+.logo {
+  margin-top: 150px;
+  top: -1px;
+  left: 16px;
+  z-index: 999999;
+  position: fixed;
+  display: inline-block;
+  text-align: center;
+  background-color: black;
+  height: 15%;
+  width: 15%;
+}
+.logo h1 {
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #3b4348;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.logo h2 {
+  display: none;
+}
+body {
+  background-color: #fff;
 }
 .article-entry .like-count[data-v-a70e9a84] {
   position: absolute;
@@ -212,12 +229,13 @@ input,.form-select {
   position: relative;
   min-height: 60px;
   height: auto !important;
+  height: 150px !important;
   top:5px;
 }
 #bigname{
   color:white;
   font-size:xx-large;
-  margin-left: -500px !important;
+  margin-left: -620px;
 }
 .logo-container {
   padding: 19px 0;
@@ -228,11 +246,12 @@ input,.form-select {
 .logo-container {
   width: 450px;
 }
+
 span.tag-line {
   color: #818a90;
   font-size: 12px;
   position: relative;
-  top: 2px;
+  padding-top: 2px !important;
   left:-520px;
 }
 .main-nav {
@@ -251,21 +270,21 @@ span.tag-line {
   list-style: none;
   padding: 16px 14px 18px;
 }
-.main-nav div > ul > li el-link {
+.main-nav div > ul > li a {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   color: #c1cad1;
 }
-.main-nav div > ul > li el-link:hover {
+.main-nav div > ul > li a:hover {
   color: #fff;
 }
-.main-nav div > ul > li:hover > el-link {
+.main-nav div > ul > li:hover > a {
   color: #fff;
 }
 .main-nav div > ul > li:last-child {
   padding-right: 0;
 }
-.main-nav div > ul li.current-menu-item el-link {
+.main-nav div > ul li.current-menu-item a {
   color: #fff;
 }
 .main-nav .sub-menu {
@@ -286,7 +305,7 @@ span.tag-line {
 .main-nav .sub-menu li:hover {
   background-color: #292e32;
 }
-.main-nav .sub-menu li:hover > el-link {
+.main-nav .sub-menu li:hover > a {
   color: #fff;
 }
 .main-nav .sub-menu .sub-menu {
@@ -297,19 +316,19 @@ span.tag-line {
 .main-nav .responsive-nav {
   display: none;
 }
+
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
-  background: #353b65 url("../../assets/flower.png") center top no-repeat;
+  background: #353b65 url("../../assets/wallpaper.jpg") center top no-repeat;
   background-size: 100%;
   min-height: 279px;
   height: auto !important;
   height: 279px;
 }
 .search-area-wrapper .search-area {
-  margin-top: -20px;
   padding: 50px 0;
-  height:450px;
 }
+
 h3.search-header {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -317,6 +336,7 @@ h3.search-header {
   color: #fff;
   text-align: center;
 }
+
 p.search-tag-line {
   font-family: "Droid Serif", serif;
   font-style: italic;
@@ -325,6 +345,7 @@ p.search-tag-line {
   color: #fff;
   text-align: center;
 }
+
 form.search-form {
   margin: 40px 0 0;
   text-align: center;
@@ -363,15 +384,18 @@ form.search-form input.search-btn {
 form.search-form input.search-btn:hover {
   background-color: #4b5760;
 }
+
 #search-error-container label {
   color: #fff;
   padding: 5px;
   font-size: 14px;
 }
+
 .lt-ie8 form.search-form input.search-btn {
   padding-top: 12px;
   padding-bottom: 13px;
 }
+
 /* Page - Container --------------------------------------------------------------------------------------------------*/
 .page-container {
   width: 100%;
@@ -380,13 +404,18 @@ form.search-form input.search-btn:hover {
   padding: 40px 35px;
   background-color: #fff;
 }
-.pages-nav el-link {
+
+
+.pages-nav a {
   margin-right: 10px;
 }
+
+
 div {
   display: block;
   margin: 5px auto 20px auto;
 }
+
 li.comment > article {
   background: #fff;
   float: left;
@@ -400,6 +429,7 @@ li.comment > article {
 .page-content {
   margin-bottom: 20px;
 }
+
 .row.separator {
   margin-bottom: 10px;
 }
@@ -415,12 +445,13 @@ li.comment > article {
   color: #6f7579;
   font-size: 16px;
 }
-.articles-list > h3 el-link {
+.articles-list > h3 a {
   color: #3b4348;
 }
-.articles-list > h3 el-link:hover {
+.articles-list > h3 a:hover {
   color: #395996;
 }
+
 ul.articles {
   list-style: none;
   margin: 0;
@@ -446,15 +477,16 @@ ul.articles .article-entry {
 ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #f2f2f2;
 }
+
 .article-entry > h4 {
   font-size: 13px;
   margin-bottom: 5px;
   font-weight: 600;
 }
-.article-entry > h4 el-link {
+.article-entry > h4 a {
   color: #3b4348;
 }
-.article-entry > h4 el-link:hover {
+.article-entry > h4 a:hover {
   color: #395996;
 }
 .article-entry .article-meta {
@@ -470,12 +502,13 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("../../assets/liked.png") no-repeat 6px 8px;
+  background: url("liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
   color: #395996;
 }
+
 #footer .article-entry .like-count {
   border-color: #535b61;
 }
@@ -485,6 +518,7 @@ ul.articles li.article-entry:last-child {
 #footer ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #535b61;
 }
+
 .main-listing article {
   margin-bottom: 0;
 }
@@ -496,6 +530,7 @@ ul.articles li.article-entry:last-child {
   .main-nav > div {
     display: none;
   }
+
   .main-nav {
     display: block;
     width: 85%;
@@ -504,6 +539,7 @@ ul.articles li.article-entry:last-child {
     border-radius: 0;
     border: none;
   }
+
   /* Search Area */
   .search-area-wrapper {
     background-size: auto;
@@ -511,21 +547,26 @@ ul.articles li.article-entry:last-child {
     height: auto !important;
     height: 240px;
   }
+
   .search-area-wrapper .search-area {
     padding: 20px 0;
   }
+
   .search-area-wrapper h3.search-header {
     font-size: 30px;
     padding: 0 15px;
   }
+
   .search-area-wrapper p.search-tag-line {
     padding: 0 15px;
     font-size: 14px;
     line-height: 22px;
   }
+
   .search-area-wrapper form.search-form input.search-term {
     width: 60%;
   }
+
   @media (max-width: 480px) {
     /* Search Area */
     .search-area-wrapper form.search-form input.search-term {
@@ -533,10 +574,12 @@ ul.articles li.article-entry:last-child {
       display: block;
       margin: 0 auto 10px;
     }
+
     .search-area-wrapper form.search-form input.search-btn {
       display: block;
       margin: 0 auto;
     }
+
     ul.articles .article-entry {
       padding-bottom: 20px;
     }

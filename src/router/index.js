@@ -24,7 +24,8 @@ const Voice = () => import('../views/voice/voice');
 const EditUserInfo = () => import('../views/editUserInfo/editUserInfo');
 const EditComment = () => import('../views/editComment/editComment');
 const EmailCheck = () => import('../views/emailCheck/emailCheck');
-// const Detailarticle = () =>import('../views/detailarticle/detailarticle');
+const AllArticleTest = () => import('../views/allArticle/allArticleTest')
+const DetailArticle = () =>import('../views/detailArticle/detailArticle');
 
 const GitTest = () => import('../views/testVue/gittest');
 
@@ -107,6 +108,12 @@ const routes = [
     }, {
         path: '/gitTest',
         component: GitTest
+    }, {
+        path: '/allArticleTest',
+        component: AllArticleTest
+    }, {
+        path: '/detailArticle',
+        component: DetailArticle
     }
 
 ];
