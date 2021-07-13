@@ -12,14 +12,14 @@
         </div>
 
         <!-- Start of Main Navigation -->
+        <a href="#"><img id="image1" src="../../assets/wallpaper.jpg" alt="" /></a>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
               <li class="current-menu-item"><a href="/menu">主页</a></li>
               <li><a href="/allArticle">所有文章</a></li>
-              <li><a href="/myArticle">我的文章</a></li>
-              <li><a href="/myComment">我的评论</a></li>
-              <li><a href="/personalKeep">个人中心</a></li>
+              <li><a href="/myarticle">我的</a></li>
+              <li><a href="/personalpage">个人主页</a></li>
             </ul>
           </div>
         </nav>
@@ -77,7 +77,7 @@ export default {
 
   data() {
     return {
-      articlesData: {}
+      articlesData: {},
     }
   }
 }
@@ -94,7 +94,7 @@ body {
   border-radius: 50%;
   float:left;
   margin-left:40px;
-  margin-top:15px !important;
+  margin-top:-175px !important;
 }
 .menu .image {
   margin-top: 18px;
@@ -237,13 +237,13 @@ span.tag-line {
   color: #818a90;
   font-size: 12px;
   position: relative;
-  top: 2px;
-  left:-520px;
+  top:-18px;
+  margin-left:-1200px;
 }
 .main-nav {
   position: absolute;
   top: 5px;
-  left:710px;
+  left:880px;
   right: 0;
 }
 .main-nav div > ul {

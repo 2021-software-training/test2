@@ -1,23 +1,35 @@
 <template>
+
+
   <body>
+
   <div class="header-wrapper">
     <header>
       <div class="container">
-        <div class="logo-container">
+        <div1 class="logo-container">
           <!-- Website Logo -->
           <p id="bigname"><strong>Knowledge Base Theme</strong></p>
           <span class="tag-line">Premium WordPress Theme</span>
-        </div>
+        </div1>
 
         <!-- Start of Main Navigation -->
+        <a href="#"><img id="image1" src="../../assets/moon.png" alt="" /></a>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><a href="/menu">主页</a></li>
-              <li><a href="/allArticle">所有文章</a></li>
-              <li><a href="/myarticle">我的文章</a></li>
-              <li><a href="/mycomment">我的评论</a></li>
-              <li><a href="/personalkeep">个人中心</a></li>
+              <template>
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                  <el-menu-item index="5" ><a href="/menu">主页</a></el-menu-item>
+                  <el-menu-item index="3" ><a href="/allArticle">所有文章</a></el-menu-item>
+                  <el-menu-item index="4"> <a href="/myArticle">我的</a></el-menu-item>
+                  <el-menu-item index="1"><a href="/myComment">个人主页</a></el-menu-item>
+                </el-menu>
+                <div class="line"></div>
+
+              </template>
+
+
+
             </ul>
           </div>
         </nav>
@@ -26,7 +38,7 @@
       </div>
     </header>
   </div>
-  <!-- End of Header -->
+
   <div id="page-wraper">
     <!-- Sidebar Menu -->
     <div class="responsive-nav">
@@ -34,154 +46,220 @@
       <div id="menu" class="menu">
         <i class="fa fa-times" id="menu-close"></i>
         <div class="container">
-          <div class="image">
-            <a href="#"><img src="../../assets/wallpaper.jpg" alt="" /></a>
-          </div>
-          <div class="author-content">
-            <h4>Name</h4>
-            <span>个性签名</span>
-          </div>
+          <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+
+          </el-radio-group>
+          <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+            <template>
+              <el-row class="tac">
+                <el-col :span="12">
+                  <el-menu
+                      default-active="2"
+                      class="el-menu-vertical-demo"
+                      @open="handleOpen"
+                      @close="handleClose"
+                      background-color="#545c64"
+                      text-color="#fff"
+                      active-text-color="#ffd04b">
+                    <el-submenu index="1">
+                      <template #title>
+                        <i class="el-icon-location"></i>
+                        <span>可视主页</span>
+                      </template>
+                    </el-submenu>
+                    <el-submenu index="2">
+                      <template #title>
+                        <i class="el-icon-menu"></i>
+                        <span>编辑文章</span>
+                      </template>
+                    </el-submenu>
+                    <el-submenu index="3">
+                      <template #title>
+                        <i class="el-icon-setting"></i>
+                        <span>设置</span>
+                      </template>
+                      <el-menu-item-group>
+                        <template #title>设置</template>
+                        <a href="/changepassword"><el-menu-item index="1-1">重置密码</el-menu-item></a>
+                        <a href="/personalkeep"><el-menu-item index="1-2">编辑信息</el-menu-item></a>
+                        <a href="/changehead"><el-menu-item index="1-3">更改头像背景</el-menu-item></a>
+                        <a href="/voice"><el-menu-item index="1-4">语音设置</el-menu-item></a>
+                      </el-menu-item-group>
+                    </el-submenu>
+
+                  </el-menu>
+                </el-col>
+
+
+
+
+
+
+              </el-row>
+            </template>
+
+
+          </el-menu>
+
         </div>
       </div>
     </div>
   </div>
-  <!-- Start of Search Wrapper -->
-  <div class="search-area-wrapper">
-    <div class="search-area container">
-      <h3 class="search-header">XXXX的主页</h3>
-      <p class="search-tag-line">说给来者的话</p>
-
-      <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
-        <input class="search-term required" type="text" id="s" name="s" placeholder="留言" title="* Please enter a search term!" />
-        <input class="search-btn" type="submit" value="留言" />
-        <div id="search-error-container"></div>
-      </form>
-    </div>
-  </div>
-  <div class="page-container">
-    <div class="container">
-      <div class="row">
-
-        <!-- start of page content -->
-        <div class="span8 page-content">
-
-          <!-- Basic Home Page Template -->
-          <div class="row separator">
-            <section class="span4 articles-list">
-              <h3>XXXX的文章</h3>
-              <ul class="articles">
-                <li class="article-entry standard">
-                  <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-                  <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-                  <span class="like-count">66</span>
-                </li>
-                <li class="article-entry standard">
-                  <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-                  <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-                  <span class="like-count">15</span>
-                </li>
-                <li class="article-entry video">
-                  <h4><a href="single.html">Meta Tags in WordPress</a></h4>
-                  <span class="article-meta">23 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-                  <span class="like-count">8</span>
-                </li>
-                <li class="article-entry image">
-                  <h4><a href="single.html">WordPress in Your Language</a></h4>
-                  <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-                  <span class="like-count">6</span>
-                </li>
-                <li class="article-entry standard">
-                  <h4><a href="single.html">Know Your Sources</a></h4>
-                  <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-                  <span class="like-count">2</span>
-                </li>
-                <li class="article-entry standard">
-                  <h4><a href="single.html">Validating a Website</a></h4>
-                  <span class="article-meta">21 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-                  <span class="like-count">3</span>
-                </li>
-              </ul>
-            </section>
-
-
-            <section class="span4 articles-list">
-              <ul class="articles">
-                <li class="article-entry standard">
-                  <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-                  <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-                  <span class="like-count">66</span>
-                </li>
-                <li class="article-entry standard">
-                  <h4><a href="single.html">Using Javascript</a></h4>
-                  <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-                  <span class="like-count">18</span>
-                </li>
-                <li class="article-entry image">
-                  <h4><a href="single.html">Using Images</a></h4>
-                  <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
-                  <span class="like-count">7</span>
-                </li>
-                <li class="article-entry video">
-                  <h4><a href="single.html">Using Video</a></h4>
-                  <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
-                  <span class="like-count">7</span>
-                </li>
-                <li class="article-entry standard">
-                  <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-                  <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-                  <span class="like-count">15</span>
-                </li>
-                <li class="article-entry standard">
-                  <h4><a href="single.html">WordPress CSS Information and Techniques</a></h4>
-                  <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Theme Development">Theme Development</a></span>
-                  <span class="like-count">1</span>
-                </li>
-              </ul>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <h3>xxx的信息</h3>
-  <form action="#" class="information">
-    <p>
-      <label>性别</label>
-      <select class="form-select" aria-label="Default select example" disabled>
-        <option selected>男</option>
-        <option value="女">女</option>
-      </select>
-      <label>生日</label>
-      <input name="dname" value="Your Birthday 无" type="text" size="30" disabled />
-      <label>邮箱</label>
-      <input name="demail" value="Your Email 无" type="text" size="30" disabled />
-      <label>地址</label>
-      <input name="demail" value="Your Address 无" type="text" size="30" disabled />
-      <label>喜好</label>
-      <input  class="text" value="无" disabled>
-      <label>个性签名</label>
-      <input  class="text" value="无" disabled>
-    </p>
-  </form>
 
   </body>
 </template>
 
 <script>
 export default {
-  name: "personalPage"
+  data() {
+    return {
+      isCollapse: true,
+      activeIndex: '1',
+      activeIndex2: '1'
+    };
+  },
+  name:
+      "changePassword",
+  methods:{
+    keeper(){
+      this.$router.push('/personal');
+    },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    }
+  }
 }
 </script>
 
 <style scoped>
-/* General ------------------------------------------------------------------------------------------------------------*/
-body {
-  background-color: #fff;
+body{
+
+  height:800px;
+}
+#image1{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  float:left;
+  margin-left:40px;
+  margin-top:-160px !important;
+}
+form {
+  margin:10px; padding: 0;
+  border: 1px solid #f2f2f2;
+  background-color: #FAFAFA;
+}
+label {
+  display:block;
+  font-weight:bold;
+  margin:5px 0;
+  color:black;
+}
+input,.form-select {
+  padding: 2px;
+  border:1px solid #eee;
+  font: normal 1em Verdana, sans-serif;
+  color:#777;
+}
+.text {
+  width:190px;
+  padding:100px;
+  margin-left:auto;
+  margin-right: auto;
+  font: normal 1em Verdana, sans-serif;
+  border:1px solid #eee;
+  height:20px;
+  display:block;
+  color:black;
+}
+#keep {
+  margin: 0;
+  font: bold 1em Arial, Sans-serif;
+  border: 1px solid #CCC;
+  background: #FFF;
+  padding: 7px 15px;
+  color: #00CACA;
 }
 
+
+#page-wraper {
+  background: url("#") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+}
+
+
+/* Basic */
+
+
+input{
+  outline: none;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #9D9D9D;
+}
+
+h4 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.25px;
+}
+
+img {
+  width: 100%;
+  overflow: hidden;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+ul li {
+  display: inline-block;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+/* Sidebar Menu */
+
 .menu .image {
-  margin-top: 18px;
+  margin-top: 60px;
 }
 
 .menu .image img {
@@ -202,7 +280,7 @@ body {
 .menu .author-content span {
   font-size: 13px;
   font-style: italic;
-  color: black;
+  color: #fff;
 }
 
 .menu {
@@ -231,82 +309,23 @@ body {
 .menu {
   text-align: center;
 }
-.menu {
-  left: 1%;
-  -webkit-transition: -webkit-transform 233ms cubic-bezier(0, 0, 0.21, 1);
-  -webkit-overflow-scrolling: touch;
-  box-sizing: border-box;
-  height: 54vh;
-  max-height: 100vh !important;
-  max-width: 80vw !important;
-  min-width: 45px !important;
-  outline: none;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  padding: 0;
-  position: fixed !important;
-  top: -70px;
-  width: 27%;
-  will-change: transform;
-  z-index: 9999 !important;
 
-}
-
-.information {
-  margin:10px; padding: 0;
-  border: 1px solid #f2f2f2;
-  background-color: #FAFAFA;
-}
-label {
-  display:block;
-  font-weight:bold;
-  margin:5px 0;
-  color:black;
-}
-input,.form-select {
-  padding: 2px;
-  border:1px solid #eee;
-  font: normal 1em Verdana, sans-serif;
-  color:#777;
-}
-.text {
-  width:190px;
-  padding:100px;
-  margin-left:auto;
-  margin-right: auto;
-  font: normal 1em Verdana, sans-serif;
-  border:1px solid #eee;
-  height:20px;
-  display:block;
-  color:black;
-}
-
-.article-entry .like-count[data-v-a70e9a84] {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  line-height: 18px;
-  font-weight: 600;
-  padding: 3px 5px 3px 20px;
-  border: 1px solid #f2f2f2;
-  border-bottom: none;
-  background: url("/liked.png") no-repeat 6px 8px;
-}
 .header-wrapper {
   background-color: #3b4348;
   width: 100%;
   height: auto;
+  margin-top:-61px;
 }
 .header-wrapper .container {
   position: relative;
   min-height: 60px;
   height: auto !important;
-  height: 60px;
+  top:5px;
 }
 #bigname{
   color:white;
-  font-size:x-large;
-  margin-left: -900px;
+  font-size:xx-large;
+  margin-left: -500px !important;
 }
 .logo-container {
   padding: 19px 0;
@@ -317,12 +336,12 @@ input,.form-select {
 .logo-container {
   width: 450px;
 }
-
 span.tag-line {
   color: #818a90;
   font-size: 12px;
   position: relative;
-  top: 2px;
+  top:-5px;
+  margin-left:-1280px !important;
 }
 .main-nav {
   position: absolute;
@@ -388,10 +407,9 @@ span.tag-line {
 
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
-  background: #353b65 url("../../assets/wallpaper.jpg") center top no-repeat;
+  background: #353b65 url("#") center top no-repeat;
   background-size: 100%;
   min-height: 279px;
-  height: auto !important;
   height: 279px;
 }
 .search-area-wrapper .search-area {
@@ -438,7 +456,7 @@ form.search-form input.search-term {
   margin-bottom: 0;
 }
 form.search-form input.search-term.loading {
-  background-image: url("../../assets/wallpaper.jpg");
+  background-image: url("#");
   background-repeat: no-repeat;
   background-position: 98% 50%;
 }
@@ -480,7 +498,7 @@ form.search-form input.search-btn:hover {
 }
 
 
-div {
+div1 {
   display: block;
   margin: 5px auto 20px auto;
 }
@@ -529,19 +547,19 @@ ul.articles .article-entry {
   position: relative;
   border-bottom: 1px solid #f2f2f2;
   padding: 0 0 0 24px;
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry.standard {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry.video {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry.image {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #f2f2f2;
@@ -571,10 +589,10 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("/liked.png") no-repeat 6px 8px;
+  background: url("../../assets/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
-  background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
+  background: url("#") no-repeat 6px -22px;
   color: #395996;
 }
 
@@ -614,7 +632,6 @@ ul.articles li.article-entry:last-child {
     background-size: auto;
     min-height: 240px;
     height: auto !important;
-    height: 240px;
   }
 
   .search-area-wrapper .search-area {

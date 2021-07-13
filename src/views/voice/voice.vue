@@ -28,34 +28,7 @@
     </header>
   </div>
 
-  <div id="page-wraper">
-    <!-- Sidebar Menu -->
-    <div class="responsive-nav">
-      <i class="fa fa-bars" id="menu-toggle"></i>
-      <div id="menu" class="menu">
-        <i class="fa fa-times" id="menu-close"></i>
-        <div class="container">
-          <div class="image">
-            <a href="#"><img src="./../../assets/wallpaper.jpg" alt="" /></a>
-          </div>
-          <div class="author-content">
-            <h4>Name</h4>
-            <span>个性签名</span>
-          </div>
-          <nav class="main-nav2" role="navigation">
-            <ul class="main-menu">
-              <li><a href="/personalkeep">个人信息</a></li>
-              <li><a href="/personalpage">个人主页</a></li>
-              <li><a href="/changecode">修改密码</a></li>
-              <li><a href="/changehead">修改头像及背景</a></li>
-              <li><a href="/voice">语音设置</a></li>
-              <li><a href="/writearticle">写文章</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <h3>语音设置</h3>
   <form action="#">
@@ -67,16 +40,22 @@
       <option value="女2">女2</option>
     </select>
     <div>
-      <label for="customRange1" class="form-label">语速</label>
-      <input type="range" class="form-range" min="0" max="15" id="customRange1">
+      <label  class="form-label">语速</label>
+      <div class="block">
+        <el-slider v-model="value1"></el-slider>
+      </div>
     </div>
     <div>
-      <label for="customRange2" class="form-label">音调</label>
-      <input type="range" class="form-range" min="0" max="15" id="customRange2">
+      <label  class="form-label">音调</label>
+      <div class="block">
+        <el-slider v-model="value2"></el-slider>
+      </div>
     </div>
     <div>
-      <label for="customRange3" class="form-label">音量</label>
-      <input type="range" class="form-range" min="0" max="9" id="customRange3">
+      <label  class="form-label">音量</label>
+      <div class="block">
+        <el-slider v-model="value3"></el-slider>
+      </div>
     </div>
     <br />
     <butoon id="keep" @click="keeper">保存</butoon>
@@ -87,16 +66,31 @@
 
 <script>
 export default {
+    data() {
+      return {
+        value1: 0,
+        value2:0,
+        value3:0
+      }
+    },
   name: "personal",
   methods:{
     keeper(){
       this.$router.push('/personalkeep');
+    },
+    formatTooltip(val) {
+      return val / 100;
     }
   }
 }
 </script>
 
 <style scoped>
+
+.block{
+  margin:auto;
+  width:50%;
+}
 
 form {
   margin:10px; padding: 0;
@@ -108,6 +102,9 @@ label {
   font-weight:bold;
   margin:5px 0;
   color:black;
+}
+.form-select{
+  width:20%;
 }
 input,.form-select {
   padding: 2px;
@@ -620,7 +617,7 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("/liked.png") no-repeat 6px 8px;
+  background: url("/../../assets/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;

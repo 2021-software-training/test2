@@ -28,34 +28,7 @@
     </header>
   </div>
 
-  <div id="page-wraper">
-    <!-- Sidebar Menu -->
-    <div class="responsive-nav">
-      <i class="fa fa-bars" id="menu-toggle"></i>
-      <div id="menu" class="menu">
-        <i class="fa fa-times" id="menu-close"></i>
-        <div class="container">
-          <div class="image">
-            <a href="#"><img src="../../assets/wallpaper.jpg" alt="" /></a>
-          </div>
-          <div class="author-content">
-            <h4>Name</h4>
-            <span>个性签名</span>
-          </div>
-          <nav class="main-nav2" role="navigation">
-            <ul class="main-menu">
-              <li><a href="/personalKeep">个人信息</a></li>
-              <li><a href="/personalPage">个人主页</a></li>
-              <li><a href="/changePassword">修改密码</a></li>
-              <li><a href="/changehHead">修改头像及背景</a></li>
-              <li><a href="/voice">语音设置</a></li>
-              <li><a href="/writearticle">写文章</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <h3>修改密码</h3>
   <form action="#">
@@ -611,7 +584,7 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("/liked.png") no-repeat 6px 8px;
+  background: url("/../../assets/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
