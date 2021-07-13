@@ -1,14 +1,19 @@
 <template>
-  <div >
+  <body>
+  <div class="background">
     <form action="" class="login">
       <p>CSI语音技术吧</p>
+      <p id="warn">&nbsp;</p>
       <input type="text" v-model="userName" placeholder="用户名">
       <input type="password" v-model="userPassword" placeholder="密码">
-      <label><input type="checkbox" name="ten" id="yu">记住密码</label>
+      <br>
+      <br>
+      <a  class="btn2" href="#" > 人脸识别 </a>
       <el-button type="submit" class="btn" @click="toLogin"> 登  录 </el-button>
       <el-button type="submit" class="btn btn1" @click="toRegister"> 注  册 </el-button>
     </form>
   </div>
+  </body>
 </template>
 
 <script>
@@ -32,7 +37,7 @@ export default {
       console.log((judge.token))
       if (judge.result === "yes") {
         window.sessionStorage.setItem("token", judge.token);
-        console.log("success!");
+        alert("登陆成功")
         await this.$router.push('/menu');
       } else {
         console.log("failed");
@@ -51,9 +56,15 @@ export default {
   user-select: none;
   /* 无法选中，整体感更强 */
 }
-
 body{
-  background: url("./../../assets/wallpaper.jpg") no-repeat fixed;
+  background: #353b65 url("../../assets/img.png") no-repeat;
+  background-size: 66%;
+  min-height: 279px;
+  margin-top: -100px;
+  margin-left: -20px;
+  margin-right: -25px;
+  height: 630px;
+  width:2000px;
 }
 #yu{
   margin-left: -544px;
@@ -67,7 +78,7 @@ body{
   left: 50%;
   margin-left: -200px;
   /* absolute居中的一种方法 */
-  background-color: whitesmoke;
+  background-color: rgba(255,255,255,0.7);
   width: 400px;
   height: 400px;
   border-radius: 25px;
@@ -82,7 +93,7 @@ p{
 }
 
 input{
-  background-color: whitesmoke;
+  background-color: rgba(0,0,0,0);
   width: 100%;
   height: 40px;
   margin-bottom: 10px;
@@ -99,17 +110,27 @@ input{
   width: 42%;
   height: 52px;
   border-radius: 23px;
-  margin-top: 40px;
+  margin-top: 30px;
   font-size: 31px;
-  font-weight: 600;
-  color: white;
+  color: rgba(255,255,255,0.6);
   float:left;
 }
 .btn1
 {
   margin-left: 40px;
+  margin-top: 30px;
+}
+.btn2
+{
+  margin-top:10px;
+  margin-left:-560px;
 }
 .btn:hover{
-  background-color:#17D3AD
+  background-color:#17D3AD;
+  color: rgba(255,255,255,1);
+}
+#warn{
+  font-size: small;
+  color:red;
 }
 </style>

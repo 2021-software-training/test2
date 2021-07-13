@@ -1,9 +1,5 @@
 <template>
   <body>
-  <div class="logo">
-    <h1>分类</h1>
-    <h2>E</h2>
-  </div>
   <nav id="sort">
     <ul>
       <li><a href="/allArtcle"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></a></li>
@@ -26,6 +22,10 @@
         <!-- Start of Main Navigation -->
         <nav class="main-nav">
           <div class="menu-top-menu-container">
+            <div class="search">
+              <input class="search-term" type="text"  placeholder="search" />
+              <input class="search-btn" type="submit" value="search" />
+            </div>
             <ul id="menu-top-menu" class="clearfix">
               <li class="current-menu-item"><a href="/menu">主页</a></li>
               <li><a href="/allArticle">所有文章</a></li>
@@ -42,8 +42,9 @@
   </div>
 
   <div class="row separator">
-    <section class="span4 articles-list" v-for="article in articlesData" v-bind:key="article.title">
-      <ul id="array-render" class="articles">
+    <h3>我的搜索</h3>
+    <section class="span4 articles-list">
+      <ul id="array-render" class="articles" v-for="article in articlesData" v-bind:key="article.title">
         <li>
           {{article.title}} <br>
           {{article.time}}
@@ -83,7 +84,11 @@ export default {
   }
 }
 </script>
+
 <style scoped>
+.search{
+
+}
 #image1{
   width: 100px;
   height: 100px;
@@ -93,16 +98,15 @@ export default {
   margin-top:15px !important;
 }
 #sort {
-  top: 25%;
+  top: 147px;
   text-align: center;
-  background: rgba(0, 0, 0, 1);
-  position: fixed;
+  background: #3b4348;
+  position: absolute;
   z-index: 100;
   height: 90%;
-  left: 0;
-  width: 15%;
-  font-weight: 300;
-  font-size: 1rem;
+  left: 16px;
+  width: 150px;
+
 }
 #sort em {
   font-style: normal;
@@ -112,9 +116,11 @@ export default {
   margin-top: 15px;
   color: #fff;
 }
+
 #sort ul li a {
   text-align: center;
 }
+
 #sort ul {
   position: relative;
   top: 50%;
@@ -164,13 +170,13 @@ export default {
 }
 .logo {
   margin-top: 150px;
-  top: 0;
-  left: 0;
+  top: -1px;
+  left: 16px;
   z-index: 999999;
   position: fixed;
   display: inline-block;
   text-align: center;
-  background-color: #faf5b2;
+  background-color: black;
   height: 15%;
   width: 15%;
 }
@@ -178,7 +184,7 @@ export default {
   font-size: 24px;
   text-transform: uppercase;
   font-weight: 900;
-  color: #111;
+  color: #3b4348;
   top: 50%;
   left: 50%;
   position: absolute;
@@ -228,6 +234,7 @@ body {
 .logo-container {
   width: 450px;
 }
+
 span.tag-line {
   color: #818a90;
   font-size: 12px;
@@ -297,6 +304,7 @@ span.tag-line {
 .main-nav .responsive-nav {
   display: none;
 }
+
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
   background: #353b65 url("../../assets/wallpaper.jpg") center top no-repeat;
@@ -308,6 +316,7 @@ span.tag-line {
 .search-area-wrapper .search-area {
   padding: 50px 0;
 }
+
 h3.search-header {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -315,6 +324,7 @@ h3.search-header {
   color: #fff;
   text-align: center;
 }
+
 p.search-tag-line {
   font-family: "Droid Serif", serif;
   font-style: italic;
@@ -323,6 +333,7 @@ p.search-tag-line {
   color: #fff;
   text-align: center;
 }
+
 form.search-form {
   margin: 40px 0 0;
   text-align: center;
@@ -361,15 +372,18 @@ form.search-form input.search-btn {
 form.search-form input.search-btn:hover {
   background-color: #4b5760;
 }
+
 #search-error-container label {
   color: #fff;
   padding: 5px;
   font-size: 14px;
 }
+
 .lt-ie8 form.search-form input.search-btn {
   padding-top: 12px;
   padding-bottom: 13px;
 }
+
 /* Page - Container --------------------------------------------------------------------------------------------------*/
 .page-container {
   width: 100%;
@@ -378,13 +392,18 @@ form.search-form input.search-btn:hover {
   padding: 40px 35px;
   background-color: #fff;
 }
+
+
 .pages-nav a {
   margin-right: 10px;
 }
+
+
 div {
   display: block;
   margin: 5px auto 20px auto;
 }
+
 li.comment > article {
   background: #fff;
   float: left;
@@ -398,6 +417,7 @@ li.comment > article {
 .page-content {
   margin-bottom: 20px;
 }
+
 .row.separator {
   margin-bottom: 10px;
 }
@@ -419,6 +439,7 @@ li.comment > article {
 .articles-list > h3 a:hover {
   color: #395996;
 }
+
 ul.articles {
   list-style: none;
   margin: 0;
@@ -444,6 +465,7 @@ ul.articles .article-entry {
 ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #f2f2f2;
 }
+
 .article-entry > h4 {
   font-size: 13px;
   margin-bottom: 5px;
@@ -474,6 +496,7 @@ ul.articles li.article-entry:last-child {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
   color: #395996;
 }
+
 #footer .article-entry .like-count {
   border-color: #535b61;
 }
@@ -483,6 +506,7 @@ ul.articles li.article-entry:last-child {
 #footer ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #535b61;
 }
+
 .main-listing article {
   margin-bottom: 0;
 }
@@ -494,6 +518,7 @@ ul.articles li.article-entry:last-child {
   .main-nav > div {
     display: none;
   }
+
   .main-nav {
     display: block;
     width: 85%;
@@ -502,6 +527,7 @@ ul.articles li.article-entry:last-child {
     border-radius: 0;
     border: none;
   }
+
   /* Search Area */
   .search-area-wrapper {
     background-size: auto;
@@ -509,21 +535,26 @@ ul.articles li.article-entry:last-child {
     height: auto !important;
     height: 240px;
   }
+
   .search-area-wrapper .search-area {
     padding: 20px 0;
   }
+
   .search-area-wrapper h3.search-header {
     font-size: 30px;
     padding: 0 15px;
   }
+
   .search-area-wrapper p.search-tag-line {
     padding: 0 15px;
     font-size: 14px;
     line-height: 22px;
   }
+
   .search-area-wrapper form.search-form input.search-term {
     width: 60%;
   }
+
   @media (max-width: 480px) {
     /* Search Area */
     .search-area-wrapper form.search-form input.search-term {
@@ -531,10 +562,12 @@ ul.articles li.article-entry:last-child {
       display: block;
       margin: 0 auto 10px;
     }
+
     .search-area-wrapper form.search-form input.search-btn {
       display: block;
       margin: 0 auto;
     }
+
     ul.articles .article-entry {
       padding-bottom: 20px;
     }
