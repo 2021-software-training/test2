@@ -1,232 +1,133 @@
 <template>
-  <body>
-
-<!--  <nav id="sort">-->
-<!--    <ul>-->
-<!--      <li><el-link href="/allArtcle"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></el-link></li>-->
-<!--      <li><el-link href="/history"><img src="assets/images/icon-2.png" alt=""> <em>历史</em></el-link></li>-->
-<!--      <li><el-link href="/science"><img src="assets/images/icon-3.png" alt=""> <em>科技</em></el-link></li>-->
-<!--      <li><el-link href="/life"><img src="assets/images/icon-4.png" alt=""> <em>生活</em></el-link></li>-->
-<!--    </ul>-->
-<!--  </nav>-->
-
-  <div class="header-wrapper">
-    <div class="user-avatar">
-      <el-avatar id="image1" shape="square"> user </el-avatar>
-    </div>
-
-    <header>
-      <div class="container">
-        <div class="logo-container">
-          <!-- Website Logo -->
-          <p id="bigname"><strong>Knowledge Base Theme</strong></p>
+  <el-container>
+    <el-header>
+      <div class="header-wrapper">
+        <div class="user-avatar">
+          <el-avatar id="image1" shape="square"> user </el-avatar>
         </div>
 
-        <!-- Start of Main Navigation -->
-        <nav class="main-nav">
-          <div class="menu-top-menu-container">
-            <div class="search">
-              <input class="search-term" type="text"  placeholder="search" />
-              <input class="search-btn" type="submit" value="search" />
+        <header>
+          <div class="container">
+            <div class="logo-container">
+              <!-- Website Logo -->
+              <p id="bigname"><strong>Knowledge Base Theme</strong></p>
             </div>
-            <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
-              <li><el-link href="/allArticle">所有文章</el-link></li>
-              <li><el-link href="/myArticle">我的文章</el-link></li>
-              <li><el-link href="/myComment">我的评论</el-link></li>
-              <li><el-link href="/personalKeep">个人中心</el-link></li>
-            </ul>
+
+            <!-- Start of Main Navigation -->
+            <nav class="main-nav">
+              <div class="menu-top-menu-container">
+                <div class="search">
+                  <input class="search-term" type="text"  placeholder="search" />
+                  <input class="search-btn" type="submit" value="search" />
+                </div>
+                <ul id="menu-top-menu" class="clearfix">
+                  <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
+                  <li><el-link href="/allArticle">所有文章</el-link></li>
+                  <li><el-link href="/myArticle">我的文章</el-link></li>
+                  <li><el-link href="/myComment">我的评论</el-link></li>
+                  <li><el-link href="/personalKeep">个人中心</el-link></li>
+                </ul>
+              </div>
+            </nav>
+            <!-- End of Main Navigation -->
+
           </div>
-        </nav>
-        <!-- End of Main Navigation -->
-
+        </header>
       </div>
-    </header>
-  </div>
+    </el-header>
 
-  <div class="row separator">
-<!--    <h3>我的搜索</h3>-->
-    <div>
-<!--      <el-radio-group v-model="radio1">-->
-        <el-button  @click="toAllType">All</el-button>
-        <el-button  @click="toGameType">Game</el-button>
-        <el-button  @click="toHistoryType">History</el-button>
-        <el-button  @click="toScienceType">Science</el-button>
-<!--      </el-radio-group>-->
+    <el-container>
+      <el-aside width="200px">
+        <nav id="sort">
+          <el-space direction="vertical">
+            <el-card class="box-card" style="width: 250px">
+              <template #header>
+                <div class="card-header">
+                  <br><el-avatar shape="square" :size="100">user</el-avatar><br><br>
+                  <span>Author name</span>
+                  <!--              <el-button class="button" type="text">Operation button</el-button>-->
+                </div>
+              </template>
+              <span class="article-title">
+              article title<br><br>
+            </span>
+              <el-divider></el-divider>
 
-    </div>
+              <el-button type="primary" icon="el-icon-caret-top" size="mini" circle></el-button>
+              <el-button type="primary" icon="el-icon-chat-line-round" size="mini" circle></el-button>
+              <el-button type="primary" icon="el-icon-paperclip" size="mini" circle></el-button>
 
-    <el-divider></el-divider>
-    <el-space wrap alignment="flex-end">
-      <el-card class="box-card" style="width: 1000px" v-for="(article, index) in articlesData" v-bind:key="index">
-        <template #header>
-          <div class="card-header">
-            <span>{{article.title}}</span>
+              <el-divider></el-divider>
+              <div>
+                <el-tag size="10">1</el-tag>
+              </div>
+
+              <div>
+                <el-tag size="10">2</el-tag>
+              </div>
+              <div>
+                <el-tag size="10">3</el-tag>
+              </div>
+
+            </el-card>
+          </el-space>
+        </nav>
+      </el-aside>
+
+      <el-main>
+        <template>
+          <br>
+          <el-divider></el-divider>
+          <div class="row separator">
+            <el-space direction="vertical">
+              <el-card class="box-card" style="width: 650px" v-for="i in 2" :key="i">
+                <template #header>
+                  <div class="card-header">
+                    <span>Card name</span>
+                    <el-button class="button" type="text">Operation button</el-button>
+                  </div>
+                </template>
+                <div v-for="o in 4" :key="o" class="text item">
+                  {{ 'List item ' + o }}
+                </div>
+              </el-card>
+            </el-space>
           </div>
         </template>
-        <div class="text-item">
-          <div class="article-text">
-            {{article.articleText}}<br>
-          </div>
-          <br>
-          <div class="article-icon">
-            <el-button icon="el-icon-chat-line-round" size="small" type="comment" @click="toDetailArticle(index)">
-              评论 {{article.commentsNum}}
-            </el-button>
-            <el-button icon="el-icon-caret-top" size="small" type="like" @click="sendLike(index)">
-              赞同 {{article.likesNum}}
-            </el-button>
-          </div>
+      </el-main>
+
+      <el-aside width="200px">
+        <div>
+          aside
         </div>
-      </el-card>
-    </el-space>
-  </div>
-  </body>
+      </el-aside>
+<!--      <el-aside width="200px">Aside</el-aside>-->
+    </el-container>
+  </el-container>
 </template>
 
 <script>
-import {showPageAllArticle} from "@/api/api";
-import {addLikeArticle} from "@/api/api";
-
-
 export default {
-  name: "allArticle",
+  name: "comment",
+
   data() {
     return {
-      articlesData: [{
-        articleID:    '',
-        authorName:   '',
-        articleType1: '',
-        articleType2: '',
-        articleType3: '',
-        title:        '',
-        time:         '',
-        articleText:  '',
-        commentsNum:  '',
-        likesNum:     ''
-      }],
-      articleType: this.$route.params.type,
-
-      articleData:{
-        authorName: '',
-        authorID:   '',
-        articleID: '',
-        articleText: '',
-        articleType1: '',
-        articleType2: '',
-        articleType3: '',
-        title: '',
-        time: '',
-        commentsNum: '',
-        likesNum: ''
-      },
-    }
-  },
-  created() {
-    showPageAllArticle(this.articleType).then((myData) => {
-      console.log(myData);
-      if (myData.result === 0) {
-        this.$router.push('/login');
-        alert("请先登陆")
-      }
-      this.articlesData = myData
-    });
-    console.log(this.articlesData);
-  },
-
-  methods: {
-    sendLike(num) {
-      let articleInfo = {
-        articleID: this.articlesData[num].articleID
-      };
-      addLikeArticle(articleInfo);
-      location.reload();          //到时候需要换一下
-    },
-
-    async toDetailArticle(num) {
-      await this.$router.push('/detailArticle/' + (this.articlesData[num].articleID).toString())
-    },
-
-    toAllType() {
-      this.$router.push('/allArticle/All');
-      console.log('All')
-      location.reload()
-    },
-
-    toGameType() {
-      this.$router.push('/allArticle/Game');
-      console.log('Game')
-      location.reload()
-    },
-
-    toHistoryType() {
-      this.$router.push('/allArticle/History');
-      console.log('History')
-      location.reload()
-    },
-
-    toScienceType() {
-      this.$router.push('/allArticle/Science');
-      console.log('Science')
-      location.reload()
+      test: this.$route.params.articleID
     }
   }
 }
 </script>
 
 <style scoped>
-
-.el-button--comment.is-active,
-.el-button--comment:active {
-  background: #20B2AA;
-  border-color: #20B2AA;
-  color: #fff;
-}
-
-
-/*点击之后的颜色*/
-.el-button--comment:focus,
-.el-button--comment:hover {
-  background: #1E90FF;
-  border-color: #1E90FF;
-  color: #fff;
-}
-
-/*未被点击的颜色*/
-.el-button--comment {
-  color: #FFF;
-  background-color: #1E90FF;
-  border-color: #1E90FF;
-}
-
-
-
-.el-button--like.is-active,
-.el-button--like:active {
-  background: #20B2AA;
-  border-color: #20B2AA;
-  color: #fff;
-}
-
-
-/*点击之后的颜色*/
-.el-button--like:focus,
-.el-button--like:hover {
-  background: #000080;
-    border-color: #000080;
-  color: #fff;
-}
-
-/*未被点击的颜色*/
-.el-button--like {
-  color: #FFF;
-  background-color: #1E90FF;
-  border-color: #1E90FF;
-}
-
-
 .search{
 
+}
+.article{
+  text-align:justify;
+  height:auto;
+  margin-right:50px;
+  font-size: 16px;
+  font-family: "Hiragino Sans GB","Helvetica Neue",Helvetica,"PingFang SC","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
 .card-header {
@@ -235,8 +136,14 @@ export default {
   font-weight: bold;
 }
 
-.article-text {
-  float: left;
+.main-title {
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px
+}
+
+.main-content {
   font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   font-size: 14px;
 }
@@ -260,14 +167,14 @@ export default {
 /*  margin-top:15px !important;*/
 /*}*/
 #sort {
-  top: 147px;
+  top: 175px;
   text-align: center;
-  background: #3b4348;
+  background: #F2F6FC;
   position: absolute;
   z-index: 100;
   height: 90%;
   left: 16px;
-  width: 150px;
+  width: 275px;
 
 }
 #sort em {
@@ -356,7 +263,7 @@ export default {
   display: none;
 }
 body {
-  background-color: #EBEEF5;
+  background-color: #FFFFFF;
 }
 .article-entry .like-count[data-v-a70e9a84] {
   position: absolute;
@@ -653,7 +560,7 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("liked.png") no-repeat 6px 8px;
+  background: url("../../assets/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;

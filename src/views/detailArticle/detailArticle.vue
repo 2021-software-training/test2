@@ -1,5 +1,4 @@
 <template>
-
   <body>
   <el-container>
     <el-header>
@@ -46,23 +45,30 @@
               <template #header>
                 <div class="card-header">
                   <br><el-avatar shape="square" :size="100">user</el-avatar><br><br>
-                  <span>{{authorName}}</span>
+                  <span>{{articleData.authorName}}</span>
                   <!--              <el-button class="button" type="text">Operation button</el-button>-->
                 </div>
               </template>
               <span class="article-title">
-              我的文章<br><br>
+              {{articleData.articleTitle}}<br><br>
             </span>
               <el-divider></el-divider>
 
               <el-button type="primary" icon="el-icon-caret-top" size="mini" circle></el-button>
-              <el-button type="primary" icon="el-icon-chat-line-round" size="mini" circle></el-button>
+              <el-button type="primary" icon="el-icon-chat-line-round" size="mini" circle @click="toComment"></el-button>
               <el-button type="primary" icon="el-icon-paperclip" size="mini" circle></el-button>
 
               <el-divider></el-divider>
-              <div v-for="o in 2" :key="o" class="text item">
-                <el-tag size="10">标签一</el-tag>
-              </div>
+                <div>
+                  <el-tag size="10">{{articleData.articleType1}}</el-tag>
+                </div>
+
+                <div>
+                  <el-tag size="10">{{articleData.articleType2}}</el-tag>
+                </div>
+                <div>
+                  <el-tag size="10"> {{articleData.articleType3}} </el-tag>
+                </div>
 
             </el-card>
           </el-space>
@@ -72,20 +78,19 @@
       <el-main >
         <div class="row separator">
           <div class="main-title">
-            这里是文章的标题
+            {{articleData.articleTitle}}
           </div>
           <el-divider></el-divider>
           <div class="article">
-            计算机科学（英语：computer science，有时缩写为CS）是系统性研究信息与计算的理论基础以及它们在计算机系统中如何实现与
-              应用的实用技术的学科。
-
-              [7] [8]它通常被形容为对那些创造、描述以及转换信息的算法处理的系统研究。计算机科学包含很多分支领域；
-              有些强调特定结果的计算，比如计算机图形学；而有些是探讨计算问题的性质，比如计算复杂性理论；
-              还有一些领域专注于怎样实现计算，比如编程语言理论是研究描述计算的方法，而程序设计是应用特定的编程语言解决特定的计算问题，
-              人机交互则是专注于怎样使计算机和计算变得有用、好用，以及随时随地为人所用。
+            <span>
+              {{articleData.articleText}}
+            </span>
           </div>
         </div>
       </el-main>
+      <el-aside width="275px">
+
+      </el-aside>
     </el-container>
 
   </el-container>
@@ -93,45 +98,46 @@
 </template>
 
 <script>
-// import {showPageAllArticle} from "@/api/api";
-import {addLikeArticle} from "@/api/api";
+import {showAnArticle} from "@/api/api";
 
 export default {
-  name: "allArticle",
+  name: "detailArticle",
   data() {
     return {
-      // articlesData: [{
-      //   articleID:    '',
-      //   articleType1: '',
-      //   articleType2: '',
-      //   articleType3: '',
-      //   title:        '',
-      //   time:         '',
-      //   articleText:  '',
-      //   commentsNum:  '',
-      //   likesNum:     ''
-      // }],
-      // radio1: 'all',
-      authorName: ''
+      articleData: {
+        authorName: '',
+        authorID:   '',
+        articleID: '',
+        articleTitle: '',
+        articleText: '',
+        articleType1: '',
+        articleType2: '',
+        articleType3: '',
+        title: '',
+        time: '',
+        commentsNum: '',
+        likesNum: ''
+      }
     }
   },
   created() {
-    this.authorName = this.$route.query.authorName;
+    this.doSomething();
   },
-  //   showPageAllArticle("all").then((myData) => {
-  //     console.log(myData);
-  //     if (myData.result === 0) {
-  //       this.$router.push('/login');
-  //       alert("请先登陆")
-  //     }
-  //     this.articlesData = myData
-  //   });
-  //   console.log(this.articlesData);
-  // },
-
   methods: {
-    sendLike() {
-      addLikeArticle()
+    async doSomething() {
+      let articleInfo = {
+        articleID: this.$route.params.articleID
+      };
+      console.log(articleInfo);
+      await showAnArticle(articleInfo).then((res) => {
+        this.articleData = res;
+        console.log(res)
+      });
+
+    },
+
+    toComment() {
+      this.$router.push((this.articleData.articleID).toString() + '/comment')
     }
   }
 }

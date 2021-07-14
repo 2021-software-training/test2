@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import {showUserAllArticle, showAnArticle} from "@/api/api";
+import {showUserAllArticle} from "@/api/api";
 import {addLikeArticle} from "@/api/api";
 
 
@@ -136,14 +136,7 @@ export default {
     },
 
     async toDetailArticle(num) {
-      let articleInfo = {
-        articleID: this.articlesData[num].articleID
-      };
-      this.articleData = showAnArticle(articleInfo);
-      await this.$router.push({
-        path: '/detailArticle',
-        query: this.articleData
-      })
+      await this.$router.push('/detailArticle/' + (this.articlesData[num].articleID).toString())
     },
 
     toAllType() {

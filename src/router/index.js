@@ -26,7 +26,7 @@ const EditComment = () => import('../views/editComment/editComment');
 const EmailCheck = () => import('../views/emailCheck/emailCheck');
 const AllArticleTest = () => import('../views/allArticle/allArticleTest')
 const DetailArticle = () =>import('../views/detailArticle/detailArticle');
-
+const Comment = () => import('../views/comment/comment')
 const GitTest = () => import('../views/testVue/gittest');
 
 Vue.use(VueRouter);
@@ -110,8 +110,12 @@ const routes = [
         path: '/allArticleTest',
         component: AllArticleTest
     }, {
-        path: '/detailArticle',
+        path: '/detailArticle/:articleID',
+        name: 'detailArticle',
         component: DetailArticle
+    }, {
+        path: '/detailArticle/:articleID/comment',
+        component: Comment
     }
 
 ];
