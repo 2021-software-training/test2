@@ -9,8 +9,8 @@ const Register = () => import('../views/register/register');
 const Menu = () => import('../views/menu/menu');
 const WriteArticle = () => import('../views/writeArticle/writeArticle')
 const AllArticle = () => import('../views/allArticle/allArticle')
-const History = () =>import('../views/history/history');
-const Science = () =>import('../views/science/science');
+// const History = () =>import('../views/history/history');
+// const Science = () =>import('../views/science/science');
 const Life = () => import('../views/life/life');
 const Content = () => import('../views/content/content')
 const PersonalKeep = () => import('../views/personalKeep/personalKeep');
@@ -54,15 +54,13 @@ const routes = [
         path: '/writeArticle',
         component: WriteArticle
     },{
-        path: '/allArticle',
+        path: '/allArticle/:type',
         component: AllArticle
     }, {
-        path: '/history',
-        component: History
-    }, {
-        path: '/science',
-        component: Science
-    }, {
+        path: '/allArticle',
+        redirect: 'allArticle/All'
+    },
+    {
         path: '/life',
         component: Life
     }, {

@@ -159,14 +159,13 @@ export function editUserInfo(userInfo) {
 
 
 
-export function addLikeArticle(articleAndUserInfo) {
+export function addLikeArticle(articleInfo) {
     return request({
         method: 'get',
         url:    '/mainPage/addLikeArticle',
-        data:   articleAndUserInfo,
+        data:   articleInfo,
         params: {
-            articleID:    articleAndUserInfo.articleID,
-            username:   articleAndUserInfo.username
+            articleID:    articleInfo.articleID
         }
     })
 }

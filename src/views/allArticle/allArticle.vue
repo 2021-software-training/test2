@@ -47,18 +47,18 @@
   <div class="row separator">
 <!--    <h3>我的搜索</h3>-->
     <div>
-      <el-radio-group v-model="radio1">
-        <el-radio-button label="All"></el-radio-button>
-        <el-radio-button label="Game"></el-radio-button>
-        <el-radio-button label="History"></el-radio-button>
-        <el-radio-button label="Science"></el-radio-button>
-      </el-radio-group>
+<!--      <el-radio-group v-model="radio1">-->
+        <el-button  @click="toAllType">All</el-button>
+        <el-button  @click="toGameType">Game</el-button>
+        <el-button  @click="toHistoryType">History</el-button>
+        <el-button  @click="toScienceType">Science</el-button>
+<!--      </el-radio-group>-->
 
     </div>
 
     <el-divider></el-divider>
     <el-space wrap alignment="flex-end">
-      <el-card class="box-card" style="width: 1000px" v-for="article in articlesData" v-bind:key="article.title">
+      <el-card class="box-card" style="width: 1000px" v-for="(article, index) in articlesData" v-bind:key="index">
         <template #header>
           <div class="card-header">
             <span>{{article.title}}</span>
@@ -70,8 +70,12 @@
           </div>
           <br>
           <div class="article-icon">
-            <el-button type="primary" icon="el-icon-chat-line-round" size="small">评论 {{article.commentsNum}}</el-button>
-            <el-button type="primary" icon="el-icon-caret-top" size="small" @click="sendLike">赞同 {{article.likesNum}}</el-button>
+            <el-button icon="el-icon-chat-line-round" size="small" type="comment" @click="toDetailArticle(index)">
+              评论 {{article.commentsNum}}
+            </el-button>
+            <el-button icon="el-icon-caret-top" size="small" type="like" @click="sendLike(index)">
+              赞同 {{article.likesNum}}
+            </el-button>
           </div>
         </div>
       </el-card>
@@ -81,8 +85,9 @@
 </template>
 
 <script>
-import {showPageAllArticle} from "@/api/api";
+import {showPageAllArticle, showAnArticle} from "@/api/api";
 import {addLikeArticle} from "@/api/api";
+
 
 export default {
   name: "allArticle",
@@ -90,6 +95,7 @@ export default {
     return {
       articlesData: [{
         articleID:    '',
+        authorName:   '',
         articleType1: '',
         articleType2: '',
         articleType3: '',
@@ -99,11 +105,14 @@ export default {
         commentsNum:  '',
         likesNum:     ''
       }],
-      radio1: 'all',
+      radio1: this.$route.params.type,
+      articleData: '',
+      typeAll: false,
+      typeHistory: true
     }
   },
   created() {
-    showPageAllArticle("all").then((myData) => {
+    showPageAllArticle(this.radio1).then((myData) => {
       console.log(myData);
       if (myData.result === 0) {
         this.$router.push('/login');
@@ -115,14 +124,101 @@ export default {
   },
 
   methods: {
-    sendLike() {
-      addLikeArticle()
+    sendLike(num) {
+      let articleInfo = {
+        articleID: this.articlesData[num].articleID
+      };
+      addLikeArticle(articleInfo);
+      location.reload();          //到时候需要换一下
+    },
+
+    async toDetailArticle(num) {
+      let articleInfo = {
+        articleID: this.articlesData[num].articleID
+      };
+      this.articleData = showAnArticle(articleInfo);
+      await this.$router.push({
+        path: '/detailArticle',
+        query: this.articleData
+      })
+    },
+
+    toAllType() {
+      this.$router.push('/allArticle/All');
+      console.log('All')
+      location.reload()
+    },
+
+    toGameType() {
+      this.$router.push('/allArticle/Game');
+      console.log('Game')
+      location.reload()
+    },
+
+    toHistoryType() {
+      this.$router.push('/allArticle/History');
+      console.log('History')
+      location.reload()
+    },
+
+    toScienceType() {
+      this.$router.push('/allArticle/Science');
+      console.log('Science')
+      location.reload()
     }
   }
 }
 </script>
 
 <style scoped>
+
+.el-button--comment.is-active,
+.el-button--comment:active {
+  background: #20B2AA;
+  border-color: #20B2AA;
+  color: #fff;
+}
+
+
+/*点击之后的颜色*/
+.el-button--comment:focus,
+.el-button--comment:hover {
+  background: #1E90FF;
+  border-color: #1E90FF;
+  color: #fff;
+}
+
+/*未被点击的颜色*/
+.el-button--comment {
+  color: #FFF;
+  background-color: #1E90FF;
+  border-color: #1E90FF;
+}
+
+
+
+.el-button--like.is-active,
+.el-button--like:active {
+  background: #20B2AA;
+  border-color: #20B2AA;
+  color: #fff;
+}
+
+
+/*点击之后的颜色*/
+.el-button--like:focus,
+.el-button--like:hover {
+  background: #000080;
+    border-color: #000080;
+  color: #fff;
+}
+
+/*未被点击的颜色*/
+.el-button--like {
+  color: #FFF;
+  background-color: #1E90FF;
+  border-color: #1E90FF;
+}
 
 
 .search{

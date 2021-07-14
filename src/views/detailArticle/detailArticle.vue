@@ -1,122 +1,133 @@
 <template>
+
   <body>
-
-    <nav id="sort">
-      <el-space direction="vertical">
-        <el-card class="box-card" style="width: 250px">
-          <template #header>
-            <div class="card-header">
-              <br><el-avatar shape="square" :size="100">user</el-avatar><br><br>
-              <span>Author Name</span>
-<!--              <el-button class="button" type="text">Operation button</el-button>-->
-            </div>
-          </template>
-            <span class="article-title">
-              我的文章<br><br>
-            </span>
-          <el-divider></el-divider>
-
-          <el-button type="primary" icon="el-icon-caret-top" size="mini" circle></el-button>
-          <el-button type="primary" icon="el-icon-chat-line-round" size="mini" circle></el-button>
-          <el-button type="primary" icon="el-icon-paperclip" size="mini" circle></el-button>
-
-          <el-divider></el-divider>
-          <div v-for="o in 2" :key="o" class="text item">
-            <el-tag size="10">标签一</el-tag>
-          </div>
-
-        </el-card>
-      </el-space>
-    </nav>
-
-
-  <div class="header-wrapper">
-    <div class="user-avatar">
-      <el-avatar id="image1" shape="square"> user </el-avatar>
-    </div>
-
-    <header>
-      <div class="container">
-        <div class="logo-container">
-          <!-- Website Logo -->
-          <p id="bigname"><strong>Knowledge Base Theme</strong></p>
+  <el-container>
+    <el-header>
+      <div class="header-wrapper">
+        <div class="user-avatar">
+          <el-avatar id="image1" shape="square"> user </el-avatar>
         </div>
 
-        <!-- Start of Main Navigation -->
-        <nav class="main-nav">
-          <div class="menu-top-menu-container">
-            <div class="search">
-              <input class="search-term" type="text"  placeholder="search" />
-              <input class="search-btn" type="submit" value="search" />
+        <header>
+          <div class="container">
+            <div class="logo-container">
+              <!-- Website Logo -->
+              <p id="bigname"><strong>Knowledge Base Theme</strong></p>
             </div>
-            <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
-              <li><el-link href="/allArticle">所有文章</el-link></li>
-              <li><el-link href="/myArticle">我的文章</el-link></li>
-              <li><el-link href="/myComment">我的评论</el-link></li>
-              <li><el-link href="/personalKeep">个人中心</el-link></li>
-            </ul>
+
+            <!-- Start of Main Navigation -->
+            <nav class="main-nav">
+              <div class="menu-top-menu-container">
+                <div class="search">
+                  <input class="search-term" type="text"  placeholder="search" />
+                  <input class="search-btn" type="submit" value="search" />
+                </div>
+                <ul id="menu-top-menu" class="clearfix">
+                  <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
+                  <li><el-link href="/allArticle">所有文章</el-link></li>
+                  <li><el-link href="/myArticle">我的文章</el-link></li>
+                  <li><el-link href="/myComment">我的评论</el-link></li>
+                  <li><el-link href="/personalKeep">个人中心</el-link></li>
+                </ul>
+              </div>
+            </nav>
+            <!-- End of Main Navigation -->
+
           </div>
-        </nav>
-        <!-- End of Main Navigation -->
-
+        </header>
       </div>
-    </header>
-  </div>
+    </el-header>
 
-  <div class="row separator">
-    <!--    <h3>我的搜索</h3>-->
-    <div class="main-title">
-      这里是文章的标题
-    </div>
-    <el-divider></el-divider>
-    <div class="article">
-      <p>计算机科学（英语：computer science，有时缩写为CS）是系统性研究信息与计算的理论基础以及它们在计算机系统中如何实现与
-        应用的实用技术的学科。
-        [7] [8]它通常被形容为对那些创造、描述以及转换信息的算法处理的系统研究。计算机科学包含很多分支领域；
-        有些强调特定结果的计算，比如计算机图形学；而有些是探讨计算问题的性质，比如计算复杂性理论；
-        还有一些领域专注于怎样实现计算，比如编程语言理论是研究描述计算的方法，而程序设计是应用特定的编程语言解决特定的计算问题，
-        人机交互则是专注于怎样使计算机和计算变得有用、好用，以及随时随地为人所用。</p>
-    </div>
+    <el-container>
+      <el-aside width="275px">
+        <nav id="sort">
+          <el-space direction="vertical">
+            <el-card class="box-card" style="width: 250px">
+              <template #header>
+                <div class="card-header">
+                  <br><el-avatar shape="square" :size="100">user</el-avatar><br><br>
+                  <span>{{authorName}}</span>
+                  <!--              <el-button class="button" type="text">Operation button</el-button>-->
+                </div>
+              </template>
+              <span class="article-title">
+              我的文章<br><br>
+            </span>
+              <el-divider></el-divider>
 
-  </div>
+              <el-button type="primary" icon="el-icon-caret-top" size="mini" circle></el-button>
+              <el-button type="primary" icon="el-icon-chat-line-round" size="mini" circle></el-button>
+              <el-button type="primary" icon="el-icon-paperclip" size="mini" circle></el-button>
 
+              <el-divider></el-divider>
+              <div v-for="o in 2" :key="o" class="text item">
+                <el-tag size="10">标签一</el-tag>
+              </div>
+
+            </el-card>
+          </el-space>
+        </nav>
+      </el-aside>
+
+      <el-main >
+        <div class="row separator">
+          <div class="main-title">
+            这里是文章的标题
+          </div>
+          <el-divider></el-divider>
+          <div class="article">
+            计算机科学（英语：computer science，有时缩写为CS）是系统性研究信息与计算的理论基础以及它们在计算机系统中如何实现与
+              应用的实用技术的学科。
+
+              [7] [8]它通常被形容为对那些创造、描述以及转换信息的算法处理的系统研究。计算机科学包含很多分支领域；
+              有些强调特定结果的计算，比如计算机图形学；而有些是探讨计算问题的性质，比如计算复杂性理论；
+              还有一些领域专注于怎样实现计算，比如编程语言理论是研究描述计算的方法，而程序设计是应用特定的编程语言解决特定的计算问题，
+              人机交互则是专注于怎样使计算机和计算变得有用、好用，以及随时随地为人所用。
+          </div>
+        </div>
+      </el-main>
+    </el-container>
+
+  </el-container>
   </body>
 </template>
 
 <script>
-import {showPageAllArticle} from "@/api/api";
+// import {showPageAllArticle} from "@/api/api";
 import {addLikeArticle} from "@/api/api";
 
 export default {
   name: "allArticle",
   data() {
     return {
-      articlesData: [{
-        articleID:    '',
-        articleType1: '',
-        articleType2: '',
-        articleType3: '',
-        title:        '',
-        time:         '',
-        articleText:  '',
-        commentsNum:  '',
-        likesNum:     ''
-      }],
-      radio1: 'all',
+      // articlesData: [{
+      //   articleID:    '',
+      //   articleType1: '',
+      //   articleType2: '',
+      //   articleType3: '',
+      //   title:        '',
+      //   time:         '',
+      //   articleText:  '',
+      //   commentsNum:  '',
+      //   likesNum:     ''
+      // }],
+      // radio1: 'all',
+      authorName: ''
     }
   },
   created() {
-    showPageAllArticle("all").then((myData) => {
-      console.log(myData);
-      if (myData.result === 0) {
-        this.$router.push('/login');
-        alert("请先登陆")
-      }
-      this.articlesData = myData
-    });
-    console.log(this.articlesData);
+    this.authorName = this.$route.query.authorName;
   },
+  //   showPageAllArticle("all").then((myData) => {
+  //     console.log(myData);
+  //     if (myData.result === 0) {
+  //       this.$router.push('/login');
+  //       alert("请先登陆")
+  //     }
+  //     this.articlesData = myData
+  //   });
+  //   console.log(this.articlesData);
+  // },
 
   methods: {
     sendLike() {
@@ -127,15 +138,15 @@ export default {
 </script>
 
 <style scoped>
-
-
 .search{
 
 }
 .article{
   text-align:justify;
-  height:300px;
+  height:auto;
   margin-right:50px;
+  font-size: 16px;
+  font-family: "Hiragino Sans GB","Helvetica Neue",Helvetica,"PingFang SC","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 
 .card-header {
@@ -148,6 +159,7 @@ export default {
   font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   font-size: 20px;
   font-weight: bold;
+  margin-top: 20px
 }
 
 .main-content {
@@ -270,7 +282,7 @@ export default {
   display: none;
 }
 body {
-  background-color: #EBEEF5;
+  background-color: #FFFFFF;
 }
 .article-entry .like-count[data-v-a70e9a84] {
   position: absolute;
