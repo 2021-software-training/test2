@@ -1,26 +1,40 @@
 <template>
-
-  <div >
+  <body>
+  <div class="backgroud">
     <form action="" class="login">
-      <p>邮箱验证</p >
-      <input type="text" placeholder="邮箱验证码">
-
-
-      <el-button type="submit" class="btn" @click="func1"> 验证 </el-button>
-
+      <p>CSI语音技术吧</p>
+      <p id="warn">&nbsp;</p>
+      <input type="text" placeholder="邮箱验证">
+      <br>
+      <br>
+      <el-button type="submit" class="btn btn1" @click="func2"> 验   证 </el-button>
     </form>
   </div>
+  </body>
 </template>
 
 <script>
 //import {request} from "@/api/api";
 
+import request from "request";
 export default {
-  name: "emailCheck",
+  name: "land",
+
   methods: {
+    getMsg() {
+      request({
+        method: 'post',
+        url: ''
+      })
+    },
     func1() {
-      alert("check")
-    }
+      alert("登录成功");
+      this.$router.push('/menu');
+    },
+
+    func2() {
+      this.$router.push('/login');
+    },
   }
 }
 </script>
@@ -30,7 +44,16 @@ export default {
   user-select: none;
   /* 无法选中，整体感更强 */
 }
-
+body{
+  background: #353b65 url("../../assets/blue.jpg") no-repeat;
+  background-size: 100%;
+  min-height: 279px;
+  margin-top: -100px;
+  margin-left: -20px;
+  margin-right: -25px;
+  height: 920px;
+  width:2000px;
+}
 #yu{
   margin-left: -544px;
   width: min-content;
@@ -43,7 +66,7 @@ export default {
   left: 50%;
   margin-left: -200px;
   /* absolute居中的一种方法 */
-  background-color: whitesmoke;
+  background-color: rgba(255,255,255,0.7);
   width: 400px;
   height: 400px;
   border-radius: 25px;
@@ -58,7 +81,7 @@ p{
 }
 
 input{
-  background-color: whitesmoke;
+  background-color: rgba(0,0,0,0);
   width: 100%;
   height: 40px;
   margin-bottom: 10px;
@@ -75,20 +98,27 @@ input{
   width: 42%;
   height: 52px;
   border-radius: 23px;
-  margin-top: 40px;
-  margin-left: 88px;
+  margin-top: 30px;
   font-size: 31px;
-  font-weight: 600;
-  color: white;
+  color: rgba(255,255,255,0.6);
   float:left;
 }
 .btn1
 {
-  margin-left: 40px;
+  margin-left: 87px;
+  margin-top: 30px;
+}
+.btn2
+{
+  margin-top:10px;
+  margin-left:-560px;
 }
 .btn:hover{
-  background-color:#17D3AD
+  background-color:#17D3AD;
+  color: rgba(255,255,255,1);
 }
-
-
+#warn{
+  font-size: small;
+  color:red;
+}
 </style>

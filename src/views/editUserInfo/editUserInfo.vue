@@ -566,7 +566,7 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("/liked.png") no-repeat 6px 8px;
+  background: url("#") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;

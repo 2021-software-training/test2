@@ -31,8 +31,8 @@
             </div>
             <ul id="menu-top-menu" class="clearfix">
               <li ><el-link href="/menu">主页</el-link></li>
-              <li class="current-menu-item"><el-link href="/allArticle">所有文章</el-link></li>R
-              <li ><el-link href="/myArticle">我的</el-link></li>
+              <li ><el-link href="/allArticle">所有文章</el-link></li>R
+              <li class="current-menu-item"><el-link href="/myArticle">我的</el-link></li>
               <li ><el-link href="/personalpage">个人主页</el-link></li>
             </ul>
           </div>
@@ -44,16 +44,18 @@
   </div>
 
   <div class="row separator">
-    <!--    <h3>我的搜索</h3>-->
-    <div>
-      <!--      <el-radio-group v-model="radio1">-->
-      <el-button  @click="toAllType" >All</el-button>
-      <el-button  @click="toGameType">Game</el-button>
-      <el-button  @click="toHistoryType" class="import">History</el-button>
-      <el-button  @click="toScienceType">Science</el-button>
-      <!--      </el-radio-group>-->
-
-    </div>
+    <h3>我收到的留言</h3>
+    <el-dropdown id="block1">
+      <el-button type="primary">
+        更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+      </el-button>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item @click="toMyArticle">我的文章</el-dropdown-item>
+        <el-dropdown-item @click="toMyAgree">我的点赞</el-dropdown-item>
+        <el-dropdown-item @click="toMyComment">我的评论</el-dropdown-item>
+        <el-dropdown-item @click="toMyMessage">我收到的留言</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
 
     <el-divider></el-divider>
     <el-space wrap alignment="flex-end">
@@ -69,11 +71,8 @@
           </div>
           <br>
           <div class="article-icon">
-            <el-button icon="el-icon-chat-line-round" size="small" type="comment" @click="toDetailArticle(index)">
-              评论 {{article.commentsNum}}
-            </el-button>
-            <el-button icon="el-icon-caret-top" size="small" type="like" @click="sendLike(index)">
-              赞同 {{article.likesNum}}
+            <el-button icon="el-icon-close" size="small" type="comment" @click="toDetailArticle(index)">
+              删除
             </el-button>
           </div>
         </div>
@@ -141,35 +140,31 @@ export default {
         query: this.articleData
       })
     },
-
-    toAllType() {
-      this.$router.push('/allArticle/All');
-      console.log('All')
-      location.reload()
+    toMyArticle(){
+      this.$router.push('/myarticle');
     },
-
-    toGameType() {
-      this.$router.push('/allArticle/Game');
-      console.log('Game')
-      location.reload()
+    toMyAgree(){
+      this.$router.push('/myarticle');
     },
-
-    toHistoryType() {
-      this.$router.push('/allArticle/History');
-      console.log('History')
-      location.reload()
+    toMyComment(){
+      this.$router.push('/mycomment');
     },
-
-    toScienceType() {
-      this.$router.push('/allArticle/Science');
-      console.log('Science')
-      location.reload()
+    toMyMessage(){
+      this.$router.push('/myarticle');
     }
   }
 }
 </script>
 
 <style scoped>
+
+#block1  {
+  float:right;
+  vertical-align: top;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
+}
 .import{
   background-color: #1E90FF;
 }

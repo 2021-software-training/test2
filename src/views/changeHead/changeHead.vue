@@ -1,24 +1,35 @@
 <template>
+
+
   <body>
 
   <div class="header-wrapper">
     <header>
       <div class="container">
-        <div class="logo-container">
+        <div1 class="logo-container">
           <!-- Website Logo -->
           <p id="bigname"><strong>Knowledge Base Theme</strong></p>
           <span class="tag-line">Premium WordPress Theme</span>
-        </div>
+        </div1>
 
         <!-- Start of Main Navigation -->
+        <a href="#"><img id="image1" src="../../assets/moon.png" alt="" /></a>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><a href="/menu">主页</a></li>
-              <li><a href="/allArticle">所有文章</a></li>
-              <li><a href="/myArticle">我的文章</a></li>
-              <li><a href="/myComment">我的评论</a></li>
-              <li><a href="/personalKeep">个人中心</a></li>
+              <template>
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                  <el-menu-item index="5" ><a href="/menu">主页</a></el-menu-item>
+                  <el-menu-item index="3" ><a href="/allArticle">所有文章</a></el-menu-item>
+                  <el-menu-item index="4"> <a href="/myArticle">我的</a></el-menu-item>
+                  <el-menu-item index="1"><a href="/myComment">个人主页</a></el-menu-item>
+                </el-menu>
+                <div class="line"></div>
+
+              </template>
+
+
+
             </ul>
           </div>
         </nav>
@@ -28,10 +39,75 @@
     </header>
   </div>
 
+  <div id="page-wraper">
+    <!-- Sidebar Menu -->
+    <div class="responsive-nav">
+      <i class="fa fa-bars" id="menu-toggle"></i>
+      <div id="menu" class="menu">
+        <i class="fa fa-times" id="menu-close"></i>
+        <div class="container">
+          <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+
+          </el-radio-group>
+          <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+            <template>
+              <el-row class="tac">
+                <el-col :span="12">
+                  <el-menu
+                      default-active="2"
+                      class="el-menu-vertical-demo"
+                      @open="handleOpen"
+                      @close="handleClose"
+                      background-color="#545c64"
+                      text-color="#fff"
+                      active-text-color="#ffd04b">
+                    <a href="/personalpage"><el-submenu index="1">
+                      <template #title>
+                        <i class="el-icon-location"></i>
+                        <span>可视主页</span>
+                      </template>
+                    </el-submenu></a>
+                    <a href="/writeArticle"><el-submenu index="2">
+                      <template #title>
+                        <i class="el-icon-menu"></i>
+                        <span>编辑文章</span>
+                      </template>
+                    </el-submenu></a>
+                    <el-submenu index="3">
+                      <template #title>
+                        <i class="el-icon-setting"></i>
+                        <span>设置</span>
+                      </template>
+                      <el-menu-item-group>
+                        <template #title>设置</template>
+                        <a href="/changepassword"><el-menu-item index="1-1">重置密码</el-menu-item></a>
+                        <a href="/personalnotkeep"><el-menu-item index="1-2">编辑信息</el-menu-item></a>
+                        <a href="/changehead"><el-menu-item index="1-3">更改头像背景</el-menu-item></a>
+                        <a href="/voice"><el-menu-item index="1-4">语音设置</el-menu-item></a>
+                      </el-menu-item-group>
+                    </el-submenu>
+
+                  </el-menu>
+                </el-col>
 
 
-  <h3>修改头像</h3>
-  <form action="#">
+
+
+
+
+              </el-row>
+            </template>
+
+
+          </el-menu>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form action="#" id="block1">
+    <h3>修改头像</h3>
     <label>图片预览</label>
     <div class="headimage">
       <a  href="#"><img src="../../assets/wallpaper.jpg" alt="" /></a>
@@ -40,11 +116,11 @@
     <input name="demail" value="" type="file" size="30" accept="image/gif image/jpeg,image/png,image/jpg "  />
     <br>
     <br>
-    <button id="keep" @click="keeper">上传</button>
+    <el-button type="primary" class="keep" @click="keeper">上传<i class="el-icon-upload el-icon--right"></i></el-button>
   </form>
 
-  <h3>修改主页背景</h3>
   <form action="#">
+    <h3>修改主页背景</h3>
     <label>图片预览</label>
     <div class="headimage">
       <a  href="#"><img src="../../assets/wallpaper.jpg" alt="" /></a>
@@ -53,7 +129,7 @@
     <input name="demail" value="" type="file" size="30" accept="image/gif image/jpeg,image/png,image/jpg "  />
     <br>
     <br>
-    <butoon id="keep" @click="keeper">上传</butoon>
+    <el-button type="primary" class="keep" @click="keeper">上传<i class="el-icon-upload el-icon--right"></i></el-button>
   </form>
 
   </body>
@@ -61,18 +137,91 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isCollapse: true,
+      activeIndex: '1',
+      activeIndex2: '1',
+      value1: 0,
+      value2: 0,
+      value3: 0
+    }
+  },
   name:
-      "personal",
+      "voice",
   methods:{
     keeper(){
-      this.$router.push('/personalNot');
+      this.$router.push('/personalpage');
+    },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    formatTooltip(val) {
+      return val / 100;
     }
   }
 }
 </script>
 
 <style scoped>
+#block1{
+  margin-top: -100px !important;
+}
+.headimage{
+  margin: auto;
+  width: 400px;
+  height: 250px;
+  text-align: center;
+}
+form {
+  margin-right:100px !important;
+  margin:10px; padding: 0;
+  border: 1px solid #f2f2f2;
+  background-color: #FAFAFA;
+  float:right;
+  width:70%;
+}
+label {
+  display:block;
+  font-weight:bold;
+  margin:5px 0;
+  color:black;
+}
+.form-select{
+  width:20%;
+}
+input,.form-select {
+  padding: 2px;
+  border:1px solid #eee;
+  font: normal 1em Verdana, sans-serif;
+  color:#777;
+}
+#keep {
+  margin:0px;
+  font: bold 1em Arial, Sans-serif;
+  border: 1px solid #CCC;
+  background: #FFF;
+  padding: 2px 3px;
+  color: #4284B0;
+}
+body{
 
+  height:800px;
+}
+#image1{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  float:left;
+  margin-left:40px;
+  margin-top:-160px !important;
+}
 form {
   margin:10px; padding: 0;
   border: 1px solid #f2f2f2;
@@ -101,26 +250,18 @@ input,.form-select {
   display:block;
   color:black;
 }
-.headimage{
-  width: 400px;
-  height: 250px;
-  text-align: center;
-}
-#keep {
+.keep {
   margin: 0;
   font: bold 1em Arial, Sans-serif;
   border: 1px solid #CCC;
   background: #FFF;
-  padding: 2px 3px;
-  color: #4284B0;
+  padding: 7px 15px;
+  color: #00CACA;
 }
 
-body {
-  font-family: 'Lato', sans-serif;
-}
 
 #page-wraper {
-  background: url(../../assets/wallpaper.jpg) no-repeat center center fixed;
+  background: url("#") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -131,9 +272,6 @@ body {
 
 /* Basic */
 
-body {
-  overflow-x: hidden;
-}
 
 input{
   outline: none;
@@ -147,7 +285,7 @@ a:hover {
 p {
   font-size: 16px;
   line-height: 24px;
-  color: #fff;
+  color: #9D9D9D;
 }
 
 h4 {
@@ -188,36 +326,6 @@ html {
 
 .container {
   margin: 0 auto;
-}
-
-.main-nav2 {
-  text-align: center;
-}
-
-.main-nav2 li:last-child a {
-  border-bottom: 2px solid #fff;
-}
-
-.main-nav2 li {
-  display: block;
-}
-
-.main-nav2 li a {
-  height: 70px;
-  line-height: 70px;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-  width: 100%;
-  transition: all 0.5s;
-  border-top: 2px solid #fff;
-}
-
-.main-nav2 li:hover a,
-.main-nav2 li.active a {
-  background: #fff;
-  color: #8c363e;
 }
 
 /* Sidebar Menu */
@@ -273,70 +381,23 @@ html {
 .menu {
   text-align: center;
 }
-.menu {
-  left: 1%;
-  -webkit-transition: -webkit-transform 233ms cubic-bezier(0, 0, 0.21, 1);
-  -webkit-overflow-scrolling: touch;
-  background-color: #a43f49;
-  box-sizing: border-box;
-  height: 100vh;
-  max-height: 100vh !important;
-  max-width: 80vw !important;
-  min-width: 45px !important;
-  outline: none;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  padding: 0;
-  position: fixed !important;
-  top: -70px;
-  width: 27%;
-  will-change: transform;
-  z-index: 9999 !important;
-}
-
-
-
-#menu-toggle {
-  z-index: 999;
-  cursor: pointer;
-  position: fixed;
-  top: 0;
-  left: 0;
-  color: #a43f49;
-  background-color: #fff;
-  width: 60px;
-  height: 60px;
-  text-align: center;
-  display: inline-block;
-  line-height: 60px;
-}
-#menu-close {
-  cursor: pointer;
-  text-align: right;
-  color: #a43f49;
-  background-color: #fff;
-  width: 100%;
-  height: 60px;
-  text-align: center;
-  display: inline-block;
-  line-height: 60px;
-}
 
 .header-wrapper {
   background-color: #3b4348;
   width: 100%;
   height: auto;
+  margin-top:-61px;
 }
 .header-wrapper .container {
   position: relative;
   min-height: 60px;
   height: auto !important;
-  height: 60px;
+  top:5px;
 }
 #bigname{
   color:white;
-  font-size:x-large;
-  margin-left: -900px;
+  font-size:xx-large;
+  margin-left: -500px !important;
 }
 .logo-container {
   padding: 19px 0;
@@ -347,12 +408,12 @@ html {
 .logo-container {
   width: 450px;
 }
-
 span.tag-line {
   color: #818a90;
   font-size: 12px;
   position: relative;
-  top: 2px;
+  top:-5px;
+  margin-left:-1280px !important;
 }
 .main-nav {
   position: absolute;
@@ -418,7 +479,7 @@ span.tag-line {
 
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
-  background: #353b65 url("../../assets/wallpaper.jpg") center top no-repeat;
+  background: #353b65 url("#") center top no-repeat;
   background-size: 100%;
   min-height: 279px;
   height: 279px;
@@ -467,7 +528,7 @@ form.search-form input.search-term {
   margin-bottom: 0;
 }
 form.search-form input.search-term.loading {
-  background-image: url("../../assets/wallpaper.jpg");
+  background-image: url("#");
   background-repeat: no-repeat;
   background-position: 98% 50%;
 }
@@ -509,7 +570,7 @@ form.search-form input.search-btn:hover {
 }
 
 
-div {
+div1 {
   display: block;
   margin: 5px auto 20px auto;
 }
@@ -558,19 +619,19 @@ ul.articles .article-entry {
   position: relative;
   border-bottom: 1px solid #f2f2f2;
   padding: 0 0 0 24px;
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry.standard {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry.video {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry.image {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #f2f2f2;
@@ -600,10 +661,10 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("/../../assets/liked.png") no-repeat 6px 8px;
+  background: url("../../assets/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
-  background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
+  background: url("#") no-repeat 6px -22px;
   color: #395996;
 }
 
@@ -643,7 +704,6 @@ ul.articles li.article-entry:last-child {
     background-size: auto;
     min-height: 240px;
     height: auto !important;
-    height: 240px;
   }
 
   .search-area-wrapper .search-area {

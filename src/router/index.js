@@ -11,7 +11,7 @@ const WriteArticle = () => import('../views/writeArticle/writeArticle')
 const AllArticle = () => import('../views/allArticle/allArticle')
 const History = () =>import('../views/history/history');
 const Science = () =>import('../views/science/science');
-const Life = () => import('../views/life/life');
+const Game = () => import('../views/game/game');
 const Content = () => import('../views/content/content')
 const PersonalKeep = () => import('../views/personalKeep/personalKeep');
 const PersonalNotKeep = () => import('../views/personalNotKeep/personalNotKeep');
@@ -24,6 +24,8 @@ const Voice = () => import('../views/voice/voice');
 const EditUserInfo = () => import('../views/editUserInfo/editUserInfo');
 const EditComment = () => import('../views/editComment/editComment');
 const EmailCheck = () => import('../views/emailCheck/emailCheck');
+const MyAgree = () => import('../views/myAgree/myAgree');
+const MyMessage = () => import('../views/myMessage/myMessage');
 // const Detailarticle = () =>import('../views/detailarticle/detailarticle');
 
 const GitTest = () => import('../views/testVue/gittest');
@@ -56,14 +58,14 @@ const routes = [
         path: '/allArticle',
         component: AllArticle
     }, {
-        path: '/history',
+        path: '/allArticle/History',
         component: History
     }, {
-        path: '/science',
+        path: '/allArticle/Science',
         component: Science
     }, {
-        path: '/life',
-        component: Life
+        path: '/allArticle/Game',
+        component: Game
     }, {
         path: '/personalNotKeep',
         component: PersonalNotKeep
@@ -107,6 +109,12 @@ const routes = [
     }, {
         path: '/gitTest',
         component: GitTest
+    },{
+        path: '/myAgree',
+        component: MyAgree
+    }, {
+        path: '/mymessage',
+        component: MyMessage
     }
 
 ];

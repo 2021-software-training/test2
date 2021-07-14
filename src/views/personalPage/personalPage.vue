@@ -61,18 +61,18 @@
                       background-color="#545c64"
                       text-color="#fff"
                       active-text-color="#ffd04b">
-                    <el-submenu index="1">
+                    <a href="/personalpage"><el-submenu index="1">
                       <template #title>
                         <i class="el-icon-location"></i>
                         <span>可视主页</span>
                       </template>
-                    </el-submenu>
-                    <el-submenu index="2">
+                    </el-submenu></a>
+                    <a href="/writeArticle"><el-submenu index="2">
                       <template #title>
                         <i class="el-icon-menu"></i>
                         <span>编辑文章</span>
                       </template>
-                    </el-submenu>
+                    </el-submenu></a>
                     <el-submenu index="3">
                       <template #title>
                         <i class="el-icon-setting"></i>
@@ -81,7 +81,7 @@
                       <el-menu-item-group>
                         <template #title>设置</template>
                         <a href="/changepassword"><el-menu-item index="1-1">重置密码</el-menu-item></a>
-                        <a href="/personalkeep"><el-menu-item index="1-2">编辑信息</el-menu-item></a>
+                        <a href="/personalnotkeep"><el-menu-item index="1-2">编辑信息</el-menu-item></a>
                         <a href="/changehead"><el-menu-item index="1-3">更改头像背景</el-menu-item></a>
                         <a href="/voice"><el-menu-item index="1-4">语音设置</el-menu-item></a>
                       </el-menu-item-group>
@@ -104,6 +104,27 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div id="message">
+    <span>用户名</span>
+    <el-divider><i class="el-icon-user-solid"></i></el-divider>
+    <el-divider direction="vertical"></el-divider>
+    <span>年龄</span>
+    <el-divider direction="vertical"></el-divider>
+    <span>性别</span>
+    <el-divider direction="vertical"></el-divider>
+    <span>生日</span>
+    <el-divider direction="vertical"></el-divider>
+    <el-divider><i class="el-icon-user"></i></el-divider>
+    <span>邮箱</span>
+    <el-divider><i class="el-icon-message"></i></el-divider>
+    <span>地址</span>
+    <el-divider><i class="el-icon-location"></i></el-divider>
+    <span>个性签名</span>
+    <el-divider><i class="el-icon-cherry"></i></el-divider>
+    <span>喜好</span>
+    <el-divider><i class="el-icon-watermelon"></i></el-divider>
   </div>
 
   </body>
@@ -138,9 +159,40 @@ export default {
 </script>
 
 <style scoped>
-body{
 
-  height:800px;
+
+.card-header {
+  font-size:18px;
+  font-family: "Microsoft YaHei", Arial,sans-serif;
+  font-weight: bold;
+}
+
+.article-text {
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size: 14px;
+}
+
+.article-icon {
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  color: #3A5F7B;
+}
+
+body{
+  background: #353b65 url("../../assets/fly.png") no-repeat;
+  background-size: 120%;
+  min-height: 400px;
+  margin-left: -10px;
+  height:900px;
+  width:1500px;
+}
+.block2{
+  float:left;
+}
+#message{
+  width:40%;
+  float:right;
+  margin-right:100px !important;
+  margin-top: -200px !important;
 }
 #image1{
   width: 100px;

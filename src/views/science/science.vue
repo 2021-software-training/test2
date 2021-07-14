@@ -1,36 +1,39 @@
 <template>
   <body>
-  <div class="logo">
-    <h1>分类</h1>
-    <h2>E</h2>
-  </div>
-  <nav id="sort">
-    <ul>
-      <li><a href="/alla"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></a></li>
-      <li><a href="/history"><img src="assets/images/icon-2.png" alt=""> <em>历史</em></a></li>
-      <li><a href="/science"><img src="assets/images/icon-3.png" alt=""> <em>科技</em></a></li>
-      <li><a href="/life"><img src="assets/images/icon-4.png" alt=""> <em>生活</em></a></li>
-    </ul>
-  </nav>
+
+  <!--  <nav id="sort">-->
+  <!--    <ul>-->
+  <!--      <li><el-link href="/allArtcle"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></el-link></li>-->
+  <!--      <li><el-link href="/history"><img src="assets/images/icon-2.png" alt=""> <em>历史</em></el-link></li>-->
+  <!--      <li><el-link href="/science"><img src="assets/images/icon-3.png" alt=""> <em>科技</em></el-link></li>-->
+  <!--      <li><el-link href="/life"><img src="assets/images/icon-4.png" alt=""> <em>生活</em></el-link></li>-->
+  <!--    </ul>-->
+  <!--  </nav>-->
 
   <div class="header-wrapper">
+    <div class="user-avatar">
+      <el-avatar id="image1" shape="square"> user </el-avatar>
+    </div>
+
     <header>
       <div class="container">
         <div class="logo-container">
           <!-- Website Logo -->
           <p id="bigname"><strong>Knowledge Base Theme</strong></p>
-          <span class="tag-line">Premium WordPress Theme</span>
         </div>
 
         <!-- Start of Main Navigation -->
         <nav class="main-nav">
           <div class="menu-top-menu-container">
+            <div class="search">
+              <input class="search-term" type="text"  placeholder="search" />
+              <input class="search-btn" type="submit" value="search" />
+            </div>
             <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><a href="/menu">主页</a></li>
-              <li><a href="/alla">所有文章</a></li>
-              <li><a href="/myarticle">我的文章</a></li>
-              <li><a href="/mycomment">我的评论</a></li>
-              <li><a href="/personalkeep">个人中心</a></li>
+              <li ><el-link href="/menu">主页</el-link></li>
+              <li class="current-menu-item"><el-link href="/allArticle">所有文章</el-link></li>R
+              <li ><el-link href="/myArticle">我的</el-link></li>
+              <li ><el-link href="/personalpage">个人主页</el-link></li>
             </ul>
           </div>
         </nav>
@@ -41,99 +44,228 @@
   </div>
 
   <div class="row separator">
-    <section class="span4 articles-list">
-      <h3>科技类</h3>
-      <ul class="articles">
-        <li class="article-entry standard">
-          <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-          <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-          <span class="like-count">66</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-          <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">15</span>
-        </li>
-        <li class="article-entry video">
-          <h4><a href="single.html">Meta Tags in WordPress</a></h4>
-          <span class="article-meta">23 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">8</span>
-        </li>
-        <li class="article-entry image">
-          <h4><a href="single.html">WordPress in Your Language</a></h4>
-          <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-          <span class="like-count">6</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">Know Your Sources</a></h4>
-          <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">2</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">Validating a Website</a></h4>
-          <span class="article-meta">21 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">3</span>
-        </li>
-      </ul>
-    </section>
+    <!--    <h3>我的搜索</h3>-->
+    <div>
+      <!--      <el-radio-group v-model="radio1">-->
+      <el-button  @click="toAllType" >All</el-button>
+      <el-button  @click="toGameType">Game</el-button>
+      <el-button  @click="toHistoryType">History</el-button>
+      <el-button  @click="toScienceType" class="import">Science</el-button>
+      <!--      </el-radio-group>-->
 
+    </div>
 
-    <section class="span4 articles-list">
-      <ul class="articles">
-        <li class="article-entry standard">
-          <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-          <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-          <span class="like-count">66</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">Using Javascript</a></h4>
-          <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-          <span class="like-count">18</span>
-        </li>
-        <li class="article-entry image">
-          <h4><a href="single.html">Using Images</a></h4>
-          <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
-          <span class="like-count">7</span>
-        </li>
-        <li class="article-entry video">
-          <h4><a href="single.html">Using Video</a></h4>
-          <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
-          <span class="like-count">7</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-          <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
-          <span class="like-count">15</span>
-        </li>
-        <li class="article-entry standard">
-          <h4><a href="single.html">WordPress CSS Information and Techniques</a></h4>
-          <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Theme Development">Theme Development</a></span>
-          <span class="like-count">1</span>
-        </li>
-      </ul>
-    </section>
+    <el-divider></el-divider>
+    <el-space wrap alignment="flex-end">
+      <el-card class="box-card" style="width: 1000px" v-for="(article, index) in articlesData" v-bind:key="index">
+        <template #header>
+          <div class="card-header">
+            <span>{{article.title}}</span>
+          </div>
+        </template>
+        <div class="text-item">
+          <div class="article-text">
+            {{article.articleText}}<br>
+          </div>
+          <br>
+          <div class="article-icon">
+            <el-button icon="el-icon-chat-line-round" size="small" type="comment" @click="toDetailArticle(index)">
+              评论 {{article.commentsNum}}
+            </el-button>
+            <el-button icon="el-icon-caret-top" size="small" type="like" @click="sendLike(index)">
+              赞同 {{article.likesNum}}
+            </el-button>
+          </div>
+        </div>
+      </el-card>
+    </el-space>
   </div>
   </body>
 </template>
 
 <script>
+import {showPageAllArticle, showAnArticle} from "@/api/api";
+import {addLikeArticle} from "@/api/api";
+
+
 export default {
-  name: "science"
+  name: "allArticle",
+  data() {
+    return {
+      articlesData: [{
+        articleID:    '',
+        authorName:   '',
+        articleType1: '',
+        articleType2: '',
+        articleType3: '',
+        title:        '',
+        time:         '',
+        articleText:  '',
+        commentsNum:  '',
+        likesNum:     ''
+      }],
+      radio1: this.$route.params.type,
+      articleData: '',
+      typeAll: false,
+      typeHistory: true
+    }
+  },
+  created() {
+    showPageAllArticle(this.radio1).then((myData) => {
+      console.log(myData);
+      if (myData.result === 0) {
+        this.$router.push('/login');
+        alert("请先登陆")
+      }
+      this.articlesData = myData
+    });
+    console.log(this.articlesData);
+  },
+
+  methods: {
+    sendLike(num) {
+      let articleInfo = {
+        articleID: this.articlesData[num].articleID
+      };
+      addLikeArticle(articleInfo);
+      location.reload();          //到时候需要换一下
+    },
+
+    async toDetailArticle(num) {
+      let articleInfo = {
+        articleID: this.articlesData[num].articleID
+      };
+      this.articleData = showAnArticle(articleInfo);
+      await this.$router.push({
+        path: '/detailArticle',
+        query: this.articleData
+      })
+    },
+
+    toAllType() {
+      this.$router.push('/allArticle/All');
+      console.log('All')
+      location.reload()
+    },
+
+    toGameType() {
+      this.$router.push('/allArticle/Game');
+      console.log('Game')
+      location.reload()
+    },
+
+    toHistoryType() {
+      this.$router.push('/allArticle/History');
+      console.log('History')
+      location.reload()
+    },
+
+    toScienceType() {
+      this.$router.push('/allArticle/Science');
+      console.log('Science')
+      location.reload()
+    }
+  }
 }
 </script>
 
 <style scoped>
+.import{
+  background-color: #1E90FF;
+}
+.el-button--comment.is-active,
+.el-button--comment:active {
+  background: #20B2AA;
+  border-color: #20B2AA;
+  color: #fff;
+}
+
+
+/*点击之后的颜色*/
+.el-button--comment:focus,
+.el-button--comment:hover {
+  background: #1E90FF;
+  border-color: #1E90FF;
+  color: #fff;
+}
+
+/*未被点击的颜色*/
+.el-button--comment {
+  color: #FFF;
+  background-color: #1E90FF;
+  border-color: #1E90FF;
+}
+
+
+
+.el-button--like.is-active,
+.el-button--like:active {
+  background: #20B2AA;
+  border-color: #20B2AA;
+  color: #fff;
+}
+
+
+/*点击之后的颜色*/
+.el-button--like:focus,
+.el-button--like:hover {
+  background: #000080;
+  border-color: #000080;
+  color: #fff;
+}
+
+/*未被点击的颜色*/
+.el-button--like {
+  color: #FFF;
+  background-color: #1E90FF;
+  border-color: #1E90FF;
+}
+
+
+.search{
+
+}
+
+.card-header {
+  font-size:18px;
+  font-family: "Microsoft YaHei", Arial,sans-serif;
+  font-weight: bold;
+}
+
+.article-text {
+  float: left;
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size: 14px;
+}
+
+.article-icon {
+  float: right;
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  color: #3A5F7B;
+}
+
+.user-avatar {
+  float: right;
+  margin-top: 30px;
+  margin-right: 10px;
+}
+
+/*#image1{*/
+/*  border-radius: 50%;*/
+/*  float:left;*/
+/*  margin-left:40px;*/
+/*  margin-top:15px !important;*/
+/*}*/
 #sort {
-  top: 15%;
+  top: 147px;
   text-align: center;
-  background: rgba(0, 0, 0, 0.75);
-  position: fixed;
+  background: #3b4348;
+  position: absolute;
   z-index: 100;
   height: 90%;
-  left: 0;
-  width: 15%;
-  font-weight: 300;
-  font-size: 1rem;
+  left: 16px;
+  width: 150px;
+
 }
 #sort em {
   font-style: normal;
@@ -196,14 +328,14 @@ export default {
   z-index: -1;
 }
 .logo {
-  margin-top: 0px;
-  top: 0;
-  left: 0;
+  margin-top: 150px;
+  top: -1px;
+  left: 16px;
   z-index: 999999;
   position: fixed;
   display: inline-block;
   text-align: center;
-  background-color: #faf5b2;
+  background-color: black;
   height: 15%;
   width: 15%;
 }
@@ -211,7 +343,7 @@ export default {
   font-size: 24px;
   text-transform: uppercase;
   font-weight: 900;
-  color: #111;
+  color: #3b4348;
   top: 50%;
   left: 50%;
   position: absolute;
@@ -221,7 +353,7 @@ export default {
   display: none;
 }
 body {
-  background-color: #fff;
+  background-color: #EBEEF5;
 }
 .article-entry .like-count[data-v-a70e9a84] {
   position: absolute;
@@ -235,40 +367,45 @@ body {
   background: url("#") no-repeat 6px 8px;
 }
 .header-wrapper {
-  background-color: #3b4348;
+  background-color: #3A5F7B;
   width: 100%;
   height: auto;
+  margin-top:-61px;
 }
 .header-wrapper .container {
   position: relative;
   min-height: 60px;
   height: auto !important;
-  height: 60px;
+  height: 150px !important;
+  top:5px;
 }
 #bigname{
   color:white;
-  font-size:x-large;
-  margin-left: -900px;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC",serif;
+  font-size: 45px;
+  margin-left: -800px;
+  margin-top: 35px;
+  margin-bottom: -100px;
 }
 .logo-container {
   padding: 19px 0;
+
 }
 .logo-container img {
   margin-right: 10px;
-}
-.logo-container {
-  width: 450px;
 }
 
 span.tag-line {
   color: #818a90;
   font-size: 12px;
   position: relative;
-  top: 2px;
+  padding-top: 2px !important;
+  left:-520px;
 }
 .main-nav {
   position: absolute;
   top: 5px;
+  left:710px;
   right: 0;
 }
 .main-nav div > ul {
@@ -279,11 +416,11 @@ span.tag-line {
   position: relative;
   float: left;
   list-style: none;
-  padding: 16px 14px 18px;
+  padding: 45px 14px 18px;
 }
 .main-nav div > ul > li a {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   color: #c1cad1;
 }
 .main-nav div > ul > li a:hover {
@@ -513,7 +650,7 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("/liked.png") no-repeat 6px 8px;
+  background: url("../../assets/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
