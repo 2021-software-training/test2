@@ -82,6 +82,11 @@
               <el-card class="box-card" style="width: 650px" v-for="i in commentsData.length" :key="i">
                 <template #header>
                   <div class="card-header">
+                    <el-avatar  shape="square"
+                                :src="getImage"
+                                class="avatars"
+                    >User
+                    </el-avatar>
                     <span>{{commentsData[i-1].user.username}}</span>
                   </div>
                 </template>
@@ -190,12 +195,17 @@ export default  {
       }]
     }
   },
+
+
   created() {
     this.getArticleInfo();
     this.getCommentInfo();
 
   },
   methods: {
+    getImage() {
+      return 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username");
+    },
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
     },
@@ -252,6 +262,11 @@ export default  {
 </script>
 
 <style scoped>
+
+.avatars {
+  float: left;
+  margin-right: -20px;
+}
 
 .input-text {
   width: 600px;

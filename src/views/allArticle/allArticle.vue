@@ -12,7 +12,10 @@
 
   <div class="header-wrapper">
     <div class="user-avatar">
-      <el-avatar id="image1" shape="square"> user </el-avatar>
+      <el-avatar id="image1" shape="square"
+                 :src="imgUrl"
+      >
+      </el-avatar>
     </div>
 
     <header>
@@ -61,6 +64,11 @@
       <el-card class="box-card" style="width: 1000px" v-for="(article, index) in articlesData" v-bind:key="index">
         <template #header>
           <div class="card-header">
+            <el-avatar  shape="square"
+                       :src="imgUrl"
+                        class="avatars"
+            >User
+            </el-avatar>
             <span>{{article.title}}</span>
           </div>
         </template>
@@ -120,8 +128,13 @@ export default {
         commentsNum: '',
         likesNum: ''
       },
-      page: window.sessionStorage.getItem("username")
+      page: window.sessionStorage.getItem("username"),
+      imgUrl:''
     }
+  },
+  beforeCreate() {
+    this.imgUrl = 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username")
+    console.log(this.imgUrl)
   },
   created() {
     showPageAllArticle(this.articleType).then((myData) => {
@@ -136,6 +149,10 @@ export default {
   },
 
   methods: {
+    getImage() {
+      return 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username");
+    },
+
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
     },
@@ -179,6 +196,10 @@ export default {
 </script>
 
 <style scoped>
+
+.avatars {
+  float: left;
+}
 
 .el-button--comment.is-active,
 .el-button--comment:active {
@@ -644,32 +665,10 @@ ul.articles li.article-entry:last-child {
 .article-entry > h4 a:hover {
   color: #395996;
 }
-.article-entry .article-meta {
-  display: block;
-  margin-bottom: 10px;
-}
-.article-entry .like-count {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  line-height: 18px;
-  font-weight: 600;
-  padding: 3px 5px 3px 20px;
-  border: 1px solid #f2f2f2;
-  border-bottom: none;
-  background: url("liked.png") no-repeat 6px 8px;
-}
-.article-entry:hover .like-count {
-  background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
-  color: #395996;
-}
 
-#footer .article-entry .like-count {
-  border-color: #535b61;
-}
-#footer .article-entry:hover .like-count {
-  color: #fff;
-}
+
+
+
 #footer ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #535b61;
 }

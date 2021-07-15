@@ -1,9 +1,12 @@
 import axios from "axios";
 
+
+export const BASE_PATH = './../../assets/';
+
 export function request(config) {
     const instance = axios.create({
         baseURL: 'http://127.0.0.1:8000',
-        timeout: 5000,
+        timeout: 10000,
         headers: {
             'Authorization':  window.sessionStorage.getItem('token')
         }
@@ -36,6 +39,17 @@ export function login (userInfo) {
     })
 }
 
+export const imageUpload = params => {
+    const url = 'http://127.0.0.1:8000/mainPage/changeHead'
+    // 根据后台需求的数据格式确定headers
+    return axios.post(url, params, {
+        headers: {
+            "content-type": "multipart/form-data",
+            'Authorization':  window.sessionStorage.getItem('token')
+        }
+    })
+}
+
 export function register (userInfo) {
     return request({
         method: 'get',
@@ -57,7 +71,7 @@ export function addArticle(articleInfo) {
         method: 'get',
         url:    '/mainPage/addArticle',
         params: {
-            title:  articleInfo.title,
+            articleTitle:  articleInfo.articleTitle,
             articleText:  articleInfo.articleText,
             articleType1: articleInfo.articleType1,
             articleType2: articleInfo.articleType1,
@@ -104,6 +118,7 @@ export function showAnArticle(articleInfo) {
 }
 
 
+
 export function addArticleComment(articleAndCommentInfo) {
     return request({
         method: 'get',
@@ -126,10 +141,10 @@ export function editComment(commentInfo) {
     })
 }
 
-export function showAllComment() {
+export function showUserAllComment() {
     return request({
         method: 'get',
-        url:    '/mainPage/showAllComment',
+        url:    '/mainPage/showAllComment'
     })
 }
 
@@ -160,17 +175,23 @@ export function editUserInfo(userInfo) {
         url:    '/mainPage/editUserInfo',
         params: {
             gender  :  userInfo.gender,
+            age:       userInfo.age,
             addressProvinces:   userInfo.addressProvinces,
             addressCity:        userInfo.addressCity,
-            habits1 :  userInfo.habits1,
-            habits2 :  userInfo.habits2,
-            habits3 :  userInfo.habits3,
+            // habits1 :  userInfo.habits1,
+            // habits2 :  userInfo.habits2,
+            // habits3 :  userInfo.habits3,
             signature: userInfo.signature
         }
     })
 }
-
-
+//
+// export function editAudioInfo(audioInfo) {
+//     return request({
+//         method: 'get',
+//         url:
+//     })
+// }
 
 export function addLikeArticle(articleInfo) {
     return request({
@@ -194,6 +215,30 @@ export function addLikeComment(commentAndUserInfo) {
     })
 }
 
+export function playAudio(articleInfo) {
+    return request({
+        method: 'get',
+        url: '/mainPage/audioArticle',
+        params: {
+            articleID: articleInfo.articleID,
+            PER: articleInfo.PER,
+            SPD: articleInfo.SPD,
+            PIT: articleInfo.PIT,
+            VOL: articleInfo.VOL
+        }
+    })
+}
+
+export function updatePasswordHelper(password) {
+    return request({
+        method: 'get',
+        url:    '/api/update',
+        params: {
+            oldPassword:    password.oldPassword,
+            newPassword:    password.newPassword
+        }
+    })
+}
 
 export const website = 'http://192.168.1.197:8080/';
 /*

@@ -9,11 +9,6 @@ const Register = () => import('../views/register/register');
 const Menu = () => import('../views/menu/menu');
 const WriteArticle = () => import('../views/writeArticle/writeArticle')
 const AllArticle = () => import('../views/allArticle/allArticle')
-// const History = () =>import('../views/history/history');
-// const Science = () =>import('../views/science/science');
-const Life = () => import('../views/life/life');
-const Content = () => import('../views/content/content')
-const PersonalKeep = () => import('../views/personalKeep/personalKeep');
 const PersonalNotKeep = () => import('../views/personalNotKeep/personalNotKeep');
 const PersonalPage = () => import('../views/personalPage/personalPage');
 const ChangePassword = () => import('../views/changePassword/changePassword');
@@ -21,13 +16,11 @@ const ChangeHead = () => import('../views/changeHead/changeHead');
 const MyArticle = () => import('../views/myArticle/myArticle');
 const MyComment = () => import('../views/myComment/myComment');
 const Voice = () => import('../views/voice/voice');
-const EditUserInfo = () => import('../views/editUserInfo/editUserInfo');
-const EditComment = () => import('../views/editComment/editComment');
 const EmailCheck = () => import('../views/emailCheck/emailCheck');
-const AllArticleTest = () => import('../views/allArticle/allArticleTest')
 const DetailArticle = () =>import('../views/detailArticle/detailArticle');
 const Comment = () => import('../views/comment/comment')
 const GitTest = () => import('../views/testVue/gittest');
+const AudioTest = () => import('../views/testVue/audioTest')
 
 Vue.use(VueRouter);
 
@@ -59,20 +52,9 @@ const routes = [
     }, {
         path: '/allArticle',
         redirect: 'allArticle/All'
-    },
-    {
-        path: '/life',
-        component: Life
     }, {
         path: '/personalNotKeep',
         component: PersonalNotKeep
-    }, {
-        path: '/content',
-        component: Content
-    },
-    {
-        path: '/personalKeep',
-        component: PersonalKeep
     }, {
         path: '/personalNotKeep',
         component: PersonalNotKeep
@@ -86,7 +68,7 @@ const routes = [
         path: '/changeHead',
         component: ChangeHead
     }, {
-        path: '/myArticle',
+        path: '/myArticle/',
         component: MyArticle
     }, {
         path: '/myComment',
@@ -94,21 +76,12 @@ const routes = [
     }, {
         path: '/voice',
         component: Voice
-    }, {
-        path: '/editUserInfo',
-        component: EditUserInfo
-    }, {
-        path: '/editComment',
-        component: EditComment
-    }, {
+    },  {
         path: '/emailCheck',
         component: EmailCheck
     }, {
         path: '/gitTest',
         component: GitTest
-    }, {
-        path: '/allArticleTest',
-        component: AllArticleTest
     }, {
         path: '/detailArticle/:articleID',
         name: 'detailArticle',
@@ -116,6 +89,9 @@ const routes = [
     }, {
         path: '/detailArticle/:articleID/comment/:page',
         component: Comment
+    }, {
+        path: '/audioTest',
+        component: AudioTest
     }
 
 ];

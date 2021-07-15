@@ -7,10 +7,14 @@
             <el-input v-model="model.title"></el-input>
           </el-col>
         </el-form-item>
-
+        <div style="margin-bottom: 20px">
+          <el-checkbox v-model="checked1" label="Game" border size="medium"></el-checkbox>
+          <el-checkbox v-model="checked2" label="History" border size="medium"></el-checkbox>
+          <el-checkbox v-model="checked3" label="Science" border size="medium"></el-checkbox>
+        </div>
         <el-form-item>
           <el-col>
-            <mavon-editor v-model="model.content"></mavon-editor>
+            <mavon-editor v-model="model.content" default-open="edit"></mavon-editor>
           </el-col>
         </el-form-item>
 
@@ -25,7 +29,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import {addArticle} from "@/api/api";
+
 export default {
   name: "writeArticle",
   data() {
@@ -33,24 +38,47 @@ export default {
       model: {
         title: '',
         content: '',
+      },
+      checked1: false,
+      checked2: false,
+      checked3: false,
+      articleInfo: {
+        articleTitle:  '',
+        articleType1: '',
+        articleType2: '',
+        articleType3: ''
       }
     }
   },
 
   methods: {
-    submit() {
+    async submit() {
       console.log(this.model.title)
       console.log(this.model.content)
+      this.articleInfo.articleTitle = this.model.title;
+      this.articleInfo.articleText = this.model.content;
 
-      axios.get('http://127.0.0.1:8000/api', this.model)
-          .then(res => {
-            if(res.data.Code === 200) {
-              this.$message.success('发布成功');
-            }
-            else {
-              console.log()
-            }
-          })
+      if (this.checked1) {
+        this.articleInfo.articleType1 = "Game";
+      }
+
+      if (this.checked2) {
+        this.articleInfo.articleType2 = "History";
+      }
+
+      if (this.checked3) {
+        this.articleInfo.articleType3 = "Science";
+      }
+
+      const res = await addArticle(this.articleInfo);
+      if (res.result === "yes") {
+        alert("发表成功")
+        location.reload();
+      }
+
+      else {
+        alert("失败");
+      }
     }
   }
 }

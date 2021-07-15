@@ -90,7 +90,16 @@
                   <el-link href="/voice"><el-menu-item index="3-4">语音设置</el-menu-item></el-link>
                 </el-menu-item-group>
               </el-submenu>
+              <el-submenu index="4">
+                <template #title>
+                  <i class="el-icon-switch-button"></i>
 
+                </template>
+                <el-menu-item-group>
+                  <template #title></template>
+                  <el-link href="/login"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
+                </el-menu-item-group>
+              </el-submenu>
             </el-menu>
           </template>
         </div>
@@ -102,30 +111,42 @@
   <form action="#">
     <h3>语音设置</h3>
     <label>发声人</label>
-    <select class="form-select" aria-label="Default select example">
+    <select class="form-select" aria-label="Default select example" v-model="person">
       <option selected>男1</option>
       <option value="男2">男2</option>
       <option value="女1">女1</option>
       <option value="女2">女2</option>
     </select>
-    <div>
-      <label  class="form-label">语速</label>
-      <div class="block">
-        <el-slider v-model="value1"></el-slider>
-      </div>
+    <div class="block">
+      <span class="demonstration">语速</span>
+      <el-slider
+          v-model="speed"
+          :step="1"
+          max="15"
+          show-stops>
+      </el-slider>
     </div>
-    <div>
-      <label  class="form-label">音调</label>
-      <div class="block">
-        <el-slider v-model="value2"></el-slider>
-      </div>
+
+    <div class="block">
+      <span class="demonstration">音调</span>
+      <el-slider
+          v-model="pitch"
+          :step="1"
+          max="15"
+          show-stops>
+      </el-slider>
     </div>
-    <div>
-      <label  class="form-label">音量</label>
-      <div class="block">
-        <el-slider v-model="value3"></el-slider>
-      </div>
+
+    <div class="block">
+      <span class="demonstration">音量</span>
+      <el-slider
+          v-model="volume"
+          :step="1"
+          max="15"
+          show-stops>
+      </el-slider>
     </div>
+
     <br />
     <el-button type="primary" id="keep" @click="toUserPage">保存<i class="el-icon-upload el-icon--right"></i></el-button>
   </form>
@@ -140,9 +161,10 @@ export default {
       isCollapse: true,
       activeIndex: '1',
       activeIndex2: '1',
-      value1: 0,
-      value2: 0,
-      value3: 0
+      person: '',
+      speed: 0,
+      pitch: 0,
+      volume: 0
     }
   },
   name:

@@ -6,11 +6,11 @@
   <div class="header-wrapper">
     <header>
       <div class="container">
-        <div1 class="logo-container">
+        <div class="logo-container">
           <!-- Website Logo -->
           <p id="bigname"><strong>Knowledge Base Theme</strong></p>
           <span class="tag-line">Premium WordPress Theme</span>
-        </div1>
+        </div>
 
         <!-- Start of Main Navigation -->
         <el-link href="#"><img id="image1" src="../../assets/moon.png" alt="" /></el-link>
@@ -89,6 +89,16 @@
                   <el-link href="/voice"><el-menu-item index="3-4">语音设置</el-menu-item></el-link>
                 </el-menu-item-group>
               </el-submenu>
+              <el-submenu index="4">
+                <template #title>
+                  <i class="el-icon-switch-button"></i>
+
+                </template>
+                <el-menu-item-group>
+                  <template #title></template>
+                  <el-link href="/login"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
+                </el-menu-item-group>
+              </el-submenu>
             </el-menu>
           </template>
         </div>
@@ -107,7 +117,8 @@
       <el-upload
           class="upload-demo"
           drag
-          action="https://jsonplaceholder.typicode.com/posts/"
+          :action="uploadUrl"
+          :headers="myHeader2"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
           multiple>
@@ -123,40 +134,50 @@
   </form>
 
 
-  <form action="#">
-    <h3>修改主页背景</h3>
-    <label>图片预览</label>
-    <div class="headimage">
-      <el-link  href="#"><img src="../../assets/wallpaper.jpg" alt="" /></el-link>
-    </div>
-    <label>上传图片</label>
-    <template>
-      <el-upload
-          class="upload-demo"
-          drag
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
-          multiple>
-        <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        <template #tip>
-          <div class="el-upload__tip">
-            只能上传 jpg/png 文件，且不超过 2MB
-          </div>
-        </template>
-      </el-upload>
-    </template>
-  </form>
+<!--  <form action="#">-->
+<!--    <h3>修改主页背景</h3>-->
+<!--    <label>图片预览</label>-->
+<!--    <div class="headimage">-->
+<!--      <el-link  href="#"><img src="../../assets/wallpaper.jpg" alt="" /></el-link>-->
+<!--    </div>-->
+<!--    <label>上传图片</label>-->
+<!--    <template>-->
+<!--      <el-upload-->
+<!--          class="upload-demo"-->
+<!--          drag-->
+<!--          :action="uploadUrl"-->
+<!--          :headers="myHeader2"-->
+<!--          :on-success="handleAvatarSuccess"-->
+<!--          :before-upload="beforeAvatarUpload"-->
+<!--          multiple>-->
+<!--        <i class="el-icon-upload"></i>-->
+<!--        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>-->
+<!--        <template #tip>-->
+<!--          <div class="el-upload__tip">-->
+<!--            只能上传 jpg/png 文件，且不超过 2MB-->
+<!--          </div>-->
+<!--        </template>-->
+<!--      </el-upload>-->
+<!--    </template>-->
+<!--  </form>-->
 
   </body>
 </template>
 
 <script>
+import {imageUpload} from "@/api/api";
+
 export default {
   data() {
     return {
       page: window.sessionStorage.getItem("username"),
+      uploadUrl: 'http://127.0.0.1:8000/mainPage/changeHead',
+      myHeader: {
+        Authorization: window.sessionStorage.getItem('token')
+      },
+      myHeader2: {
+        Authorization: window.sessionStorage.getItem('token')
+      },
       isCollapse: true,
       activeIndex: '1',
       activeIndex2: '1',
@@ -169,6 +190,30 @@ export default {
   name:
       "voice",
   methods:{
+    uploadSectionFile(params) {
+      const file = params.file,
+          fileType = file.type,
+          isImage = fileType.indexOf("image") !== -1,
+          isLt2M = file.size / 1024 / 1024 < 2;
+      // 这里常规检验，看项目需求而定
+      if (!isImage) {
+        this.$message.error("只能上传图片格式png、jpg、gif!");
+        return;
+      }
+      if (!isLt2M) {
+        this.$message.error("只能上传图片大小小于2M");
+        return;
+      }
+      // 根据后台需求数据格式
+      const form = new FormData();
+      // 文件对象
+      form.append("file", file);
+      // 本例子主要要在请求时添加特定属性，所以要用自己方法覆盖默认的action
+      form.append("clientType", 'xxx');
+      // 项目封装的请求方法，下面做简单介绍
+      imageUpload(form)
+    },
+
     keeper(){
       this.$router.push("/personalPage/" + this.page);
     },
@@ -569,7 +614,7 @@ form.search-form input.search-btn:hover {
 .pages-nav a {
   margin-right: 10px;
 }
-div1 {
+.logo-container{
   display: block;
   margin: 5px auto 20px auto;
 }

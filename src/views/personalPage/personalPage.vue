@@ -17,16 +17,18 @@
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
-              <template>
-                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                  <el-menu-item index="5" ><el-link href="/menu">网站主页</el-link></el-menu-item>
-                  <el-menu-item index="3" ><el-link href="/allArticle">所有文章</el-link></el-menu-item>
-                  <el-menu-item index="4"> <el-link href="/myArticle">我的</el-link></el-menu-item>
-                  <el-menu-item index="1"><el-link @click="toUserPage">个人主页</el-link></el-menu-item>
-                </el-menu>
-                <div class="line"></div>
-
-              </template>
+              <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="2" ><el-link href="/menu">主页</el-link></el-menu-item>
+                <el-menu-item index="3" ><el-link href="/allArticle">所有文章</el-link></el-menu-item>
+                <el-submenu index="4" mode="vertical" >
+                  <template  slot="title" >我的</template>
+                  <el-menu-item index="4-1">我的文章</el-menu-item>
+                  <el-menu-item index="4-2" >我的点赞</el-menu-item>
+                  <el-menu-item index="4-3" >我的评论</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="1"><el-link @click="toUserPage">个人主页</el-link></el-menu-item>
+              </el-menu>
+              <div class="line"></div>
 
 
 
@@ -93,6 +95,16 @@
                   <el-link href="/voice"><el-menu-item index="3-4">语音设置</el-menu-item></el-link>
                 </el-menu-item-group>
               </el-submenu>
+              <el-submenu index="4">
+                <template #title>
+                  <i class="el-icon-switch-button"></i>
+
+                </template>
+                <el-menu-item-group>
+                  <template #title></template>
+                  <el-link href="/login"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
+                </el-menu-item-group>
+              </el-submenu>
 
             </el-menu>
           </template>
@@ -156,10 +168,10 @@ export default {
   async created() {
     this.username = this.$route.params.username
     this.userInfo = await getUserInfo(this.username)
-    if (this.userInfo.gender === 0) {
+    if (this.userInfo.gender === 1) {
       this.userInfo.gender = "男";
     }
-    else if (this.userInfo.gender === 1) {
+    else if (this.userInfo.gender === 2) {
       this.userInfo.gender = "女";
     }
     else {
@@ -193,16 +205,19 @@ export default {
   font-family: "Microsoft YaHei", Arial,sans-serif;
   font-weight: bold;
 }
+
 .article-text {
   font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   font-size: 14px;
 }
+
 .article-icon {
   font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   color: #3A5F7B;
 }
+
 body{
-  background: #353b65 url("../../assets/fly.png") no-repeat;
+  background: #353b65 url("../../assets/littlegirl.png") no-repeat;
   background-size: 120%;
   min-height: 400px;
   margin-left: -10px;
@@ -262,6 +277,8 @@ input,.form-select {
   padding: 7px 15px;
   color: #00CACA;
 }
+
+
 #page-wraper {
   background: url("#") no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -270,42 +287,54 @@ input,.form-select {
   background-size: cover;
   width: 100%;
 }
+
+
 /* Basic */
+
+
 input{
   outline: none;
 }
-el-link,
+
+a,
 a:hover {
   text-decoration: none;
 }
+
 p {
   font-size: 16px;
   line-height: 24px;
   color: #9D9D9D;
 }
+
 h4 {
   font-size: 26px;
   font-weight: 700;
   color: #fff;
   letter-spacing: 0.25px;
 }
+
 img {
   width: 100%;
   overflow: hidden;
 }
+
 ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
+
 ul li {
   display: inline-block;
 }
+
 html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 *,
 *:before,
 *:after {
@@ -313,33 +342,42 @@ html {
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
+
 .container {
   margin: 0 auto;
 }
+
 /* Sidebar Menu */
+
 .menu .image {
   margin-top: 60px;
 }
+
 .menu .image img {
   width: 140px;
   height: 140px;
   border-radius: 50%;
   text-align: center;
 }
+
 .menu .author-content {
   margin: 40px 0px 60px 0px;
 }
+
 .menu .author-content h4 {
   margin-bottom: 0px;
 }
+
 .menu .author-content span {
   font-size: 13px;
   font-style: italic;
   color: #fff;
 }
+
 .menu {
   margin-top: 60px;
 }
+
 .menu  {
   position: relative;
   margin-top: 60px;
@@ -349,18 +387,22 @@ html {
   content: "";
   display: table;
 }
+
 .menu:after {
   clear: both;
 }
+
 .menu a {
   text-decoration: none;
   color: inherit;
 }
+
 .menu {
   text-align: center;
 }
+
 .header-wrapper {
-  background-color: #3A5F7B;
+  background-color: #3b4348;
   width: 100%;
   height: auto;
   margin-top:-61px;
@@ -394,8 +436,8 @@ span.tag-line {
 }
 .main-nav {
   position: absolute;
-  top: 5px;
-  right: 0;
+  top: 70px;
+  right: 330px;
 }
 .main-nav div > ul {
   width: auto;
@@ -453,6 +495,7 @@ span.tag-line {
 .main-nav .responsive-nav {
   display: none;
 }
+
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
   background: #353b65 url("#") center top no-repeat;
@@ -463,6 +506,7 @@ span.tag-line {
 .search-area-wrapper .search-area {
   padding: 50px 0;
 }
+
 h3.search-header {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -470,6 +514,7 @@ h3.search-header {
   color: #fff;
   text-align: center;
 }
+
 p.search-tag-line {
   font-family: "Droid Serif", serif;
   font-style: italic;
@@ -478,6 +523,7 @@ p.search-tag-line {
   color: #fff;
   text-align: center;
 }
+
 form.search-form {
   margin: 40px 0 0;
   text-align: center;
@@ -516,15 +562,18 @@ form.search-form input.search-btn {
 form.search-form input.search-btn:hover {
   background-color: #4b5760;
 }
+
 #search-error-container label {
   color: #fff;
   padding: 5px;
   font-size: 14px;
 }
+
 .lt-ie8 form.search-form input.search-btn {
   padding-top: 12px;
   padding-bottom: 13px;
 }
+
 /* Page - Container --------------------------------------------------------------------------------------------------*/
 .page-container {
   width: 100%;
@@ -533,13 +582,18 @@ form.search-form input.search-btn:hover {
   padding: 40px 35px;
   background-color: #fff;
 }
+
+
 .pages-nav a {
   margin-right: 10px;
 }
-div1 {
+
+
+.logo-container {
   display: block;
   margin: 5px auto 20px auto;
 }
+
 li.comment > article {
   background: #fff;
   float: left;
@@ -553,6 +607,7 @@ li.comment > article {
 .page-content {
   margin-bottom: 20px;
 }
+
 .row.separator {
   margin-bottom: 10px;
 }
@@ -574,6 +629,7 @@ li.comment > article {
 .articles-list > h3 a:hover {
   color: #395996;
 }
+
 ul.articles {
   list-style: none;
   margin: 0;
@@ -599,6 +655,7 @@ ul.articles .article-entry {
 ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #f2f2f2;
 }
+
 .article-entry > h4 {
   font-size: 13px;
   margin-bottom: 5px;
@@ -629,6 +686,7 @@ ul.articles li.article-entry:last-child {
   background: url("#") no-repeat 6px -22px;
   color: #395996;
 }
+
 #footer .article-entry .like-count {
   border-color: #535b61;
 }
@@ -638,6 +696,7 @@ ul.articles li.article-entry:last-child {
 #footer ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #535b61;
 }
+
 .main-listing article {
   margin-bottom: 0;
 }
@@ -649,6 +708,7 @@ ul.articles li.article-entry:last-child {
   .main-nav > div {
     display: none;
   }
+
   .main-nav {
     display: block;
     width: 85%;
@@ -657,27 +717,33 @@ ul.articles li.article-entry:last-child {
     border-radius: 0;
     border: none;
   }
+
   /* Search Area */
   .search-area-wrapper {
     background-size: auto;
     min-height: 240px;
     height: auto !important;
   }
+
   .search-area-wrapper .search-area {
     padding: 20px 0;
   }
+
   .search-area-wrapper h3.search-header {
     font-size: 30px;
     padding: 0 15px;
   }
+
   .search-area-wrapper p.search-tag-line {
     padding: 0 15px;
     font-size: 14px;
     line-height: 22px;
   }
+
   .search-area-wrapper form.search-form input.search-term {
     width: 60%;
   }
+
   @media (max-width: 480px) {
     /* Search Area */
     .search-area-wrapper form.search-form input.search-term {
@@ -685,10 +751,12 @@ ul.articles li.article-entry:last-child {
       display: block;
       margin: 0 auto 10px;
     }
+
     .search-area-wrapper form.search-form input.search-btn {
       display: block;
       margin: 0 auto;
     }
+
     ul.articles .article-entry {
       padding-bottom: 20px;
     }

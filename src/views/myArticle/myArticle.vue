@@ -52,7 +52,7 @@
       </el-button>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item @click="toMyArticle">我的文章</el-dropdown-item>
-        <el-dropdown-item @click="toMyAgree">我的点赞</el-dropdown-item>
+        <el-dropdown-item @click="toMyLike">我的点赞</el-dropdown-item>
         <el-dropdown-item @click="toMyComment">我的评论</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -156,28 +156,17 @@ export default {
       await this.$router.push('/detailArticle/' + (this.articlesData[num].articleID).toString())
     },
 
-    toAllType() {
-      this.$router.push('/allArticle/All');
-      console.log('All')
-      location.reload()
+    toMyArticle() {
+      this.$router.push('/myArticle');
     },
 
-    toGameType() {
-      this.$router.push('/allArticle/Game');
-      console.log('Game')
-      location.reload()
+    toMyLike() {
+      this.$router.push('')
     },
 
-    toHistoryType() {
-      this.$router.push('/allArticle/History');
-      console.log('History')
-      location.reload()
-    },
-
-    toScienceType() {
-      this.$router.push('/allArticle/Science');
-      console.log('Science')
-      location.reload()
+    toMyComment() {
+      this.$router.push('/myComment');
+      alert("被点了")
     }
   }
 }
@@ -674,7 +663,7 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("liked.png") no-repeat 6px 8px;
+  background: url("../../assets/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;

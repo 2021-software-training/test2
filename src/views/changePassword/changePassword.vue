@@ -25,11 +25,7 @@
                   <el-menu-item index="1"><el-link @click="toUserPage">个人主页</el-link></el-menu-item>
                 </el-menu>
                 <div class="line"></div>
-
               </template>
-
-
-
             </ul>
           </div>
         </nav>
@@ -94,6 +90,16 @@
                 </el-menu-item-group>
               </el-submenu>
 
+              <el-submenu index="4">
+                <template #title>
+                  <i class="el-icon-switch-button"></i>
+
+                </template>
+                <el-menu-item-group>
+                  <template #title></template>
+                  <el-link href="/login"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
+                </el-menu-item-group>
+              </el-submenu>
             </el-menu>
           </template>
 
@@ -117,16 +123,18 @@
       <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
     </el-form-item>
     <br>
-    <el-button type="primary" id="keep" @click="keeper">保存<i class="el-icon-upload el-icon--right"></i></el-button>
+    <el-button type="primary" id="keep" @click="updatePassword">保存<i class="el-icon-upload el-icon--right"></i></el-button>
   </el-form>
 
   </body>
 </template>
 
 <script>
+import {updatePasswordHelper} from "@/api/api";
+
 export default {
   data() {
-    var validatePass = (rule, value, callback) => {
+    const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'));
       } else {
@@ -136,7 +144,7 @@ export default {
         callback();
       }
     };
-    var validatePass2 = (rule, value, callback) => {
+    const validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'));
       } else if (value !== this.ruleForm.pass) {
@@ -176,9 +184,7 @@ export default {
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
     },
-    keeper(){
-      this.$router.push('/personalpage');
-    },
+
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -187,6 +193,28 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    async updatePassword() {
+      if (this.ruleForm.checkPass === this.ruleForm.pass) {
+        const passwordInfo = {
+          oldPassword: this.ruleForm.oldpass,
+          newPassword: this.ruleForm.pass
+        };
+        const code = await updatePasswordHelper(passwordInfo);
+        console.log(code);
+        if (code.result === 0) {
+          this.$router.push('/login');
+          alert("请登录");
+        } else {
+          if (code.result === "no") {
+            alert("密码错误!");
+            location.reload();
+          } else {
+            alert("修改成功！")
+            // this.$router.push("/login");
+          }
+        }
+      }
     }
   }
 }

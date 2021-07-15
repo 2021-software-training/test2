@@ -93,7 +93,16 @@
                   <el-link href="/voice"><el-menu-item index="3-4">语音设置</el-menu-item></el-link>
                 </el-menu-item-group>
               </el-submenu>
+              <el-submenu index="4">
+                <template #title>
+                  <i class="el-icon-switch-button"></i>
 
+                </template>
+                <el-menu-item-group>
+                  <template #title></template>
+                  <el-link href="/login"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
+                </el-menu-item-group>
+              </el-submenu>
             </el-menu>
           </template>
 
@@ -105,10 +114,9 @@
 
   <form action="#">
     <h3>个人信息</h3>
-      <el-radio v-model="gender" label="1" border>男</el-radio>
-      <el-radio v-model="gender" label="2" border>女</el-radio>
+      <el-radio v-model="gender" label=1 border>男</el-radio>
+      <el-radio v-model="gender" label=2 border>女</el-radio>
       <el-switch
-          v-model="value1"
           active-text="公开"
           inactive-text="私人"
           active-color="#13ce66"
@@ -116,9 +124,8 @@
       </el-switch>
       <br>
       <label>年龄</label>
-      <input name="demail" placeholder="Your Age" type="text" size="30" />
+      <input name="demail" placeholder="Your Age" type="text" size="30" v-model="age" />
       <el-switch
-          v-model="value2"
           active-text="公开"
           inactive-text="私人"
           active-color="#13ce66"
@@ -126,36 +133,55 @@
       </el-switch>
       <br>
       <label>地址</label>
-      <input name="demail" placeholder="Your Address" type="text" size="30" />
+      <input name="demail" v-model="address" placeholder="Your Address" type="text" size="30" />
       <el-switch
-          v-model="value3"
           active-text="公开"
           inactive-text="私人"
           active-color="#13ce66"
           inactive-color="#ff4949">
       </el-switch>
-      <br>
-      <label>喜好</label>
 
-      <!--      <el-radio-group v-model="radio1">-->
-      <el-button  @click="toAllType">All</el-button>
-      <el-button  @click="toGameType">Game</el-button>
-      <el-button  @click="toHistoryType">History</el-button>
-      <el-button  @click="toScienceType">Science</el-button>
-      <!--      </el-radio-group>-->
-      <el-switch
-          v-model="value4"
-          active-text="公开"
-          inactive-text="私人"
-          active-color="#13ce66"
-          inactive-color="#ff4949">
-      </el-switch>
+    <label>城市</label>
+    <input name="demail"  v-model="city" placeholder="Your City" type="text" size="30" />
+    <el-switch
+        active-text="公开"
+        inactive-text="私人"
+        active-color="#13ce66"
+        inactive-color="#ff4949">
+    </el-switch>
+      <br>
+    <label>喜好</label><el-switch
+      v-model="value5"
+      active-text="公开"
+      inactive-text="私人"
+      active-color="#13ce66"
+      inactive-color="#ff4949">
+  </el-switch> <br>
+
+    <p style="text-align: center; margin: 0 0 20px">喜好选择框</p>
+    <ar style="text-align: center">
+      <el-transfer
+          v-model="leftValue"
+          style="text-align: left; display: inline-block"
+          filterable
+          :left-default-checked="[2, 3]"
+          :right-default-checked="[1]"
+          :render-content="renderFunc"
+          :titles="['全部喜好选择', '我的喜好选择']"
+          :button-texts="['到左边', '到右边']"
+          :format="{
+        noChecked: '${total}',
+        hasChecked: '${checked}/${total}'
+      }"
+          :data="data"
+          @change="handleChange">
+      </el-transfer>
+    </ar>
       <br>
       <br>
       <label>个性签名</label>
-      <textarea rows="5" cols="5"></textarea>
+      <textarea rows="5" cols="5" v-model="signature"></textarea>
       <el-switch
-          v-model="value5"
           active-text="公开"
           inactive-text="私人"
           active-color="#13ce66"
@@ -163,7 +189,7 @@
       </el-switch>
       <br>
       <br />
-      <el-button type="primary" id="keep" @click="keeper">保存<i class="el-icon-upload el-icon--right"></i></el-button>
+      <el-button type="primary" id="keep" @click="toEditUserInfo">保存<i class="el-icon-upload el-icon--right"></i></el-button>
 
   </form>
 
@@ -176,18 +202,47 @@ import {editUserInfo} from "@/api/api";
 
 export default {
   data() {
+    const generateData = () => {
+      const data = [];
+      data.push({
+        key: "Game",
+        label:  'game'
+      });
+      data.push({
+        key: "History",
+        label:  'game'
+      });
+      data.push({
+        key: "Science",
+        label:  'game'
+      })
+      return data;
+    };
+
     return {
+      data: generateData(),
+      leftValue: [1],
+      rightValue: [1],
+      renderFunc(h, option) {
+        return h("span", null, option.key, " - ", option.label);
+      },
+      checkboxGroup1: [' All '],
+
+      checkAll: false,
+      drawer: false,
+      isIndeterminate: true,
+
       page: window.sessionStorage.getItem("username"),
       isCollapse: true,
       activeIndex: '1',
       activeIndex2: '1',
-      value1: true,
-      value2: true,
-      value3: true,
-      value4: true,
-      value5: true,
-
+      
       gender: '',
+      age: '',
+      address: '',
+      city: '',
+      value5: '',
+      signature: '',
     };
   },
   name:
@@ -196,13 +251,7 @@ export default {
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
     },
-    keeper() {
-      let userInfo = {
-        age: this.value2,
-      };
-      editUserInfo(userInfo);
-      this.toUserPage();
-    },
+
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -211,6 +260,33 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    handleCheckedCitiesChange(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.cities.length;
+      this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+    },
+    handleChange(value, direction, movedKeys) {
+      console.log(value, direction, movedKeys);
+    },
+
+    async toEditUserInfo() {
+      const userInfo = {
+        gender: this.gender,
+        age: this.age,
+        addressProvinces: this.address,
+        addressCity: this.city,
+        signature: this.signature
+      }
+      const code = await editUserInfo(userInfo);
+      if (code.result === 0) {
+        await this.$router.push("/login");
+        alert("请登录");
+      }
+      else {
+        this.toUserPage()
+        alert("修改成功!");
+      }
     }
   }
 }

@@ -89,6 +89,20 @@
       <el-aside width="275px">
 
       </el-aside>
+
+      <el-footer>
+        <el-divider></el-divider>
+        <div>
+          <el-button type="primary" icon="el-icon-mic" size="small" @click="getAudion" round>
+            生成语音
+          </el-button>
+          <div v-if="audioDisplay">
+            <audio id="music" controls="controls">
+              <source :src="audioUrl" type="audio/mpeg"  height="100" width="100">Your browser does not support the audio tag.
+            </audio>
+          </div>
+        </div>
+      </el-footer>
     </el-container>
 
   </el-container>
@@ -96,7 +110,7 @@
 </template>
 
 <script>
-import {showAnArticle, website} from "@/api/api";
+import {showAnArticle, playAudio, website} from "@/api/api";
 
 export default {
   name: "detailArticle",
@@ -117,6 +131,13 @@ export default {
         commentsNum: '',
         likesNum: ''
       },
+      audioData: {
+        result: '',
+        articleID:  -1,
+        audioID:    -1
+      },
+      audioDisplay: false,
+      audioUrl: ''
     }
   },
   created() {
@@ -126,6 +147,25 @@ export default {
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
     },
+
+     async getAudion() {
+       const articleInfo = {
+         articleID: this.articleData.articleID,
+         PER: 3,
+         SPD: 7,
+         PIT: 7,
+         VOL: 4
+       };
+       this.audioData = await playAudio(articleInfo);
+       console.log(this.audioData);
+       if (this.audioData.result === "yes") {
+         alert("成功");
+         this.audioUrl = "http://127.0.0.1:8000/mainPage/getAudio/" + this.audioData.audioID
+         this.audioDisplay = true;
+       } else {
+         alert("失败");
+       }
+     },
     toCopy() {
       this.$alert('本文章的文章是' + website + 'detailArticle/' +
           this.articleData.articleID.toString() +'，快去分享吧！', '分享网址', {
@@ -159,7 +199,8 @@ export default {
 .article{
   text-align:justify;
   height:auto;
-  margin-right:50px;
+  margin-left:300px;
+  margin-right:300px;
   font-size: 16px;
   font-family: "Hiragino Sans GB","Helvetica Neue",Helvetica,"PingFang SC","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }

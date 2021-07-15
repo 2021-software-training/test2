@@ -30,11 +30,11 @@
               <input class="search-btn" type="submit" value="search" />
             </div>
             <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
+              <li class="current-menu-item"><el-link href="/menu">网站主页</el-link></li>
               <li><el-link href="/allArticle">所有文章</el-link></li>
-              <li><el-link href="/myArticle">我的文章</el-link></li>
-              <li><el-link href="/myComment">我的评论</el-link></li>
-              <li><el-link href="/personalKeep">个人中心</el-link></li>
+              <li><el-link href="/myArticle">我的</el-link></li>
+              <!--              <li><el-link href="/myComment">我的评论</el-link></li>-->
+              <li><el-link @click="toUserPage">个人主页</el-link></li>
             </ul>
           </div>
         </nav>
@@ -46,15 +46,17 @@
 
   <div class="row separator">
     <!--    <h3>我的搜索</h3>-->
-    <div>
-      <!--      <el-radio-group v-model="radio1">-->
-      <el-button  @click="toAllType">All</el-button>
-      <el-button  @click="toGameType">Game</el-button>
-      <el-button  @click="toHistoryType">History</el-button>
-      <el-button  @click="toScienceType">Science</el-button>
-      <!--      </el-radio-group>-->
-
-    </div>
+    <el-dropdown id="block1">
+      <el-button type="primary">
+        更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+      </el-button>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item @click="toMyArticle">我的文章</el-dropdown-item>
+        <el-dropdown-item @click="toMyLike">我的点赞</el-dropdown-item>
+        <el-dropdown-item @click="toMyComment">我的评论</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+    <br><br><br>
 
     <el-divider></el-divider>
     <el-space wrap alignment="flex-end">
@@ -85,14 +87,12 @@
 </template>
 
 <script>
-import {showPageAllArticle, showAnArticle} from "@/api/api";
-import {addLikeArticle} from "@/api/api";
-
-
+import {showAnArticle, showUserAllComment} from "@/api/api";
 export default {
   name: "allArticle",
   data() {
     return {
+      page: window.sessionStorage.getItem("username"),
       articlesData: [{
         articleID:    '',
         articleType1: '',
@@ -104,31 +104,38 @@ export default {
         commentsNum:  '',
         likesNum:     ''
       }],
-      radio1: this.$route.params.type,
-      articleData: '',
-      typeAll: false,
-      typeHistory: true
+
+      comments: [
+        {
+         comment: {},
+         article: {}
+        }
+      ]
     }
   },
   created() {
-    showPageAllArticle(this.radio1).then((myData) => {
-      console.log(myData);
+    // showPageAllArticle(this.radio1).then((myData) => {
+    //   console.log(myData);
+    //   if (myData.result === 0) {
+    //     this.$router.push('/login');
+    //     alert("请先登陆")
+    //   }
+    //   this.articlesData = myData
+    // });
+    // console.log(this.articlesData);
+    showUserAllComment().then((myData) => {
       if (myData.result === 0) {
         this.$router.push('/login');
-        alert("请先登陆")
+        alert("请先登陆");
       }
-      this.articlesData = myData
-    });
-    console.log(this.articlesData);
+      this.comments = myData;
+      console.log(this.comments)
+    })
   },
 
   methods: {
-    sendLike(num) {
-      let articleInfo = {
-        articleID: this.articlesData[num].articleID
-      };
-      addLikeArticle(articleInfo);
-      location.reload();          //到时候需要换一下
+    toUserPage() {
+      this.$router.push("/personalPage/" + this.page);
     },
 
     async toDetailArticle(num) {
@@ -142,34 +149,26 @@ export default {
       })
     },
 
-    toAllType() {
-      this.$router.push('/allArticle/All');
-      console.log('All')
-      location.reload()
+    toMyArticle() {
+      this.$router.push('/myArticle');
     },
 
-    toGameType() {
-      this.$router.push('/allArticle/Game');
-      console.log('Game')
-      location.reload()
+    toMyLike() {
+      this.$router.push('/myLike')
     },
-
-    toHistoryType() {
-      this.$router.push('/allArticle/History');
-      console.log('History')
-      location.reload()
-    },
-
-    toScienceType() {
-      this.$router.push('/allArticle/Science');
-      console.log('Science')
-      location.reload()
+    toMyComment() {
+      this.$router.push('/myComment');
     }
   }
 }
 </script>
 
 <style scoped>
+
+#block1  {
+  float:right;
+  vertical-align: top;
+}
 
 .el-button--comment.is-active,
 .el-button--comment:active {
@@ -648,7 +647,7 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("liked.png") no-repeat 6px 8px;
+  background: url("../../assets/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
   background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
