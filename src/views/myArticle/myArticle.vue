@@ -30,11 +30,11 @@
               <input class="search-btn" type="submit" value="search" />
             </div>
             <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
+              <li class="current-menu-item"><el-link href="/menu">网站主页</el-link></li>
               <li><el-link href="/allArticle">所有文章</el-link></li>
-              <li><el-link href="/myArticle">我的文章</el-link></li>
-              <li><el-link href="/myComment">我的评论</el-link></li>
-              <li><el-link href="/personalKeep">个人中心</el-link></li>
+              <li><el-link href="/myArticle">我的</el-link></li>
+<!--              <li><el-link href="/myComment">我的评论</el-link></li>-->
+              <li><el-link @click="toUserPage">个人主页</el-link></li>
             </ul>
           </div>
         </nav>
@@ -45,16 +45,18 @@
   </div>
 
   <div class="row separator">
-    <!--    <h3>我的搜索</h3>-->
-<!--    <div>-->
-<!--      &lt;!&ndash;      <el-radio-group v-model="radio1">&ndash;&gt;-->
-<!--      <el-button  @click="toAllType">All</el-button>-->
-<!--      <el-button  @click="toGameType">Game</el-button>-->
-<!--      <el-button  @click="toHistoryType">History</el-button>-->
-<!--      <el-button  @click="toScienceType">Science</el-button>-->
-<!--      &lt;!&ndash;      </el-radio-group>&ndash;&gt;-->
 
-<!--    </div>-->
+    <el-dropdown id="block1">
+      <el-button type="primary">
+        更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+      </el-button>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item @click="toMyArticle">我的文章</el-dropdown-item>
+        <el-dropdown-item @click="toMyAgree">我的点赞</el-dropdown-item>
+        <el-dropdown-item @click="toMyComment">我的评论</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+    <br><br><br>
 
     <el-divider></el-divider>
     <el-space wrap alignment="flex-end">
@@ -80,6 +82,17 @@
               浏览量 {{article.viewsNum}}
             </el-button>
           </div>
+<!--          <div>-->
+<!--            <template class="but2">-->
+<!--              <el-popconfirm title="这是一段内容确定删除吗？" icon="el-icon-close" size="small" type="comment">-->
+<!--                <template #reference>-->
+<!--                  <el-button icon="el-icon-close" size="small" type="comment" >-->
+<!--                    删除-->
+<!--                  </el-button>-->
+<!--                </template>-->
+<!--              </el-popconfirm>-->
+<!--            </template>-->
+<!--          </div>-->
         </div>
       </el-card>
     </el-space>
@@ -96,6 +109,7 @@ export default {
   name: "allArticle",
   data() {
     return {
+      page: window.sessionStorage.getItem("username"),
       articlesData: [{
         articleID:    '',
         articleType1: '',
@@ -127,6 +141,9 @@ export default {
   },
 
   methods: {
+    toUserPage() {
+      this.$router.push("/personalPage/" + this.page);
+    },
     sendLike(num) {
       let articleInfo = {
         articleID: this.articlesData[num].articleID
@@ -167,6 +184,18 @@ export default {
 </script>
 
 <style scoped>
+
+#block1  {
+  float:right;
+  vertical-align: top;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
+}
+.import{
+  background-color: #1E90FF;
+}
+
 
 .el-button--comment.is-active,
 .el-button--comment:active {

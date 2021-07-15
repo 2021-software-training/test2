@@ -13,11 +13,11 @@
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
+              <li class="current-menu-item"><el-link href="/menu">网站主页</el-link></li>
               <li><el-link href="/allArticle">所有文章</el-link></li>
-              <li><el-link href="/myArticle">我的文章</el-link></li>
-              <li><el-link href="/myComment">我的评论</el-link></li>
-              <li><el-link href="/personalKeep">个人中心</el-link></li>
+              <li><el-link href="/myArticle">我的</el-link></li>
+<!--              <li><el-link href="/myComment">我的评论</el-link></li>-->
+              <li><el-link @click="toUserPage">个人主页</el-link></li>
             </ul>
           </div>
         </nav>
@@ -72,7 +72,14 @@ export default {
 
   data() {
     return {
-      articlesData: {}
+      articlesData: {},
+      page: window.sessionStorage.getItem("username")
+    }
+  },
+
+  methods: {
+    toUserPage() {
+      this.$router.push("/personalPage/" + this.page);
     }
   }
 }

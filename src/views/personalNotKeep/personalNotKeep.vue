@@ -1,24 +1,35 @@
 <template>
+
+
   <body>
 
   <div class="header-wrapper">
     <header>
       <div class="container">
-        <div class="logo-container">
+        <div1 class="logo-container">
           <!-- Website Logo -->
           <p id="bigname"><strong>Knowledge Base Theme</strong></p>
           <span class="tag-line">Premium WordPress Theme</span>
-        </div>
+        </div1>
 
         <!-- Start of Main Navigation -->
+        <el-link href="#"><img id="image1" src="../../assets/moon.png" alt="" /></el-link>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><a href="/menu">主页</a></li>
-              <li><a href="/allArticle">所有文章</a></li>
-              <li><a href="/myarticle">我的文章</a></li>
-              <li><a href="/mycomment">我的评论</a></li>
-              <li><a href="/personalkeep">个人中心</a></li>
+              <template>
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                  <el-menu-item index="5" ><el-link href="/menu">网站主页</el-link></el-menu-item>
+                  <el-menu-item index="3" ><el-link href="/allArticle">所有文章</el-link></el-menu-item>
+                  <el-menu-item index="4"> <el-link href="/myArticle">我的</el-link></el-menu-item>
+                  <el-menu-item index="1"><el-link @click="toUserPage">个人主页</el-link></el-menu-item>
+                </el-menu>
+                <div class="line"></div>
+
+              </template>
+
+
+
             </ul>
           </div>
         </nav>
@@ -35,85 +46,205 @@
       <div id="menu" class="menu">
         <i class="fa fa-times" id="menu-close"></i>
         <div class="container">
-          <div class="image">
-            <a href="#"><img src="./wallpaper.jpg" alt="" /></a>
-          </div>
-          <div class="author-content">
-            <h4>Name</h4>
-            <span>个性签名</span>
-          </div>
-          <nav class="main-nav2" role="navigation">
-            <ul class="main-menu">
-              <li><a href="/personalkeep">个人信息</a></li>
-              <li><a href="/personalpage">个人主页</a></li>
-              <li><a href="/changecode">修改密码</a></li>
-              <li><a href="/changehead">修改头像及背景</a></li>
-              <li><a href="/voice">语音设置</a></li>
-              <li><a href="/writearticle">写文章</a></li>
-            </ul>
-          </nav>
+          <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+
+          </el-radio-group>
+          <template>
+
+            <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse"  background-color="#545c64"  text-color="#fff"  active-text-color="#ffd04b">
+
+
+              <el-submenu index="1">
+                <template #title>
+                  <i class="el-icon-location"></i>
+
+                </template>
+                <el-menu-item-group>
+                  <template #title></template>
+                  <el-link @click="toUserPage"><el-menu-item index="1-1">可视主页</el-menu-item></el-link>
+
+                </el-menu-item-group>
+              </el-submenu>
+              <el-submenu index="2">
+                <template #title>
+                  <i class="el-icon-s-order"></i>
+                  <span>文章</span>
+                </template>
+                <el-menu-item-group>
+                  <template #title></template>
+                  <el-link href="/myArticle"><el-menu-item index="1-1">历史文章</el-menu-item></el-link>
+                  <el-link href="/writeArticle"><el-menu-item index="1-2">新增文章</el-menu-item></el-link>
+                </el-menu-item-group>
+              </el-submenu>
+
+
+
+
+              <el-submenu index="3" >
+                <template #title>
+                  <i class="el-icon-setting"></i>
+                  <span>设置</span>
+                </template>
+                <el-menu-item-group>
+                  <template #title></template>
+                  <el-link href="/changePassword"><el-menu-item index="3-1">重置密码</el-menu-item></el-link>
+                  <el-link href="/personalNotKeep"><el-menu-item index="3-2">编辑信息</el-menu-item></el-link>
+                  <el-link href="/changeHead"><el-menu-item index="3-3">更改头像背景</el-menu-item></el-link>
+                  <el-link href="/voice"><el-menu-item index="3-4">语音设置</el-menu-item></el-link>
+                </el-menu-item-group>
+              </el-submenu>
+
+            </el-menu>
+          </template>
+
         </div>
       </div>
     </div>
   </div>
 
-  <h3>个人信息</h3>
+
   <form action="#">
-    <p>
-      <label>性别</label>
-      <select class="form-select" aria-label="Default select example">
-        <option selected value="男">男</option>
-        <option value="女">女</option>
-      </select>
-      <label>生日</label>
-      <input name="dname" value="Your Birthday" type="text" size="30" />
+    <h3>个人信息</h3>
+      <el-radio v-model="gender" label="1" border>男</el-radio>
+      <el-radio v-model="gender" label="2" border>女</el-radio>
+      <el-switch
+          v-model="value1"
+          active-text="公开"
+          inactive-text="私人"
+          active-color="#13ce66"
+          inactive-color="#ff4949">
+      </el-switch>
       <br>
-      <button>公开</button>
-      <button>私人</button>
-      <br>
-      <label>邮箱</label>
-      <input name="demail" value="Your Email" type="text" size="30" />
-      <br>
-      <button>公开</button>
-      <button>私人</button>
+      <label>年龄</label>
+      <input name="demail" placeholder="Your Age" type="text" size="30" />
+      <el-switch
+          v-model="value2"
+          active-text="公开"
+          inactive-text="私人"
+          active-color="#13ce66"
+          inactive-color="#ff4949">
+      </el-switch>
       <br>
       <label>地址</label>
-      <input name="demail" value="Your Address" type="text" size="30" />
-      <br>
-      <button>公开</button>
-      <button>私人</button>
+      <input name="demail" placeholder="Your Address" type="text" size="30" />
+      <el-switch
+          v-model="value3"
+          active-text="公开"
+          inactive-text="私人"
+          active-color="#13ce66"
+          inactive-color="#ff4949">
+      </el-switch>
       <br>
       <label>喜好</label>
-      <textarea rows="5" cols="5"></textarea>
+
+      <!--      <el-radio-group v-model="radio1">-->
+      <el-button  @click="toAllType">All</el-button>
+      <el-button  @click="toGameType">Game</el-button>
+      <el-button  @click="toHistoryType">History</el-button>
+      <el-button  @click="toScienceType">Science</el-button>
+      <!--      </el-radio-group>-->
+      <el-switch
+          v-model="value4"
+          active-text="公开"
+          inactive-text="私人"
+          active-color="#13ce66"
+          inactive-color="#ff4949">
+      </el-switch>
       <br>
-      <button>公开</button>
-      <button>私人</button>
       <br>
       <label>个性签名</label>
       <textarea rows="5" cols="5"></textarea>
+      <el-switch
+          v-model="value5"
+          active-text="公开"
+          inactive-text="私人"
+          active-color="#13ce66"
+          inactive-color="#ff4949" disabled>
+      </el-switch>
+      <br>
       <br />
-      <butoon id="keep" @click="keeper">保存</butoon>
-    </p>
+      <el-button type="primary" id="keep" @click="keeper">保存<i class="el-icon-upload el-icon--right"></i></el-button>
+
   </form>
 
   </body>
 </template>
 
 <script>
+
+import {editUserInfo} from "@/api/api";
+
 export default {
-  name: "personalNotKeep",
+  data() {
+    return {
+      page: window.sessionStorage.getItem("username"),
+      isCollapse: true,
+      activeIndex: '1',
+      activeIndex2: '1',
+      value1: true,
+      value2: true,
+      value3: true,
+      value4: true,
+      value5: true,
+
+      gender: '',
+    };
+  },
+  name:
+      "changePassword",
   methods:{
-    keeper(){
-      this.$router.push('/personalKeep');
+    toUserPage() {
+      this.$router.push("/personalPage/" + this.page);
+    },
+    keeper() {
+      let userInfo = {
+        age: this.value2,
+      };
+      editUserInfo(userInfo);
+      this.toUserPage();
+    },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
     }
   }
 }
 </script>
 
 <style scoped>
-
+textarea {
+  width:190px;
+  padding:100px;
+  margin-left:auto;
+  margin-right: auto;
+  font: normal 1em Verdana, sans-serif;
+  border:1px solid #eee;
+  height:20px;
+  display:block;
+  color:black;
+}
+body{
+  height:800px;
+}
+#image1{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  float:left;
+  margin-left:40px;
+  margin-top:-160px !important;
+}
 form {
-  margin:10px; padding: 0;
+  margin-right:100px !important;
+  margin-top: -100px !important;
+  padding: 0;
+  width:70%;
+  float:right;
   border: 1px solid #f2f2f2;
   background-color: #FAFAFA;
 }
@@ -129,89 +260,58 @@ input,.form-select {
   font: normal 1em Verdana, sans-serif;
   color:#777;
 }
-textarea {
-  width:190px;
-  padding:100px;
-  margin-left:auto;
-  margin-right: auto;
-  font: normal 1em Verdana, sans-serif;
-  border:1px solid #eee;
-  height:20px;
-  display:block;
-  color:black;
-}
 #keep {
   margin: 0;
   font: bold 1em Arial, Sans-serif;
   border: 1px solid #CCC;
   background: #FFF;
-  padding: 2px 3px;
-  color: #4284B0;
+  padding: 7px 15px;
+  color: #00CACA;
 }
-
-body {
-  font-family: 'Lato', sans-serif;
-}
-
 #page-wraper {
-  background: url(../../assets/wallpaper.jpg) no-repeat center center fixed;
+  background: url("#") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   width: 100%;
 }
-
-
 /* Basic */
-
-body {
-  overflow-x: hidden;
-}
-
 input{
   outline: none;
 }
-
 a,
 a:hover {
   text-decoration: none;
 }
-
 p {
   font-size: 16px;
   line-height: 24px;
-  color: #fff;
+  color: #9D9D9D;
 }
-
 h4 {
   font-size: 26px;
   font-weight: 700;
   color: #fff;
   letter-spacing: 0.25px;
 }
-
 img {
   width: 100%;
   overflow: hidden;
 }
-
 ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-
 ul li {
   display: inline-block;
 }
-
 html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 *,
 *:before,
 *:after {
@@ -219,72 +319,33 @@ html {
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
-
 .container {
   margin: 0 auto;
 }
-
-.main-nav2 {
-  text-align: center;
-}
-
-.main-nav2 li:last-child a {
-  border-bottom: 2px solid #fff;
-}
-
-.main-nav2 li {
-  display: block;
-}
-
-.main-nav2 li a {
-  height: 70px;
-  line-height: 70px;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-  width: 100%;
-  transition: all 0.5s;
-  border-top: 2px solid #fff;
-}
-
-.main-nav2 li:hover a,
-.main-nav2 li.active a {
-  background: #fff;
-  color: #8c363e;
-}
-
 /* Sidebar Menu */
-
 .menu .image {
   margin-top: 60px;
 }
-
 .menu .image img {
   width: 140px;
   height: 140px;
   border-radius: 50%;
   text-align: center;
 }
-
 .menu .author-content {
   margin: 40px 0px 60px 0px;
 }
-
 .menu .author-content h4 {
   margin-bottom: 0px;
 }
-
 .menu .author-content span {
   font-size: 13px;
   font-style: italic;
   color: #fff;
 }
-
 .menu {
   margin-top: 60px;
 }
-
 .menu  {
   position: relative;
   margin-top: 60px;
@@ -294,82 +355,32 @@ html {
   content: "";
   display: table;
 }
-
 .menu:after {
   clear: both;
 }
-
 .menu a {
   text-decoration: none;
   color: inherit;
 }
-
 .menu {
   text-align: center;
 }
-.menu {
-  left: 1%;
-  -webkit-transition: -webkit-transform 233ms cubic-bezier(0, 0, 0.21, 1);
-  -webkit-overflow-scrolling: touch;
-  background-color: #a43f49;
-  box-sizing: border-box;
-  height: 100vh;
-  max-width: 80vw !important;
-  min-width: 45px !important;
-  outline: none;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  padding: 0;
-  position: fixed !important;
-  top: -70px;
-  width: 27%;
-  will-change: transform;
-  z-index: 9999 !important;
-}
-
-
-
-#menu-toggle {
-  z-index: 999;
-  cursor: pointer;
-  position: fixed;
-  top: 0;
-  left: 0;
-  color: #a43f49;
-  background-color: #fff;
-  width: 60px;
-  height: 60px;
-  text-align: center;
-  display: inline-block;
-  line-height: 60px;
-}
-#menu-close {
-  cursor: pointer;
-  text-align: right;
-  color: #a43f49;
-  background-color: #fff;
-  width: 100%;
-  height: 60px;
-  text-align: center;
-  display: inline-block;
-  line-height: 60px;
-}
-
 .header-wrapper {
-  background-color: #3b4348;
+  background-color: #3A5F7B;
   width: 100%;
   height: auto;
+  margin-top:-61px;
 }
 .header-wrapper .container {
   position: relative;
   min-height: 60px;
   height: auto !important;
-  height: 60px;
+  top:5px;
 }
 #bigname{
   color:white;
-  font-size:x-large;
-  margin-left: -900px;
+  font-size:xx-large;
+  margin-left: -500px !important;
 }
 .logo-container {
   padding: 19px 0;
@@ -380,12 +391,12 @@ html {
 .logo-container {
   width: 450px;
 }
-
 span.tag-line {
   color: #818a90;
   font-size: 12px;
   position: relative;
-  top: 2px;
+  top:-5px;
+  margin-left:-1280px !important;
 }
 .main-nav {
   position: absolute;
@@ -448,19 +459,16 @@ span.tag-line {
 .main-nav .responsive-nav {
   display: none;
 }
-
 /* Header - Search ---------------------------------------------------------------------------------------------------*/
 .search-area-wrapper {
-  background: #353b65 url("../../assets/wallpaper.jpg") center top no-repeat;
+  background: #353b65 url("#") center top no-repeat;
   background-size: 100%;
   min-height: 279px;
-  height: auto !important;
   height: 279px;
 }
 .search-area-wrapper .search-area {
   padding: 50px 0;
 }
-
 h3.search-header {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -468,7 +476,6 @@ h3.search-header {
   color: #fff;
   text-align: center;
 }
-
 p.search-tag-line {
   font-family: "Droid Serif", serif;
   font-style: italic;
@@ -477,7 +484,6 @@ p.search-tag-line {
   color: #fff;
   text-align: center;
 }
-
 form.search-form {
   margin: 40px 0 0;
   text-align: center;
@@ -501,7 +507,7 @@ form.search-form input.search-term {
   margin-bottom: 0;
 }
 form.search-form input.search-term.loading {
-  background-image: url("../../assets/wallpaper.jpg");
+  background-image: url("#");
   background-repeat: no-repeat;
   background-position: 98% 50%;
 }
@@ -516,18 +522,15 @@ form.search-form input.search-btn {
 form.search-form input.search-btn:hover {
   background-color: #4b5760;
 }
-
 #search-error-container label {
   color: #fff;
   padding: 5px;
   font-size: 14px;
 }
-
 .lt-ie8 form.search-form input.search-btn {
   padding-top: 12px;
   padding-bottom: 13px;
 }
-
 /* Page - Container --------------------------------------------------------------------------------------------------*/
 .page-container {
   width: 100%;
@@ -536,18 +539,13 @@ form.search-form input.search-btn:hover {
   padding: 40px 35px;
   background-color: #fff;
 }
-
-
 .pages-nav a {
   margin-right: 10px;
 }
-
-
-div {
+div1 {
   display: block;
   margin: 5px auto 20px auto;
 }
-
 li.comment > article {
   background: #fff;
   float: left;
@@ -561,7 +559,6 @@ li.comment > article {
 .page-content {
   margin-bottom: 20px;
 }
-
 .row.separator {
   margin-bottom: 10px;
 }
@@ -583,7 +580,6 @@ li.comment > article {
 .articles-list > h3 a:hover {
   color: #395996;
 }
-
 ul.articles {
   list-style: none;
   margin: 0;
@@ -592,24 +588,23 @@ ul.articles .article-entry {
   position: relative;
   border-bottom: 1px solid #f2f2f2;
   padding: 0 0 0 24px;
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry.standard {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry.video {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry.image {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles .article-entry {
-  background: url("../../assets/wallpaper.jpg") no-repeat 0 3px;
+  background: url("#") no-repeat 0 3px;
 }
 ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #f2f2f2;
 }
-
 .article-entry > h4 {
   font-size: 13px;
   margin-bottom: 5px;
@@ -634,13 +629,12 @@ ul.articles li.article-entry:last-child {
   padding: 3px 5px 3px 20px;
   border: 1px solid #f2f2f2;
   border-bottom: none;
-  background: url("/liked.png") no-repeat 6px 8px;
+  background: url("../../assets/liked.png") no-repeat 6px 8px;
 }
 .article-entry:hover .like-count {
-  background: url("../../assets/wallpaper.jpg") no-repeat 6px -22px;
+  background: url("#") no-repeat 6px -22px;
   color: #395996;
 }
-
 #footer .article-entry .like-count {
   border-color: #535b61;
 }
@@ -650,7 +644,6 @@ ul.articles li.article-entry:last-child {
 #footer ul.articles li.article-entry:last-child {
   border-bottom: 1px solid #535b61;
 }
-
 .main-listing article {
   margin-bottom: 0;
 }
@@ -662,7 +655,6 @@ ul.articles li.article-entry:last-child {
   .main-nav > div {
     display: none;
   }
-
   .main-nav {
     display: block;
     width: 85%;
@@ -671,34 +663,27 @@ ul.articles li.article-entry:last-child {
     border-radius: 0;
     border: none;
   }
-
   /* Search Area */
   .search-area-wrapper {
     background-size: auto;
     min-height: 240px;
     height: auto !important;
-    height: 240px;
   }
-
   .search-area-wrapper .search-area {
     padding: 20px 0;
   }
-
   .search-area-wrapper h3.search-header {
     font-size: 30px;
     padding: 0 15px;
   }
-
   .search-area-wrapper p.search-tag-line {
     padding: 0 15px;
     font-size: 14px;
     line-height: 22px;
   }
-
   .search-area-wrapper form.search-form input.search-term {
     width: 60%;
   }
-
   @media (max-width: 480px) {
     /* Search Area */
     .search-area-wrapper form.search-form input.search-term {
@@ -706,12 +691,10 @@ ul.articles li.article-entry:last-child {
       display: block;
       margin: 0 auto 10px;
     }
-
     .search-area-wrapper form.search-form input.search-btn {
       display: block;
       margin: 0 auto;
     }
-
     ul.articles .article-entry {
       padding-bottom: 20px;
     }

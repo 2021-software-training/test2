@@ -21,11 +21,10 @@
                   <input class="search-btn" type="submit" value="search" />
                 </div>
                 <ul id="menu-top-menu" class="clearfix">
-                  <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
+                  <li class="current-menu-item"><el-link href="/menu">网站主页</el-link></li>
                   <li><el-link href="/allArticle">所有文章</el-link></li>
-                  <li><el-link href="/myArticle">我的文章</el-link></li>
-                  <li><el-link href="/myComment">我的评论</el-link></li>
-                  <li><el-link href="/personalKeep">个人中心</el-link></li>
+                  <li><el-link href="/myArticle">我的</el-link></li>
+                  <li><el-link @click="toUserPage">个人主页</el-link></li>
                 </ul>
               </div>
             </nav>
@@ -37,36 +36,36 @@
     </el-header>
 
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="275px">
         <nav id="sort">
           <el-space direction="vertical">
             <el-card class="box-card" style="width: 250px">
               <template #header>
                 <div class="card-header">
                   <br><el-avatar shape="square" :size="100">user</el-avatar><br><br>
-                  <span>Author name</span>
+                  <span>{{articleData.authorName}}</span>
                   <!--              <el-button class="button" type="text">Operation button</el-button>-->
                 </div>
               </template>
               <span class="article-title">
-              article title<br><br>
+              {{articleData.articleTitle}}<br><br>
             </span>
               <el-divider></el-divider>
 
-              <el-button type="primary" icon="el-icon-caret-top" size="mini" circle></el-button>
-              <el-button type="primary" icon="el-icon-chat-line-round" size="mini" circle></el-button>
-              <el-button type="primary" icon="el-icon-paperclip" size="mini" circle></el-button>
+              <el-button type="primary" icon="el-icon-caret-top" size="small" round>点赞</el-button>
+<!--              <el-button type="primary" icon="el-icon-chat-line-round" size="mini" circle @click="toComment"></el-button>-->
+              <el-button type="primary" icon="el-icon-paperclip" size="small" round @click="toCopy">分享</el-button>
 
               <el-divider></el-divider>
-              <div>
-                <el-tag size="10">1</el-tag>
+              <div v-if="articleData.articleType1 !== ''">
+                <el-tag size="10">{{articleData.articleType1}}</el-tag>
               </div>
 
-              <div>
-                <el-tag size="10">2</el-tag>
+              <div v-if="articleData.articleType2 !== ''">
+                <el-tag size="10">{{articleData.articleType2}}</el-tag>
               </div>
-              <div>
-                <el-tag size="10">3</el-tag>
+              <div v-if="articleData.articleType3 !== ''">
+                <el-tag size="10"> {{articleData.articleType3}} </el-tag>
               </div>
 
             </el-card>
@@ -80,15 +79,17 @@
           <el-divider></el-divider>
           <div class="row separator">
             <el-space direction="vertical">
-              <el-card class="box-card" style="width: 650px" v-for="i in 2" :key="i">
+              <el-card class="box-card" style="width: 650px" v-for="i in commentsData.length" :key="i">
                 <template #header>
                   <div class="card-header">
-                    <span>Card name</span>
-                    <el-button class="button" type="text">Operation button</el-button>
+                    <span>{{commentsData[i-1].user.username}}</span>
                   </div>
                 </template>
-                <div v-for="o in 4" :key="o" class="text item">
-                  {{ 'List item ' + o }}
+                <div>
+                  <span>{{commentsData[i-1].comment.commentText}}</span>
+                </div>
+                <div>
+                  {{commentsData[i-1].comment.commentTime}}
                 </div>
               </el-card>
             </el-space>
@@ -96,29 +97,166 @@
         </template>
       </el-main>
 
-      <el-aside width="200px">
-        <div>
-          aside
-        </div>
-      </el-aside>
 <!--      <el-aside width="200px">Aside</el-aside>-->
+      <el-footer>
+        <div>
+          <el-input class="input-text"
+              type="textarea"
+              autosize="{ minRows: 2, maxRows: 15}"
+              placeholder="请输入内容"
+              v-model="textArea">
+          </el-input>
+          <span>
+            {{textarea1}}
+          </span>
+        </div>
+        <div>
+          <el-row>
+            <template>
+              <el-popconfirm
+                  title="确定清空评论框吗？"
+                  @confirm="clearComment">
+                <template #reference>
+                  <el-button >清空评论</el-button>
+                </template>
+              </el-popconfirm>
+            </template>
+            <template>
+              <el-popconfirm
+                  title="确定提交该评论吗？"
+                  @confirm="submitComment">
+                <template #reference>
+                  <el-button type="primary">提交评论</el-button>
+                </template>
+              </el-popconfirm>
+            </template>
+          </el-row>
+        </div>
+        <div v-if="commentsData.length === 0">
+          <template>
+            <el-empty description="目前还没有任何评论诶~"></el-empty>
+          </template>
+        </div>
+
+
+        <template>
+          <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="1">
+          </el-pagination>
+        </template>
+      </el-footer>
     </el-container>
   </el-container>
 </template>
 
 <script>
-export default {
+import {showAnArticle, getAnArticleComment, addArticleComment, website} from "@/api/api";
+// import { ref } from 'vue'
+
+
+export default  {
   name: "comment",
 
   data() {
     return {
-      test: this.$route.params.articleID
+      page: window.sessionStorage.getItem("username"),
+      articleData: {
+        authorName: '',
+        authorID:   '',
+        articleID: '',
+        articleTitle: '',
+        articleText: '',
+        articleType1: '',
+        articleType2: '',
+        articleType3: '',
+        title: '',
+        time: '',
+        commentsNum: '',
+        likesNum: ''
+      },
+
+      commentsNum: 0,
+      textArea: '',
+      commentsData: [{
+        comment: {
+
+        },
+        user: {
+          userID: 0,
+          username: ''
+        }
+      }]
+    }
+  },
+  created() {
+    this.getArticleInfo();
+    this.getCommentInfo();
+
+  },
+  methods: {
+    toUserPage() {
+      this.$router.push("/personalPage/" + this.page);
+    },
+
+    toCopy() {
+      this.$alert('本文章的文章是' + website + 'detailArticle/' +
+          this.articleData.articleID.toString() +'，快去分享吧！', '分享网址', {
+        confirmButtonText: '确定',
+      });
+    },
+
+    async getArticleInfo() {
+      let articleInfo = {
+        articleID: this.$route.params.articleID
+      };
+      // console.log(articleInfo);
+      await showAnArticle(articleInfo).then((res) => {
+        this.articleData = res;
+      });
+    },
+
+    async getCommentInfo() {
+      this.commentsData = await getAnArticleComment({
+        articleID: this.$route.params.articleID
+      })
+      console.log("接下来是评论信息：")
+      console.log(this.commentsData)
+      console.log("结束")
+
+      console.log("接下来是评论信息：")
+      console.log(this.commentsData[0])
+      console.log(this.commentsData[0].comment)
+      console.log("接下来是具体细节")
+      let temp = this.commentsData[0].comment;
+      console.log(temp);
+      console.log(temp.commentID)
+      console.log(temp.commentText)
+    },
+
+    submitComment() {
+      let commentAndArticleInfo = {
+        articleID: this.articleData.articleID,
+        commentText: this.textArea
+      }
+      addArticleComment(commentAndArticleInfo);
+      location.reload()
+    },
+
+    clearComment() {
+      this.textArea = '';
     }
   }
 }
 </script>
 
 <style scoped>
+
+.input-text {
+  width: 600px;
+}
+
 .search{
 
 }

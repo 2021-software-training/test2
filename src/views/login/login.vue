@@ -37,6 +37,7 @@ export default {
       console.log((judge.token))
       if (judge.result === "yes") {
         window.sessionStorage.setItem("token", judge.token);
+        window.sessionStorage.setItem("username", this.userName);
         alert("登陆成功")
         await this.$router.push('/menu');
       } else {

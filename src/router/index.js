@@ -77,7 +77,7 @@ const routes = [
         path: '/personalNotKeep',
         component: PersonalNotKeep
     }, {
-        path: '/personalPage',
+        path: '/personalPage/:username',
         component: PersonalPage
     }, {
         path: '/changePassword',
@@ -114,7 +114,7 @@ const routes = [
         name: 'detailArticle',
         component: DetailArticle
     }, {
-        path: '/detailArticle/:articleID/comment',
+        path: '/detailArticle/:articleID/comment/:page',
         component: Comment
     }
 

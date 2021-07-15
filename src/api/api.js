@@ -104,10 +104,10 @@ export function showAnArticle(articleInfo) {
 }
 
 
-export function addComment(articleAndCommentInfo) {
+export function addArticleComment(articleAndCommentInfo) {
     return request({
         method: 'get',
-        url:    '/mainPage/addComment',
+        url:    '/mainPage/addArticleComment',
         params: {
             articleID:  articleAndCommentInfo.articleID,
             commentText: articleAndCommentInfo.commentText
@@ -133,12 +133,24 @@ export function showAllComment() {
     })
 }
 
+export function getAnArticleComment(articleInfo) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/getAnArticleComment',
+        params: {
+            articleID:  articleInfo.articleID
+        }
+    })
+}
 
 
-export function getUserInfo() {
+export function getUserInfo(username) {
     return request({
         method: 'get',
         url:    '/mainPage/getUserInfo',
+        params: {
+            username: username
+        }
     })
 }
 
@@ -148,7 +160,8 @@ export function editUserInfo(userInfo) {
         url:    '/mainPage/editUserInfo',
         params: {
             gender  :  userInfo.gender,
-            email   :  userInfo.email,
+            addressProvinces:   userInfo.addressProvinces,
+            addressCity:        userInfo.addressCity,
             habits1 :  userInfo.habits1,
             habits2 :  userInfo.habits2,
             habits3 :  userInfo.habits3,
@@ -182,7 +195,7 @@ export function addLikeComment(commentAndUserInfo) {
 }
 
 
-
+export const website = 'http://192.168.1.197:8080/';
 /*
 * 请求拦截器
 * 用于在每次请求之前在then或者catch之前拦截并进行处理
@@ -199,3 +212,5 @@ axios.interceptors.request.use(config =>{
     console.log("拦截器错误");
     return Promise.reject(error);
 })
+
+

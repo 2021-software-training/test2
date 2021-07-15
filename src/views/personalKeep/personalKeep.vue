@@ -342,7 +342,7 @@ html {
 }
 
 .header-wrapper {
-  background-color: #3b4348;
+  background-color: #3A5F7B;
   width: 100%;
   height: auto;
 }

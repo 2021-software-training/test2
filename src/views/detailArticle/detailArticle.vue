@@ -22,11 +22,10 @@
                   <input class="search-btn" type="submit" value="search" />
                 </div>
                 <ul id="menu-top-menu" class="clearfix">
-                  <li class="current-menu-item"><el-link href="/menu">主页</el-link></li>
+                  <li class="current-menu-item"><el-link href="/menu">网站主页</el-link></li>
                   <li><el-link href="/allArticle">所有文章</el-link></li>
-                  <li><el-link href="/myArticle">我的文章</el-link></li>
-                  <li><el-link href="/myComment">我的评论</el-link></li>
-                  <li><el-link href="/personalKeep">个人中心</el-link></li>
+                  <li><el-link href="/myArticle">我的</el-link></li>
+                  <li><el-link @click="toUserPage">个人主页</el-link></li>
                 </ul>
               </div>
             </nav>
@@ -56,20 +55,19 @@
 
               <el-button type="primary" icon="el-icon-caret-top" size="mini" circle></el-button>
               <el-button type="primary" icon="el-icon-chat-line-round" size="mini" circle @click="toComment"></el-button>
-              <el-button type="primary" icon="el-icon-paperclip" size="mini" circle></el-button>
+              <el-button type="primary" icon="el-icon-paperclip" size="mini" circle @click="toCopy"></el-button>
 
               <el-divider></el-divider>
-                <div>
+                <div v-if="articleData.articleType1 !== ''">
                   <el-tag size="10">{{articleData.articleType1}}</el-tag>
                 </div>
 
-                <div>
+                <div v-if="articleData.articleType2 !== ''">
                   <el-tag size="10">{{articleData.articleType2}}</el-tag>
                 </div>
-                <div>
+                <div v-if="articleData.articleType3 !== ''">
                   <el-tag size="10"> {{articleData.articleType3}} </el-tag>
                 </div>
-
             </el-card>
           </el-space>
         </nav>
@@ -98,12 +96,13 @@
 </template>
 
 <script>
-import {showAnArticle} from "@/api/api";
+import {showAnArticle, website} from "@/api/api";
 
 export default {
   name: "detailArticle",
   data() {
     return {
+      page: window.sessionStorage.getItem("username"),
       articleData: {
         authorName: '',
         authorID:   '',
@@ -117,14 +116,24 @@ export default {
         time: '',
         commentsNum: '',
         likesNum: ''
-      }
+      },
     }
   },
   created() {
-    this.doSomething();
+    this.getInfo();
   },
   methods: {
-    async doSomething() {
+    toUserPage() {
+      this.$router.push("/personalPage/" + this.page);
+    },
+    toCopy() {
+      this.$alert('本文章的文章是' + website + 'detailArticle/' +
+          this.articleData.articleID.toString() +'，快去分享吧！', '分享网址', {
+        confirmButtonText: '确定',
+      });
+    },
+
+    async getInfo() {
       let articleInfo = {
         articleID: this.$route.params.articleID
       };
@@ -137,7 +146,7 @@ export default {
     },
 
     toComment() {
-      this.$router.push((this.articleData.articleID).toString() + '/comment')
+      this.$router.push((this.articleData.articleID).toString() + '/comment/1')
     }
   }
 }
