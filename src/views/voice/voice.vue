@@ -10,7 +10,7 @@
         </div1>
 
         <!-- Start of Main Navigation -->
-        <el-link href="#"><img id="image1" src="../../assets/moon.png" alt="" /></el-link>
+        <el-link href="#"><img id="image1" :src="imgUrl" alt="" /></el-link>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
@@ -112,17 +112,17 @@
     <h3>语音设置</h3>
     <label>发声人</label>
     <select class="form-select" aria-label="Default select example" v-model="person">
-      <option selected>男1</option>
-      <option value="男2">男2</option>
-      <option value="女1">女1</option>
-      <option value="女2">女2</option>
+      <option selected value="1">男1</option>
+      <option value="3">男2</option>
+      <option value="0">女1</option>
+      <option value="4">女2</option>
     </select>
     <div class="block">
       <span class="demonstration">语速</span>
       <el-slider
           v-model="speed"
           :step="1"
-          max="15"
+          :max="15"
           show-stops>
       </el-slider>
     </div>
@@ -132,7 +132,7 @@
       <el-slider
           v-model="pitch"
           :step="1"
-          max="15"
+          :max="15"
           show-stops>
       </el-slider>
     </div>
@@ -142,21 +142,38 @@
       <el-slider
           v-model="volume"
           :step="1"
-          max="15"
+          :max="15"
           show-stops>
       </el-slider>
     </div>
 
     <br />
-    <el-button type="primary" id="keep" @click="toUserPage">保存<i class="el-icon-upload el-icon--right"></i></el-button>
+    <el-button type="primary" id="keep" @click="toEditAudioInfo">保存<i class="el-icon-upload el-icon--right"></i></el-button>
   </form>
   </body>
 </template>
 
 <script>
+import {editAudioInfo, getAudioInfo} from "@/api/api";
+
 export default {
+
+  async created() {
+    const code = await getAudioInfo();
+    if (code.result === 0) {
+      alert("请登录");
+      await this.$router.push('/login');
+    } else {
+      this.person = code.person;
+      this.speed = code.speed;
+      this.pitch = code.pitch;
+      this.volume = code.volume
+    }
+  },
+
   data() {
     return {
+      imgUrl: 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username"),
       page: window.sessionStorage.getItem("username"),
       isCollapse: true,
       activeIndex: '1',
@@ -184,7 +201,27 @@ export default {
     },
     formatTooltip(val) {
       return val / 100;
-    }
+    },
+
+    async toEditAudioInfo() {
+      const audioInfo = {
+        speed: this.speed,
+        pitch: this.pitch,
+        volume: this.volume,
+        person: this.person
+      };
+      const code = await editAudioInfo(audioInfo);
+      if (code.result === 0) {
+        alert("请登录");
+        await this.$router.push('/login');
+      } else if (code.result === "yes") {
+        alert("修改成功！")
+        location.reload();
+      } else {
+        alert("错误！")
+      }
+    },
+
   }
 }
 </script>

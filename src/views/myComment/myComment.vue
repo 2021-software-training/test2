@@ -60,23 +60,23 @@
 
     <el-divider></el-divider>
     <el-space wrap alignment="flex-end">
-      <el-card class="box-card" style="width: 1000px" v-for="(article, index) in articlesData" v-bind:key="index">
+      <el-card class="box-card" style="width: 1000px" v-for="(comment, index) in comments" v-bind:key="index">
         <template #header>
           <div class="card-header">
-            <span>{{article.title}}</span>
+            <span>{{comment.article.articleTitle}}</span>
           </div>
         </template>
         <div class="text-item">
           <div class="article-text">
-            {{article.articleText}}<br>
+            {{comment.comment.commentText}}<br>
           </div>
           <br>
           <div class="article-icon">
             <el-button icon="el-icon-chat-line-round" size="small" type="comment" @click="toDetailArticle(index)">
-              评论 {{article.commentsNum}}
+              评论 {{comment.comment.commentsNum}}
             </el-button>
             <el-button icon="el-icon-caret-top" size="small" type="like" @click="sendLike(index)">
-              赞同 {{article.likesNum}}
+              赞同 {{comment.comment.commentLikesNum}}
             </el-button>
           </div>
         </div>
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import {showAnArticle, showUserAllComment} from "@/api/api";
+import {addLikeArticle, showUserAllComment} from "@/api/api";
 export default {
   name: "allArticle",
   data() {
@@ -138,15 +138,16 @@ export default {
       this.$router.push("/personalPage/" + this.page);
     },
 
-    async toDetailArticle(num) {
+    sendLike(num) {
       let articleInfo = {
-        articleID: this.articlesData[num].articleID
+        articleID: this.comments[num].article.articleID
       };
-      this.articleData = showAnArticle(articleInfo);
-      await this.$router.push({
-        path: '/detailArticle',
-        query: this.articleData
-      })
+      addLikeArticle(articleInfo);
+      location.reload();          //到时候需要换一下
+    },
+
+    async toDetailArticle(num) {
+      await this.$router.push('/detailArticle/' + (this.comments[num].article.articleID).toString())
     },
 
     toMyArticle() {

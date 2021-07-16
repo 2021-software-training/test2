@@ -13,7 +13,7 @@
         </div>
 
         <!-- Start of Main Navigation -->
-        <el-link href="#"><img id="image1" src="../../assets/moon.png" alt="" /></el-link>
+        <el-link href="#"><img id="image1" :src="imgUrl" alt="" /></el-link>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
@@ -110,9 +110,9 @@
     <h3>修改头像</h3>
     <label>图片预览</label>
     <div class="headimage">
-      <el-link  href="#"><img src="../../assets/wallpaper.jpg" alt="" /></el-link>
+      <el-link  href="#"><img :src="imgUrl" alt="" /></el-link>
     </div>
-
+    <spinner></spinner>
     <template>
       <el-upload
           class="upload-demo"
@@ -170,6 +170,7 @@ import {imageUpload} from "@/api/api";
 export default {
   data() {
     return {
+      imgUrl: 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username"),
       page: window.sessionStorage.getItem("username"),
       uploadUrl: 'http://127.0.0.1:8000/mainPage/changeHead',
       myHeader: {

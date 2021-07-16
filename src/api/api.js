@@ -6,7 +6,7 @@ export const BASE_PATH = './../../assets/';
 export function request(config) {
     const instance = axios.create({
         baseURL: 'http://127.0.0.1:8000',
-        timeout: 10000,
+        timeout: 15000,
         headers: {
             'Authorization':  window.sessionStorage.getItem('token')
         }
@@ -50,7 +50,7 @@ export const imageUpload = params => {
     })
 }
 
-export function register (userInfo) {
+export function register (userInfo, code) {
     return request({
         method: 'get',
         url:    '/api/register',
@@ -59,11 +59,22 @@ export function register (userInfo) {
             username: userInfo.username,
             password: userInfo.password,
             email   : userInfo.email,
-            age     : userInfo.age
+            age     : userInfo.age,
+            gender  : userInfo.gender,
+            code    : code
         }
     })
 }
 
+export function emailCheckHelp(email) {
+    return request({
+        method: 'get',
+        url:    'api/emailCheck',
+        params: {
+            email: email
+        }
+    })
+}
 
 
 export function addArticle(articleInfo) {
@@ -185,13 +196,36 @@ export function editUserInfo(userInfo) {
         }
     })
 }
-//
-// export function editAudioInfo(audioInfo) {
-//     return request({
-//         method: 'get',
-//         url:
-//     })
-// }
+
+export function editAudioInfo(audioInfo) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/editAudio',
+            params: {
+            speed:  audioInfo.speed,
+            pitch:  audioInfo.pitch,
+            volume: audioInfo.volume,
+            person: audioInfo.person
+        }
+    })
+}
+
+export function judgeUsername(username) {
+    return request({
+        method: 'get',
+        url:    '/api/judge',
+        params: {
+            username: username
+        }
+    })
+}
+
+export function getAudioInfo() {
+    return request({
+        method: 'get',
+        url:    '/mainPage/getAudioInfo'
+    })
+}
 
 export function addLikeArticle(articleInfo) {
     return request({
@@ -204,13 +238,12 @@ export function addLikeArticle(articleInfo) {
     })
 }
 
-export function addLikeComment(commentAndUserInfo) {
+export function addLikeComment(commentInfo) {
     return request({
         method: 'get',
         url:    '/mainPage/addLikeComment',
         params: {
-            commentID:    commentAndUserInfo.commentID,
-            username:   commentAndUserInfo.username
+            commentID:    commentInfo.commentID
         }
     })
 }
@@ -236,6 +269,16 @@ export function updatePasswordHelper(password) {
         params: {
             oldPassword:    password.oldPassword,
             newPassword:    password.newPassword
+        }
+    })
+}
+
+export function search(articleTitle) {
+    return request({
+        method: 'get',
+        url:    'search/searcher',
+        params: {
+            searchText: articleTitle
         }
     })
 }

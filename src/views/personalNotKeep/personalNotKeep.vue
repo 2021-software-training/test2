@@ -13,7 +13,7 @@
         </div1>
 
         <!-- Start of Main Navigation -->
-        <el-link href="#"><img id="image1" src="../../assets/moon.png" alt="" /></el-link>
+        <el-link href="#"><img id="image1" :src="imgUrl" alt="" /></el-link>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
@@ -116,47 +116,21 @@
     <h3>个人信息</h3>
       <el-radio v-model="gender" label=1 border>男</el-radio>
       <el-radio v-model="gender" label=2 border>女</el-radio>
-      <el-switch
-          active-text="公开"
-          inactive-text="私人"
-          active-color="#13ce66"
-          inactive-color="#ff4949">
-      </el-switch>
+
       <br>
       <label>年龄</label>
       <input name="demail" placeholder="Your Age" type="text" size="30" v-model="age" />
-      <el-switch
-          active-text="公开"
-          inactive-text="私人"
-          active-color="#13ce66"
-          inactive-color="#ff4949">
-      </el-switch>
+
       <br>
       <label>地址</label>
       <input name="demail" v-model="address" placeholder="Your Address" type="text" size="30" />
-      <el-switch
-          active-text="公开"
-          inactive-text="私人"
-          active-color="#13ce66"
-          inactive-color="#ff4949">
-      </el-switch>
 
     <label>城市</label>
     <input name="demail"  v-model="city" placeholder="Your City" type="text" size="30" />
-    <el-switch
-        active-text="公开"
-        inactive-text="私人"
-        active-color="#13ce66"
-        inactive-color="#ff4949">
-    </el-switch>
+
       <br>
-    <label>喜好</label><el-switch
-      v-model="value5"
-      active-text="公开"
-      inactive-text="私人"
-      active-color="#13ce66"
-      inactive-color="#ff4949">
-  </el-switch> <br>
+    <label>喜好</label>
+    <br>
 
     <p style="text-align: center; margin: 0 0 20px">喜好选择框</p>
     <ar style="text-align: center">
@@ -181,12 +155,7 @@
       <br>
       <label>个性签名</label>
       <textarea rows="5" cols="5" v-model="signature"></textarea>
-      <el-switch
-          active-text="公开"
-          inactive-text="私人"
-          active-color="#13ce66"
-          inactive-color="#ff4949" disabled>
-      </el-switch>
+
       <br>
       <br />
       <el-button type="primary" id="keep" @click="toEditUserInfo">保存<i class="el-icon-upload el-icon--right"></i></el-button>
@@ -231,7 +200,7 @@ export default {
       checkAll: false,
       drawer: false,
       isIndeterminate: true,
-
+      imgUrl: 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username"),
       page: window.sessionStorage.getItem("username"),
       isCollapse: true,
       activeIndex: '1',

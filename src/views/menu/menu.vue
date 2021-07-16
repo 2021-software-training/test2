@@ -1,5 +1,7 @@
 <template>
   <body>
+  <el-container>
+    <el-header>
   <div class="header-wrapper">
     <header>
       <div class="container">
@@ -27,11 +29,12 @@
     </header>
   </div>
   <!-- End of Header -->
-
-  <!-- Start of Search Wrapper -->
+    </el-header>
+    <!-- Start of Search Wrapper -->
+    <el-main>
   <div class="search-area-wrapper">
     <div class="search-area container">
-      <h3 class="search-header">Have el-link Question?</h3>
+      <h3 class="search-header">Have a Question?</h3>
       <p class="search-tag-line">If you have any question you can ask below or enter what you are looking for!</p>
 
       <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
@@ -62,6 +65,8 @@
       </div>
     </div>
   </div>
+    </el-main>
+  </el-container>
   </body>
 </template>
 
@@ -85,6 +90,8 @@ export default {
 }
 </script>
 
+
+
 <style scoped>
 /* General ------------------------------------------------------------------------------------------------------------*/
 body {
@@ -96,7 +103,7 @@ body {
   border-radius: 50%;
   float:left;
   margin-left:40px;
-  margin-top:15px !important;
+  margin-top:-175px !important;
 }
 .menu .image {
   margin-top: 18px;
@@ -239,12 +246,12 @@ span.tag-line {
   color: #818a90;
   font-size: 12px;
   position: relative;
-  top: 2px;
-  left:-520px;
+  top:-18px;
+  margin-left:-1200px;
 }
 .main-nav {
   position: absolute;
-  top: 5px;
+  top: 60px;
   left:710px;
   right: 0;
 }
@@ -258,21 +265,21 @@ span.tag-line {
   list-style: none;
   padding: 16px 14px 18px;
 }
-.main-nav div > ul > li el-link {
+.main-nav div > ul > li a {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   color: #c1cad1;
 }
-.main-nav div > ul > li el-link:hover {
+.main-nav div > ul > li a:hover {
   color: #fff;
 }
-.main-nav div > ul > li:hover > el-link {
+.main-nav div > ul > li:hover > a {
   color: #fff;
 }
 .main-nav div > ul > li:last-child {
   padding-right: 0;
 }
-.main-nav div > ul li.current-menu-item el-link {
+.main-nav div > ul li.current-menu-item a {
   color: #fff;
 }
 .main-nav .sub-menu {
@@ -293,7 +300,7 @@ span.tag-line {
 .main-nav .sub-menu li:hover {
   background-color: #292e32;
 }
-.main-nav .sub-menu li:hover > el-link {
+.main-nav .sub-menu li:hover > a {
   color: #fff;
 }
 .main-nav .sub-menu .sub-menu {
@@ -313,9 +320,9 @@ span.tag-line {
   height: 279px;
 }
 .search-area-wrapper .search-area {
-  margin-top: -20px;
+  margin-top: -10px;
   padding: 50px 0;
-  height:450px;
+  height:690px;
 }
 h3.search-header {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -387,7 +394,7 @@ form.search-form input.search-btn:hover {
   padding: 40px 35px;
   background-color: #fff;
 }
-.pages-nav el-link {
+.pages-nav a {
   margin-right: 10px;
 }
 div {
@@ -422,10 +429,10 @@ li.comment > article {
   color: #6f7579;
   font-size: 16px;
 }
-.articles-list > h3 el-link {
+.articles-list > h3 a {
   color: #3b4348;
 }
-.articles-list > h3 el-link:hover {
+.articles-list > h3 a:hover {
   color: #395996;
 }
 ul.articles {
@@ -458,10 +465,10 @@ ul.articles li.article-entry:last-child {
   margin-bottom: 5px;
   font-weight: 600;
 }
-.article-entry > h4 el-link {
+.article-entry > h4 a {
   color: #3b4348;
 }
-.article-entry > h4 el-link:hover {
+.article-entry > h4 a:hover {
   color: #395996;
 }
 .article-entry .article-meta {

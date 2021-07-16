@@ -13,7 +13,7 @@
         </div>
 
         <!-- Start of Main Navigation -->
-        <el-link href="#"><img id="image1" src="../../assets/moon.png" alt="" /></el-link>
+        <el-link href="#"><img id="image1" :src="imgUrl" alt="" /></el-link>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
@@ -143,6 +143,7 @@ import {getUserInfo} from "@/api/api";
 export default {
   data() {
     return {
+      imgUrl: 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username"),
       page: window.sessionStorage.getItem("username"),
       isCollapse: true,
       activeIndex: '1',

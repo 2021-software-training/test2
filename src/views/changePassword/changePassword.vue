@@ -13,7 +13,7 @@
         </div1>
 
         <!-- Start of Main Navigation -->
-        <el-link href="#"><img id="image1" src="../../assets/moon.png" alt="" /></el-link>
+        <el-link href="#"><img id="image1" :src="imgUrl"/></el-link>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
@@ -154,6 +154,7 @@ export default {
       }
     };
     return {
+      imgUrl: 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username"),
       page: window.sessionStorage.getItem("username"),
       isCollapse: true,
       activeIndex: '1',
@@ -203,7 +204,7 @@ export default {
         const code = await updatePasswordHelper(passwordInfo);
         console.log(code);
         if (code.result === 0) {
-          this.$router.push('/login');
+          await this.$router.push('/login');
           alert("请登录");
         } else {
           if (code.result === "no") {

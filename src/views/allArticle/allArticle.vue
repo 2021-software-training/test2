@@ -13,7 +13,8 @@
   <div class="header-wrapper">
     <div class="user-avatar">
       <el-avatar id="image1" shape="square"
-                 :src="imgUrl"
+                 :src="('http://127.0.0.1:8000/mainPage/getImage/' + page)"
+                 :key="imgUrl"
       >
       </el-avatar>
     </div>
@@ -29,12 +30,13 @@
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <div class="search">
-              <input class="search-term" type="text"  placeholder="search" />
-              <input class="search-btn" type="submit" value="search" />
+              <input class="search-term" type="text"  placeholder="search" id="input-search"/>
+              <el-button type="primary" size="mini" circle icon="el-icon-zoom-in" @click="toSearch"></el-button>
             </div>
+
             <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><el-link href="/menu">网站主页</el-link></li>
-              <li><el-link href="/allArticle">所有文章</el-link></li>
+              <li><el-link href="/menu">网站主页</el-link></li>
+              <li class="current-menu-item"><el-link href="/allArticle">所有文章</el-link></li>
               <li><el-link href="/myArticle">我的</el-link></li>
 <!--              <li><el-link href="/myComment">我的评论</el-link></li>-->
               <li><el-link @click="toUserPage">个人主页</el-link></li>
@@ -49,6 +51,7 @@
 
   <div class="row separator">
 <!--    <h3>我的搜索</h3>-->
+
     <div>
 <!--      <el-radio-group v-model="radio1">-->
         <el-button  @click="toAllType">All</el-button>
@@ -65,7 +68,8 @@
         <template #header>
           <div class="card-header">
             <el-avatar  shape="square"
-                       :src="imgUrl"
+                        :src="'http://127.0.0.1:8000/mainPage/getImage/' + articlesData[index].authorName"
+                        :key="imgUrl"
                         class="avatars"
             >User
             </el-avatar>
@@ -86,9 +90,26 @@
             </el-button>
           </div>
         </div>
+          <span>
+            <br>
+            <el-divider></el-divider>
+          {{article.time}}
+          </span>
       </el-card>
     </el-space>
   </div>
+<!--  <div>-->
+<!--    <template>-->
+<!--      <el-pagination-->
+<!--          background-->
+<!--          layout="prev, pager, next"-->
+<!--          :total="totalPage"-->
+<!--          :current-page=currentPage-->
+<!--          @current-change="func"-->
+<!--      >-->
+<!--      </el-pagination>-->
+<!--    </template>-->
+<!--  </div>-->
   </body>
 </template>
 
@@ -101,6 +122,8 @@ export default {
   name: "allArticle",
   data() {
     return {
+      totalPage: 50,
+      currentPage: this.$route.params.page,
       articlesData: [{
         articleID:    '',
         authorName:   '',
@@ -134,9 +157,9 @@ export default {
   },
   beforeCreate() {
     this.imgUrl = 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username")
-    console.log(this.imgUrl)
   },
   created() {
+    console.log(this.imgUrl)
     showPageAllArticle(this.articleType).then((myData) => {
       console.log(myData);
       if (myData.result === 0) {
@@ -149,6 +172,18 @@ export default {
   },
 
   methods: {
+    async func() {
+
+    },
+    async toSearch() {
+      const searchTitle = document.getElementById('input-search').value;
+      await this.$router.push({
+        path: '/search',
+        query: {
+          title: searchTitle
+        }
+      })
+    },
     getImage() {
       return 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username");
     },
@@ -201,6 +236,9 @@ export default {
   float: left;
 }
 
+/*.input-search{*/
+/*  type!="textarea"*/
+/*}*/
 .el-button--comment.is-active,
 .el-button--comment:active {
   background: #20B2AA;

@@ -48,7 +48,7 @@
                 </div>
               </template>
               <span class="article-title">
-              {{articleData.articleTitle}}<br><br>
+<!--              {{articleData.articleTitle}}<br><br>-->
             </span>
               <el-divider></el-divider>
 
@@ -107,13 +107,11 @@
         <div>
           <el-input class="input-text"
               type="textarea"
-              autosize="{ minRows: 2, maxRows: 15}"
+              :autosize="true"
               placeholder="请输入内容"
               v-model="textArea">
           </el-input>
-          <span>
-            {{textarea1}}
-          </span>
+
         </div>
         <div>
           <el-row>
@@ -143,12 +141,13 @@
           </template>
         </div>
 
-
         <template>
           <el-pagination
               background
               layout="prev, pager, next"
-              :total="1">
+              :total="totalPage"
+              :current-page=currentPage
+          >
           </el-pagination>
         </template>
       </el-footer>
@@ -166,7 +165,11 @@ export default  {
 
   data() {
     return {
+      totalPage: 20,
+      currentPage: this.$route.params.page,
       page: window.sessionStorage.getItem("username"),
+      getImage:'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username"),
+      getImage2: 'http://127.0.0.1:8000/mainPage/getImage/' + this.articleData.authorName,
       articleData: {
         authorName: '',
         authorID:   '',
@@ -203,9 +206,6 @@ export default  {
 
   },
   methods: {
-    getImage() {
-      return 'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username");
-    },
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
     },

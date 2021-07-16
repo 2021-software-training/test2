@@ -21,6 +21,7 @@ const DetailArticle = () =>import('../views/detailArticle/detailArticle');
 const Comment = () => import('../views/comment/comment')
 const GitTest = () => import('../views/testVue/gittest');
 const AudioTest = () => import('../views/testVue/audioTest')
+const Search = () => import('../views/search/search')
 
 Vue.use(VueRouter);
 
@@ -78,6 +79,7 @@ const routes = [
         component: Voice
     },  {
         path: '/emailCheck',
+        name: 'email',
         component: EmailCheck
     }, {
         path: '/gitTest',
@@ -92,6 +94,9 @@ const routes = [
     }, {
         path: '/audioTest',
         component: AudioTest
+    }, {
+        path: '/search',
+        component: Search
     }
 
 ];
