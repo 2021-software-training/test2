@@ -169,7 +169,6 @@ export default  {
       currentPage: this.$route.params.page,
       page: window.sessionStorage.getItem("username"),
       getImage:'http://127.0.0.1:8000/mainPage/getImage/' + window.sessionStorage.getItem("username"),
-      getImage2: 'http://127.0.0.1:8000/mainPage/getImage/' + this.articleData.authorName,
       articleData: {
         authorName: '',
         authorID:   '',
@@ -224,6 +223,8 @@ export default  {
       // console.log(articleInfo);
       await showAnArticle(articleInfo).then((res) => {
         this.articleData = res;
+        console.log("articleData:")
+        console.log(this.articleData)
       });
     },
 

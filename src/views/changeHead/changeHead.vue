@@ -96,7 +96,7 @@
                 </template>
                 <el-menu-item-group>
                   <template #title></template>
-                  <el-link href="/login"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
+                  <el-link @click="signOut"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
                 </el-menu-item-group>
               </el-submenu>
             </el-menu>
@@ -132,34 +132,6 @@
       </el-upload>
     </template>
   </form>
-
-
-<!--  <form action="#">-->
-<!--    <h3>修改主页背景</h3>-->
-<!--    <label>图片预览</label>-->
-<!--    <div class="headimage">-->
-<!--      <el-link  href="#"><img src="../../assets/wallpaper.jpg" alt="" /></el-link>-->
-<!--    </div>-->
-<!--    <label>上传图片</label>-->
-<!--    <template>-->
-<!--      <el-upload-->
-<!--          class="upload-demo"-->
-<!--          drag-->
-<!--          :action="uploadUrl"-->
-<!--          :headers="myHeader2"-->
-<!--          :on-success="handleAvatarSuccess"-->
-<!--          :before-upload="beforeAvatarUpload"-->
-<!--          multiple>-->
-<!--        <i class="el-icon-upload"></i>-->
-<!--        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>-->
-<!--        <template #tip>-->
-<!--          <div class="el-upload__tip">-->
-<!--            只能上传 jpg/png 文件，且不超过 2MB-->
-<!--          </div>-->
-<!--        </template>-->
-<!--      </el-upload>-->
-<!--    </template>-->
-<!--  </form>-->
 
   </body>
 </template>
@@ -233,7 +205,11 @@ export default {
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
     },
-
+    signOut() {
+      window.sessionStorage.removeItem("token");
+      this.$router.push('/login');
+      alert("退出登陆成功！")
+    },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
     },

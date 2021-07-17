@@ -8,11 +8,12 @@
       <div class="container">
         <div class="logo-container">
           <!-- Website Logo -->
-          <p id="bigname"><strong>Knowledge Base Theme</strong></p>
-          <span class="tag-line">Premium WordPress Theme</span>
+          <p id="bigname"><strong>LIFTER</strong></p>
+          <span class="tag-line">.</span>
         </div>
 
         <!-- Start of Main Navigation -->
+        <img id="image2" src="../../assets/logo.jpg" alt="" />
         <el-link href="#"><img id="image1" :src="imgUrl" alt="" /></el-link>
         <nav class="main-nav">
           <div class="menu-top-menu-container">
@@ -22,11 +23,10 @@
                 <el-menu-item index="3" ><el-link href="/allArticle">所有文章</el-link></el-menu-item>
                 <el-submenu index="4" mode="vertical" >
                   <template  slot="title" >我的</template>
-                  <el-menu-item index="4-1">我的文章</el-menu-item>
-                  <el-menu-item index="4-2" >我的点赞</el-menu-item>
-                  <el-menu-item index="4-3" >我的评论</el-menu-item>
+                  <el-menu-item index="4-1" @click="toMyArticle">我的文章</el-menu-item>
+                  <el-menu-item index="4-2" @click="toMyComment" >我的评论</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="1"><el-link @click="toUserPage">个人主页</el-link></el-menu-item>
+                <el-menu-item index="1" class="import"><el-link @click="toUserPage">个人主页</el-link></el-menu-item>
               </el-menu>
               <div class="line"></div>
 
@@ -102,7 +102,7 @@
                 </template>
                 <el-menu-item-group>
                   <template #title></template>
-                  <el-link href="/login"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
+                  <el-link @click="signOut"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
                 </el-menu-item-group>
               </el-submenu>
 
@@ -195,12 +195,36 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    signOut() {
+      window.sessionStorage.removeItem("token");
+      this.$router.push('/login');
+      alert("退出登陆成功！")
+    },
+    toMyArticle() {
+      this.$router.push('/myArticle');
+    },
+    toMyComment() {
+      this.$router.push('/myComment');
     }
   }
 }
 </script>
 
 <style scoped>
+
+#image2{
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+  float:left;
+  margin-left:70px;
+  margin-top:-120px !important;
+}
+.import{
+  color:white;
+}
 .card-header {
   font-size:18px;
   font-family: "Microsoft YaHei", Arial,sans-serif;
@@ -233,6 +257,8 @@ body{
   float:right;
   margin-right:100px !important;
   margin-top: -200px !important;
+  background-color: rgba(119,136,153,0.6);
+  font-family: "Microsoft YaHei",Arial,sans-serif;
 }
 #image1{
   width: 100px;
@@ -417,7 +443,8 @@ html {
 #bigname{
   color:white;
   font-size:xx-large;
-  margin-left: -500px !important;
+  /*margin-top: -200px;*/
+  margin-left: -800px !important;
 }
 .logo-container {
   padding: 19px 0;

@@ -97,7 +97,7 @@
                 </template>
                 <el-menu-item-group>
                   <template #title></template>
-                  <el-link href="/login"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
+                  <el-link @click="signOut"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
                 </el-menu-item-group>
               </el-submenu>
             </el-menu>
@@ -194,6 +194,11 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    signOut() {
+      window.sessionStorage.removeItem("token");
+      this.$router.push('/login');
+      alert("退出登陆成功！")
     },
     async updatePassword() {
       if (this.ruleForm.checkPass === this.ruleForm.pass) {

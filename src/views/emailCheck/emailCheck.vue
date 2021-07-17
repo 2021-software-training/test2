@@ -33,11 +33,11 @@ export default {
   methods: {
     async toEmailCheck() {
       const judge = await register(this.userInfo, this.checkCode);
-      if (judge.code === "yes") {
+      if (judge.result === "yes") {
         alert("注册成功！")
         await this.$router.push('/login');
       }
-      else if (judge.code === "no") {
+      else if (judge.result === "no") {
         alert("注册失败，验证码错误！");
       }
       else {

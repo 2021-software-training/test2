@@ -1,15 +1,6 @@
 <template>
   <body>
 
-<!--  <nav id="sort">-->
-<!--    <ul>-->
-<!--      <li><el-link href="/allArtcle"><img src="assets/images/icon-1.png" alt=""> <em>我的搜索</em></el-link></li>-->
-<!--      <li><el-link href="/history"><img src="assets/images/icon-2.png" alt=""> <em>历史</em></el-link></li>-->
-<!--      <li><el-link href="/science"><img src="assets/images/icon-3.png" alt=""> <em>科技</em></el-link></li>-->
-<!--      <li><el-link href="/life"><img src="assets/images/icon-4.png" alt=""> <em>生活</em></el-link></li>-->
-<!--    </ul>-->
-<!--  </nav>-->
-
   <div class="header-wrapper">
     <div class="user-avatar">
       <el-avatar id="image1" shape="square"
@@ -23,23 +14,29 @@
       <div class="container">
         <div class="logo-container">
           <!-- Website Logo -->
-          <p id="bigname"><strong>Knowledge Base Theme</strong></p>
+          <p id="bigname"><strong>LIFTER</strong></p>
         </div>
 
         <!-- Start of Main Navigation -->
+        <img id="image2" src="../../assets/logo.jpg" alt="" />
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <div class="search">
               <input class="search-term" type="text"  placeholder="search" id="input-search"/>
               <el-button type="primary" size="mini" circle icon="el-icon-zoom-in" @click="toSearch"></el-button>
             </div>
-
             <ul id="menu-top-menu" class="clearfix">
-              <li><el-link href="/menu">网站主页</el-link></li>
-              <li class="current-menu-item"><el-link href="/allArticle">所有文章</el-link></li>
-              <li><el-link href="/myArticle">我的</el-link></li>
-<!--              <li><el-link href="/myComment">我的评论</el-link></li>-->
-              <li><el-link @click="toUserPage">个人主页</el-link></li>
+            <el-menu :default-active="activeIndex" background-color=rgba(0,0,0,0)  class="el-menu-demo" mode="horizontal" @select="handleSelect">
+              <el-menu-item index="1" ><el-link href="/menu">网站主页</el-link></el-menu-item>
+              <el-menu-item index="3" class="import"><el-link href="/allArticle">所有文章</el-link></el-menu-item>
+              <el-submenu index="4" mode="vertical" >
+                <template  slot="title" >我的</template>
+                <el-menu-item index="4-1"><el-link href="/myArticle">我的文章</el-link></el-menu-item>
+                <el-menu-item index="4-3" ><el-link href="/myComment">我的评论</el-link></el-menu-item>
+              </el-submenu>
+              <el-menu-item index="2" @click="toUserPage">个人主页</el-menu-item>
+            </el-menu>
+            <div class="line"></div>
             </ul>
           </div>
         </nav>
@@ -54,11 +51,12 @@
 
     <div>
 <!--      <el-radio-group v-model="radio1">-->
-        <el-button  @click="toAllType">All</el-button>
-        <el-button  @click="toGameType">Game</el-button>
-        <el-button  @click="toHistoryType">History</el-button>
-        <el-button  @click="toScienceType">Science</el-button>
-<!--      </el-radio-group>-->
+      <el-button  @click="toAllType">All</el-button>
+      <el-button  @click="toGameType">Game</el-button>
+      <el-button  @click="toHistoryType">History</el-button>
+      <el-button  @click="toScienceType">Science</el-button>
+      <el-button  @click="toRecommendation">Recommendation</el-button>
+      <!--      </el-radio-group>-->
 
     </div>
 
@@ -225,6 +223,12 @@ export default {
       this.$router.push('/allArticle/Science');
       console.log('Science')
       location.reload()
+    },
+
+    toRecommendation() {
+      this.$router.push('/allArticle/recommendation');
+      console.log('Recommendation');
+      location.reload()
     }
   }
 }
@@ -235,7 +239,14 @@ export default {
 .avatars {
   float: left;
 }
-
+#image2{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  float:left;
+  margin-left:70px;
+  margin-top:-30px !important;
+}
 /*.input-search{*/
 /*  type!="textarea"*/
 /*}*/

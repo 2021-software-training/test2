@@ -30,12 +30,19 @@ export function request(config) {
     return instance(config);
 }
 
+export function sendTest(Info) {
+    return request({
+        method: 'post',
+        url:    '/api/test',
+        data:   Info,
+    })
+}
+
 export function login (userInfo) {
     return request({
-        method: 'get',
+        method: 'post',
         url:    '/api/login',
-        data:   userInfo,
-        params: {username: userInfo.username, password: userInfo.password}
+        data:   {username: userInfo.username, password: userInfo.password}
     })
 }
 
@@ -52,10 +59,9 @@ export const imageUpload = params => {
 
 export function register (userInfo, code) {
     return request({
-        method: 'get',
+        method: 'post',
         url:    '/api/register',
-        data:   userInfo,
-        params: {
+        data: {
             username: userInfo.username,
             password: userInfo.password,
             email   : userInfo.email,
@@ -85,8 +91,8 @@ export function addArticle(articleInfo) {
             articleTitle:  articleInfo.articleTitle,
             articleText:  articleInfo.articleText,
             articleType1: articleInfo.articleType1,
-            articleType2: articleInfo.articleType1,
-            articleType3: articleInfo.articleType1
+            articleType2: articleInfo.articleType2,
+            articleType3: articleInfo.articleType3
         }
     })
 }
@@ -169,6 +175,15 @@ export function getAnArticleComment(articleInfo) {
     })
 }
 
+export function deleteArticle(article) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/deleteArticle',
+        params: {
+            articleID: article.articleID
+        }
+    })
+}
 
 export function getUserInfo(username) {
     return request({

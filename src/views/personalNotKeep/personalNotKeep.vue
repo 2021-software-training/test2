@@ -100,7 +100,7 @@
                 </template>
                 <el-menu-item-group>
                   <template #title></template>
-                  <el-link href="/login"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
+                  <el-link @click="signOut"><el-menu-item index="1-1">退出登录</el-menu-item></el-link>
                 </el-menu-item-group>
               </el-submenu>
             </el-menu>
@@ -219,6 +219,11 @@ export default {
   methods:{
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
+    },
+    signOut() {
+      window.sessionStorage.removeItem("token");
+      this.$router.push('/login');
+      alert("退出登陆成功！")
     },
 
     handleSelect(key, keyPath) {

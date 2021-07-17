@@ -24,10 +24,11 @@
       <div class="container">
         <div class="logo-container">
           <!-- Website Logo -->
-          <p id="bigname"><strong>Knowledge Base Theme</strong></p>
+          <p id="bigname"><strong>L  I  F  T  E  R</strong></p>
         </div>
 
         <!-- Start of Main Navigation -->
+        <img id="image2" src="../../assets/logo.jpg" alt="" />
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <div class="search">
@@ -35,11 +36,17 @@
               <el-button type="primary" size="mini" circle icon="el-icon-zoom-in" @click="toSearch"></el-button>
             </div>
             <ul id="menu-top-menu" class="clearfix">
-              <li><el-link href="/menu">网站主页</el-link></li>
-              <li><el-link href="/allArticle">所有文章</el-link></li>
-              <li class="current-menu-item"><el-link href="/myArticle">我的</el-link></li>
-<!--              <li><el-link href="/myComment">我的评论</el-link></li>-->
-              <li><el-link @click="toUserPage">个人主页</el-link></li>
+              <el-menu :default-active="activeIndex" background-color=rgba(0,0,0,0)  class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" ><el-link href="/menu">网站主页</el-link></el-menu-item>
+                <el-menu-item index="3" ><el-link href="/allArticle">所有文章</el-link></el-menu-item>
+                <el-submenu index="4" mode="vertical" >
+                  <template  slot="title" >我的</template>
+                  <el-menu-item index="4-1"><el-link href="/myArticle"><strong>我的文章</strong></el-link></el-menu-item>
+                  <el-menu-item index="4-3" ><el-link href="/myComment">我的评论</el-link></el-menu-item>
+                </el-submenu>
+                <el-menu-item index="2" @click="toUserPage">个人主页</el-menu-item>
+              </el-menu>
+              <div class="line"></div>
             </ul>
           </div>
         </nav>
@@ -50,19 +57,6 @@
   </div>
 
   <div class="row separator">
-
-    <el-dropdown id="block1">
-      <el-button type="primary">
-        更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
-      </el-button>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item @click="toMyArticle">我的文章</el-dropdown-item>
-        <el-dropdown-item @click="toMyLike">我的点赞</el-dropdown-item>
-        <el-dropdown-item @click="toMyComment">我的评论</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-    <br><br><br>
-
     <el-divider></el-divider>
     <el-space wrap alignment="flex-end">
       <el-card class="box-card" style="width: 1000px" v-for="(article, index) in articlesData" v-bind:key="index">
@@ -87,17 +81,18 @@
               浏览量 {{article.viewsNum}}
             </el-button>
           </div>
-<!--          <div>-->
-<!--            <template class="but2">-->
-<!--              <el-popconfirm title="这是一段内容确定删除吗？" icon="el-icon-close" size="small" type="comment">-->
-<!--                <template #reference>-->
-<!--                  <el-button icon="el-icon-close" size="small" type="comment" >-->
-<!--                    删除-->
-<!--                  </el-button>-->
-<!--                </template>-->
-<!--              </el-popconfirm>-->
-<!--            </template>-->
-<!--          </div>-->
+            <br><br><br><br>
+          <div>
+            <template class="but2">
+              <el-popconfirm title="确定删除这篇文章吗？" icon="el-icon-close" size="small" @confirm="toDelete(index)" type="comment">
+                <template #reference>
+                  <el-button icon="el-icon-close" size="small" type="comment"  class="delete">
+                    删除
+                  </el-button>
+                </template>
+              </el-popconfirm>
+            </template>
+          </div>
         </div>
         <span>
             <br>
@@ -112,7 +107,7 @@
 
 <script>
 import {showUserAllArticle} from "@/api/api";
-import {addLikeArticle} from "@/api/api";
+import {addLikeArticle, deleteArticle} from "@/api/api";
 
 
 export default {
@@ -187,12 +182,29 @@ export default {
     toMyComment() {
       this.$router.push('/myComment');
       alert("被点了")
+    },
+    async toDelete(num) {
+      console.log(this.articlesData[num])
+      const article = {
+        articleID: this.articlesData[num].articleID
+      }
+      console.log("操作了");
+      let judge = await deleteArticle(article);
+      if (judge.result === "yes") {
+        alert("操作成功！");
+      } else {
+        alert("操作失败")
+      }
+      location.reload();
     }
   }
 }
 </script>
 
 <style scoped>
+.delete {
+  float: right;
+}
 
 #block1  {
   float:right;
@@ -307,6 +319,15 @@ export default {
   display: block;
   margin-top: 15px;
   color: #fff;
+}
+
+#image2{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  float:left;
+  margin-left:70px;
+  margin-top:-30px !important;
 }
 
 #sort ul li a {
@@ -577,10 +598,7 @@ form.search-form input.search-btn:hover {
   padding-bottom: 13px;
 }
 
-/* Page - Container --------------------------------------------------------------------------------------------------*/
-.page-container {
-  width: 100%;
-}
+
 .page-container > .container {
   padding: 40px 35px;
   background-color: #fff;

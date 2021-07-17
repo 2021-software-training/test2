@@ -20,9 +20,18 @@
 
         <el-form-item>
           <el-col>
-            <el-button type="primary" size="small" @click="submit">发表</el-button>
+            <el-button type="primary" size="small" @click="submit" icon="el-icon-upload2">发表</el-button>
           </el-col>
+          <el-popconfirm title="确定返回到上一届界面吗？你所写的记录不会被保存" icon="el-icon-close" size="small" @confirm="back" type="comment">
+            <template #reference>
+              <el-button icon="el-icon-close" size="small" type="comment"  class="delete">
+                返回
+              </el-button>
+            </template>
+          </el-popconfirm>
+
         </el-form-item>
+
       </el-form>
     </el-row>
   </div>
@@ -52,6 +61,9 @@ export default {
   },
 
   methods: {
+    back() {
+      this.$router.push('/myArticle')
+    },
     async submit() {
       console.log(this.model.title)
       console.log(this.model.content)
@@ -73,7 +85,7 @@ export default {
       const res = await addArticle(this.articleInfo);
       if (res.result === "yes") {
         alert("发表成功")
-        location.reload();
+        this.$router.push('allArticle/All')
       }
 
       else {

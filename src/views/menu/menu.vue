@@ -7,19 +7,26 @@
       <div class="container">
         <div class="logo-container">
           <!-- Website Logo -->
-          <p id="bigname"><strong>Knowledge Base Theme</strong></p>
-          <span class="tag-line">Premium WordPress Theme</span>
+          <p id="bigname"><strong>LIFTER</strong></p>
+          <span class="tag-line"></span>
         </div>
 
         <!-- Start of Main Navigation -->
+        <img id="image2" src="../../assets/logo.jpg" alt="" />
         <nav class="main-nav">
           <div class="menu-top-menu-container">
             <ul id="menu-top-menu" class="clearfix">
-              <li class="current-menu-item"><el-link href="/menu">网站主页</el-link></li>
-              <li><el-link href="/allArticle">所有文章</el-link></li>
-              <li><el-link href="/myArticle">我的</el-link></li>
-<!--              <li><el-link href="/myComment">我的评论</el-link></li>-->
-              <li><el-link @click="toUserPage">个人主页</el-link></li>
+              <el-menu :default-active="activeIndex" background-color=rgba(0,0,0,0)  class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" class="import"><el-link href="/menu">网站主页</el-link></el-menu-item>
+                <el-menu-item index="3" ><el-link href="/allArticle">所有文章</el-link></el-menu-item>
+                <el-submenu index="4" mode="vertical" >
+                  <template  slot="title" >我的</template>
+                  <el-menu-item index="4-1"><el-link href="/myArticle">我的文章</el-link></el-menu-item>
+                  <el-menu-item index="4-3" ><el-link href="/myComment">我的评论</el-link></el-menu-item>
+                </el-submenu>
+                <el-menu-item index="2" @click="toUserPage">个人主页</el-menu-item>
+              </el-menu>
+              <div class="line"></div>
             </ul>
           </div>
         </nav>
@@ -228,9 +235,20 @@ input,.form-select {
   height: auto !important;
   top:5px;
 }
+#image2{
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+  float:left;
+  margin-left:70px;
+  margin-top:-230px !important;
+}
+
 #bigname{
   color:white;
-  font-size:xx-large;
+  font-size:xxx-large;
+  margin-top: 50px;
   margin-left: -500px !important;
 }
 .logo-container {
@@ -246,7 +264,7 @@ span.tag-line {
   color: #818a90;
   font-size: 12px;
   position: relative;
-  top:-18px;
+  top:-65px;
   margin-left:-1200px;
 }
 .main-nav {

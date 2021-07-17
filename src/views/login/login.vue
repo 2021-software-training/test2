@@ -2,13 +2,12 @@
   <body>
   <div class="background">
     <form action="" class="login">
-      <p>CSI语音技术吧</p>
+      <p>LIFTER</p>
       <p id="warn">&nbsp;</p>
       <input type="text" v-model="userName" placeholder="用户名">
       <input type="password" v-model="userPassword" placeholder="密码">
       <br>
       <br>
-      <a  class="btn2" href="#" > 人脸识别 </a>
       <el-button type="submit" class="btn" @click="toLogin"> 登  录 </el-button>
       <el-button type="submit" class="btn btn1" @click="toRegister"> 注  册 </el-button>
     </form>
@@ -41,6 +40,7 @@ export default {
         alert("登陆成功")
         await this.$router.push('/menu');
       } else {
+        alert("登陆失败")
         console.log("failed");
       }
     },
@@ -59,12 +59,12 @@ export default {
 }
 body{
   background: #353b65 url("../../assets/img.png") no-repeat;
-  background-size: 66%;
+  background-size: 120%;
   min-height: 279px;
-  margin-top: -100px;
+  margin-top: -70px;
   margin-left: -20px;
   margin-right: -25px;
-  height: 630px;
+  height: 850px;
   width:2000px;
 }
 #yu{

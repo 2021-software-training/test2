@@ -19,7 +19,7 @@
       <div class="container">
         <div class="logo-container">
           <!-- Website Logo -->
-          <p id="bigname"><strong>Knowledge Base Theme</strong></p>
+          <p id="bigname"><strong>L  I  F  T  E  R</strong></p>
         </div>
 
         <!-- Start of Main Navigation -->
@@ -79,6 +79,19 @@
               赞同 {{comment.comment.commentLikesNum}}
             </el-button>
           </div>
+          <br><br><br><br>
+          <div>
+            <template class="but2">
+              <el-popconfirm title="确定删除这篇文章吗？" icon="el-icon-close" size="small" @confirm="toDelete(index)" type="comment">
+                <template #reference>
+                  <el-button icon="el-icon-close" size="small" type="comment"  class="delete">
+                    删除
+                  </el-button>
+                </template>
+              </el-popconfirm>
+            </template>
+          </div>
+
         </div>
       </el-card>
     </el-space>
@@ -87,7 +100,7 @@
 </template>
 
 <script>
-import {addLikeArticle, showUserAllComment} from "@/api/api";
+import {addLikeArticle, deleteArticle, showUserAllComment} from "@/api/api";
 export default {
   name: "allArticle",
   data() {
@@ -137,7 +150,20 @@ export default {
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
     },
-
+    async toDelete(num) {
+      console.log(this.articlesData[num])
+      const article = {
+        articleID: this.articlesData[num].articleID
+      }
+      console.log("操作了");
+      let judge = await deleteArticle(article);
+      if (judge.result === "yes") {
+        alert("操作成功！");
+      } else {
+        alert("操作失败")
+      }
+      location.reload();
+    },
     sendLike(num) {
       let articleInfo = {
         articleID: this.comments[num].article.articleID
@@ -165,6 +191,11 @@ export default {
 </script>
 
 <style scoped>
+
+
+.but2 {
+  float: right;
+}
 
 #block1  {
   float:right;
