@@ -7,7 +7,7 @@
       <div class="container">
         <div class="logo-container">
           <!-- Website Logo -->
-          <p id="bigname"><strong>LIFTER</strong></p>
+          <p id="bigname"><strong>L  I  F  T  E  R</strong></p>
           <span class="tag-line"></span>
         </div>
 

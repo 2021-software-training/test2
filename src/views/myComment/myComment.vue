@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import {addLikeArticle, deleteArticle, showUserAllComment} from "@/api/api";
+import {addLikeArticle, deleteComment, showUserAllComment} from "@/api/api";
 export default {
   name: "allArticle",
   data() {
@@ -127,15 +127,6 @@ export default {
     }
   },
   created() {
-    // showPageAllArticle(this.radio1).then((myData) => {
-    //   console.log(myData);
-    //   if (myData.result === 0) {
-    //     this.$router.push('/login');
-    //     alert("请先登陆")
-    //   }
-    //   this.articlesData = myData
-    // });
-    // console.log(this.articlesData);
     showUserAllComment().then((myData) => {
       if (myData.result === 0) {
         this.$router.push('/login');
@@ -150,13 +141,15 @@ export default {
     toUserPage() {
       this.$router.push("/personalPage/" + this.page);
     },
+
     async toDelete(num) {
-      console.log(this.articlesData[num])
-      const article = {
-        articleID: this.articlesData[num].articleID
+      console.log("begin;")
+      console.log(this.comments[num])
+      const comment = {
+        commentID: this.comments[num].comment.commentID
       }
       console.log("操作了");
-      let judge = await deleteArticle(article);
+      let judge = await deleteComment(comment);
       if (judge.result === "yes") {
         alert("操作成功！");
       } else {

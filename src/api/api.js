@@ -185,6 +185,16 @@ export function deleteArticle(article) {
     })
 }
 
+export function deleteComment(comment) {
+    return request({
+        method: 'get',
+        url:    '/mainPage/deleteComment',
+        params: {
+            commentID: comment.commentID
+        }
+    })
+}
+
 export function getUserInfo(username) {
     return request({
         method: 'get',
